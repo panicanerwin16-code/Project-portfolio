@@ -220,14 +220,13 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               className="bg-[#111827]/90 border border-slate-800 hover:border-slate-700 rounded-2xl overflow-hidden transition-all duration-300 flex flex-col justify-between cursor-pointer group"
             >
               <div>
-                {/* Image Container */}
-                <div className="relative h-48 overflow-hidden bg-slate-900 border-b border-slate-800/80">
+                {/* Image Container - Displays full workflow image without cropping */}
+                <div className="relative h-56 overflow-hidden bg-[#0a0d14] border-b border-slate-800/80 flex items-center justify-center p-2">
                   <img
                     src={proj.image}
                     alt={proj.title}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-transparent to-transparent opacity-60" />
                 </div>
 
                 {/* Card Content */}
@@ -286,11 +285,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               <h3 className="text-2xl font-bold mb-4">{activeModal.title}</h3>
 
               {/* Large Image Preview in Modal */}
-              <div className="mb-6 rounded-xl overflow-hidden border border-slate-800 bg-slate-900 max-h-64">
+              <div className="mb-6 rounded-xl overflow-hidden border border-slate-800 bg-[#0a0d14] p-3 flex items-center justify-center max-h-[500px]">
                 <img
                   src={activeModal.image}
                   alt={activeModal.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto max-h-[460px] object-contain rounded-lg"
                 />
               </div>
 

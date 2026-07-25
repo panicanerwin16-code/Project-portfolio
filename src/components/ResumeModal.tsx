@@ -18,7 +18,7 @@ import {
   Sparkles,
   Camera,
 } from 'lucide-react';
-import erwinHeadshotDefault from '../assets/images/erwin_formal_headshot_1784981120620.jpg';
+import erwinHeadshotDefault from '../assets/images/erwin_studio_headshot_1784990012467.jpg';
 
 interface ResumeModalProps {
   isOpen: boolean;

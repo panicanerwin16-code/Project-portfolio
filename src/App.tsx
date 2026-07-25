@@ -12,7 +12,7 @@ import { ResumeModal } from './components/ResumeModal';
 import { Footer } from './components/Footer';
 import { ServiceItem } from './types';
 import { X, CheckCircle2, Calendar } from 'lucide-react';
-import defaultHeadshot from './assets/images/erwin_formal_headshot_1784981120620.jpg';
+import defaultHeadshot from './assets/images/erwin_studio_headshot_1784990012467.jpg';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
