@@ -12,7 +12,7 @@ import {
   ShieldCheck,
   Camera,
 } from 'lucide-react';
-import erwinHeadshotDefault from '../assets/images/erwin_studio_headshot_1784990012467.jpg';
+const erwinHeadshotDefault = "https://lh3.googleusercontent.com/d/1u-zRMoBxItGWVTIcXbvlTPqpoOsGF9Ja";
 import { personalInfo } from '../data/portfolioData';
 
 interface AboutSectionProps {
@@ -43,6 +43,14 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                   <img
                     src={headshot}
                     alt="Erwin Panican"
+                    referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (!target.dataset.fallback) {
+                        target.dataset.fallback = 'true';
+                        target.src = 'https://drive.google.com/thumbnail?id=1u-zRMoBxItGWVTIcXbvlTPqpoOsGF9Ja&sz=w1000';
+                      }
+                    }}
                     className="w-full h-full object-cover object-top rounded-[14px]"
                   />
                   {onUploadHeadshot && (

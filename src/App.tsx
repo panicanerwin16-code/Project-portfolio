@@ -12,7 +12,8 @@ import { ResumeModal } from './components/ResumeModal';
 import { Footer } from './components/Footer';
 import { ServiceItem } from './types';
 import { X, CheckCircle2, Calendar } from 'lucide-react';
-import defaultHeadshot from './assets/images/erwin_studio_headshot_1784990012467.jpg';
+
+const defaultHeadshot = "https://lh3.googleusercontent.com/d/1u-zRMoBxItGWVTIcXbvlTPqpoOsGF9Ja";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -24,7 +25,11 @@ export default function App() {
 
   // Profile image state with localStorage persistence
   const [headshot, setHeadshot] = useState<string>(() => {
-    return localStorage.getItem('erwin_custom_headshot') || defaultHeadshot;
+    const saved = localStorage.getItem('erwin_custom_headshot');
+    if (saved && saved.startsWith('data:image')) {
+      return saved;
+    }
+    return defaultHeadshot;
   });
 
   const isCustomHeadshot = headshot !== defaultHeadshot;

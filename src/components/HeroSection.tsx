@@ -1,5 +1,6 @@
 import React from 'react';
-import erwinHeadshotDefault from '../assets/images/erwin_studio_headshot_1784990012467.jpg';
+
+const erwinHeadshotDefault = "https://lh3.googleusercontent.com/d/1u-zRMoBxItGWVTIcXbvlTPqpoOsGF9Ja";
 
 interface HeroSectionProps {
   onOpenBooking: () => void;
@@ -105,6 +106,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <img
                   src={headshot}
                   alt="Erwin Panican"
+                  referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (!target.dataset.fallback) {
+                      target.dataset.fallback = 'true';
+                      target.src = 'https://drive.google.com/thumbnail?id=1u-zRMoBxItGWVTIcXbvlTPqpoOsGF9Ja&sz=w1000';
+                    }
+                  }}
                   className="w-full h-full object-cover object-top"
                 />
               </div>
