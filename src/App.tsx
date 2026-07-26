@@ -13,7 +13,7 @@ import { Footer } from './components/Footer';
 import { ServiceItem } from './types';
 import { X, CheckCircle2, Calendar } from 'lucide-react';
 
-const defaultHeadshot = "https://lh3.googleusercontent.com/d/1u-zRMoBxItGWVTIcXbvlTPqpoOsGF9Ja";
+const defaultHeadshot = "https://i.im.ge/QMc34OT/ERN_1.png";
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(true);

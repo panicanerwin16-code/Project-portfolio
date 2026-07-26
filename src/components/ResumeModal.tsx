@@ -18,7 +18,7 @@ import {
   Sparkles,
   Camera,
 } from 'lucide-react';
-const erwinHeadshotDefault = "https://lh3.googleusercontent.com/d/1u-zRMoBxItGWVTIcXbvlTPqpoOsGF9Ja";
+const erwinHeadshotDefault = "https://i.im.ge/QMc34OT/ERN_1.png";
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -178,7 +178,7 @@ Languages:
                   const target = e.currentTarget;
                   if (!target.dataset.fallback) {
                     target.dataset.fallback = 'true';
-                    target.src = 'https://drive.google.com/thumbnail?id=1u-zRMoBxItGWVTIcXbvlTPqpoOsGF9Ja&sz=w1000';
+                    target.src = 'https://i.im.ge/QMc34OT/ERN_1-t600.webp';
                   }
                 }}
                 className="w-full h-full object-cover object-top"
