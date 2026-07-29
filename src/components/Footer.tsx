@@ -101,33 +101,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
 
         </div>
 
-        {/* Services & Expertise Grid Row from Sophisticated Dark Design */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-b border-white/5 bg-black/20 my-8 rounded-xl overflow-hidden border border-white/5">
-          <div className="p-5 border-b sm:border-b-0 sm:border-r border-white/5 flex flex-col gap-1.5">
-            <div className="text-blue-400 text-xs font-bold tracking-wider">SERVICE 01</div>
-            <div className="font-medium text-sm text-white">CRM Automation</div>
-            <p className="text-[11px] text-gray-400 leading-relaxed">Lead management & data syncing.</p>
-          </div>
-          <div className="p-5 border-b sm:border-b-0 lg:border-r border-white/5 flex flex-col gap-1.5">
-            <div className="text-blue-400 text-xs font-bold tracking-wider">SERVICE 02</div>
-            <div className="font-medium text-sm text-white">AI Chatbots</div>
-            <p className="text-[11px] text-gray-400 leading-relaxed">24/7 Intelligent support agents.</p>
-          </div>
-          <div className="p-5 border-b sm:border-b-0 sm:border-r border-white/5 flex flex-col gap-1.5">
-            <div className="text-blue-400 text-xs font-bold tracking-wider">SERVICE 03</div>
-            <div className="font-medium text-sm text-white">Workflow Design</div>
-            <p className="text-[11px] text-gray-400 leading-relaxed">Replacing manual data entry tasks.</p>
-          </div>
-          <div className="p-5 flex flex-col gap-2">
-            <div className="text-blue-400 text-xs font-bold tracking-wider">EXPERTISE</div>
-            <div className="flex gap-2 flex-wrap">
-              <span className="text-[10px] px-2 py-1 bg-white/5 border border-white/10 rounded text-gray-300 font-mono">n8n</span>
-              <span className="text-[10px] px-2 py-1 bg-white/5 border border-white/10 rounded text-gray-300 font-mono">Make</span>
-              <span className="text-[10px] px-2 py-1 bg-white/5 border border-white/10 rounded text-gray-300 font-mono">OpenAI</span>
-              <span className="text-[10px] px-2 py-1 bg-white/5 border border-white/10 rounded text-gray-300 font-mono">Zapier</span>
-            </div>
-          </div>
-        </div>
 
         {/* Bottom Copyright & Back To Top */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-300 light:text-slate-600">

@@ -18,6 +18,7 @@ export const personalInfo = {
     'AI Automation Specialist with expertise in designing intelligent workflows using n8n, Zapier, Make.com, GoHighLevel, AI Agents, APIs, and CRM integrations. I specialize in replacing manual business processes with scalable AI automation that saves time, improves productivity, and increases operational efficiency.',
   location: 'Manila, Philippines',
   email: 'panicanerwin16@gmail.com',
+  calendly: 'https://calendly.com/panicanerwin16/30min',
   linkedin: 'https://linkedin.com/in/erwinpanican',
   github: 'https://github.com/erwinpanican',
   upwork: 'https://www.upwork.com/freelancers/~erwinpanican',
@@ -383,18 +384,176 @@ export const certificationsData: CertificationItem[] = [
 ];
 
 export const techStackData: TechStackItem[] = [
-  { name: 'n8n', category: 'Automation Engine', description: 'Self-hosted & Cloud node automation', iconBg: 'bg-rose-500/10 text-rose-400 border-rose-500/20' },
-  { name: 'Zapier', category: 'SaaS Integration', description: 'Quick SaaS connector & app triggers', iconBg: 'bg-orange-500/10 text-orange-400 border-orange-500/20' },
-  { name: 'Make.com', category: 'Visual Workflows', description: 'Complex data mapping & branching', iconBg: 'bg-purple-500/10 text-purple-400 border-purple-500/20' },
-  { name: 'OpenAI', category: 'AI Intelligence', description: 'GPT-4o, Embeddings, & Audio Models', iconBg: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' },
-  { name: 'Claude', category: 'AI Intelligence', description: 'Anthropic reasoning & long context parsing', iconBg: 'bg-amber-500/10 text-amber-400 border-amber-500/20' },
-  { name: 'Gemini', category: 'AI Intelligence', description: 'Multimodal Google AI model processing', iconBg: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20' },
-  { name: 'GoHighLevel', category: 'All-in-One CRM', description: 'Sales funnels, messaging & pipelines', iconBg: 'bg-blue-500/10 text-blue-400 border-blue-500/20' },
-  { name: 'HubSpot', category: 'Enterprise CRM', description: 'Deal tracking & contact management', iconBg: 'bg-orange-500/10 text-orange-400 border-orange-500/20' },
-  { name: 'Slack', category: 'Notifications', description: 'Real-time alert bots & team hooks', iconBg: 'bg-pink-500/10 text-pink-400 border-pink-500/20' },
-  { name: 'Airtable', category: 'Relational Data', description: 'Dynamic low-code database storage', iconBg: 'bg-red-500/10 text-red-400 border-red-500/20' },
-  { name: 'Google Workspace', category: 'Productivity', description: 'Calendar, Sheets, Docs, Gmail APIs', iconBg: 'bg-sky-500/10 text-sky-400 border-sky-500/20' },
-  { name: 'Notion', category: 'Knowledge Hub', description: 'SOPs, wikis & operational databases', iconBg: 'bg-slate-500/10 text-slate-300 border-slate-500/20' },
+  // Inner Orbit (Core Engines & Primary LLMs)
+  { 
+    name: 'n8n', 
+    category: 'Automation Engine', 
+    description: 'Self-hosted & cloud workflow orchestration with complex JS nodes.', 
+    iconBg: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
+    experience: '3+ Years Exp',
+    link: 'https://n8n.io',
+    orbit: 'inner',
+    glowColor: 'rgba(244, 63, 94, 0.6)',
+    accentColor: '#f43f5e'
+  },
+  { 
+    name: 'OpenAI', 
+    category: 'AI Intelligence', 
+    description: 'GPT-4o, structured JSON outputs, embeddings, and real-time audio.', 
+    iconBg: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+    experience: '3+ Years Exp',
+    link: 'https://openai.com',
+    orbit: 'inner',
+    glowColor: 'rgba(16, 185, 129, 0.6)',
+    accentColor: '#10b981'
+  },
+  { 
+    name: 'Make.com', 
+    category: 'Visual Workflows', 
+    description: 'Data mapping, array aggregators, error handlers & multi-branching.', 
+    iconBg: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+    experience: '3+ Years Exp',
+    link: 'https://make.com',
+    orbit: 'inner',
+    glowColor: 'rgba(168, 85, 247, 0.6)',
+    accentColor: '#a855f7'
+  },
+  { 
+    name: 'Zapier', 
+    category: 'SaaS Connector', 
+    description: 'Certified expert level Zapier paths, webhooks, & custom code zaps.', 
+    iconBg: 'bg-orange-500/10 text-orange-400 border-orange-500/20',
+    experience: '4+ Years Exp',
+    link: 'https://zapier.com',
+    orbit: 'inner',
+    glowColor: 'rgba(249, 115, 22, 0.6)',
+    accentColor: '#f97316'
+  },
+
+  // Middle Orbit (CRMs, LLM Alternatives & Voice)
+  { 
+    name: 'GoHighLevel', 
+    category: 'All-in-One CRM', 
+    description: 'GHL snapshots, automated messaging, funnels & AI bot triggers.', 
+    iconBg: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
+    experience: '3+ Years Exp',
+    link: 'https://gohighlevel.com',
+    orbit: 'middle',
+    glowColor: 'rgba(59, 130, 246, 0.6)',
+    accentColor: '#3b82f6'
+  },
+  { 
+    name: 'Gemini', 
+    category: 'Multimodal AI', 
+    description: 'Google Gemini API multimodal vision, document & text processing.', 
+    iconBg: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
+    experience: '2+ Years Exp',
+    link: 'https://deepmind.google/technologies/gemini/',
+    orbit: 'middle',
+    glowColor: 'rgba(6, 182, 212, 0.6)',
+    accentColor: '#06b6d4'
+  },
+  { 
+    name: 'HubSpot', 
+    category: 'Enterprise CRM', 
+    description: 'Pipeline velocity triggers, deal scoring & bi-directional sync.', 
+    iconBg: 'bg-orange-600/10 text-orange-400 border-orange-600/20',
+    experience: '3+ Years Exp',
+    link: 'https://hubspot.com',
+    orbit: 'middle',
+    glowColor: 'rgba(234, 88, 12, 0.6)',
+    accentColor: '#ea580c'
+  },
+  { 
+    name: 'Twilio', 
+    category: 'SMS & Voice', 
+    description: 'Automated SMS alerts, IVR telephony & WhatsApp business hooks.', 
+    iconBg: 'bg-red-500/10 text-red-400 border-red-500/20',
+    experience: '2+ Years Exp',
+    link: 'https://twilio.com',
+    orbit: 'middle',
+    glowColor: 'rgba(239, 68, 68, 0.6)',
+    accentColor: '#ef4444'
+  },
+  { 
+    name: 'Claude', 
+    category: 'AI Reasoning', 
+    description: 'Anthropic Claude long-context parsing & high-precision reasoning.', 
+    iconBg: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+    experience: '2+ Years Exp',
+    link: 'https://anthropic.com',
+    orbit: 'middle',
+    glowColor: 'rgba(245, 158, 11, 0.6)',
+    accentColor: '#f59e0b'
+  },
+
+  // Outer Orbit (Databases, Productivity & Integrations)
+  { 
+    name: 'Supabase', 
+    category: 'Database & Auth', 
+    description: 'Postgres database, vector embeddings storage & realtime webhooks.', 
+    iconBg: 'bg-emerald-600/10 text-emerald-400 border-emerald-600/20',
+    experience: '2+ Years Exp',
+    link: 'https://supabase.com',
+    orbit: 'outer',
+    glowColor: 'rgba(52, 211, 153, 0.6)',
+    accentColor: '#34d399'
+  },
+  { 
+    name: 'Airtable', 
+    category: 'Relational DB', 
+    description: 'Low-code relational data structures, script extensions & views.', 
+    iconBg: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20',
+    experience: '3+ Years Exp',
+    link: 'https://airtable.com',
+    orbit: 'outer',
+    glowColor: 'rgba(234, 179, 8, 0.6)',
+    accentColor: '#eab308'
+  },
+  { 
+    name: 'Notion', 
+    category: 'Knowledge Hub', 
+    description: 'Notion API workspace sync, SOP database updates & wikis.', 
+    iconBg: 'bg-slate-500/10 text-slate-300 border-slate-500/20',
+    experience: '4+ Years Exp',
+    link: 'https://notion.so',
+    orbit: 'outer',
+    glowColor: 'rgba(203, 213, 225, 0.6)',
+    accentColor: '#cbd5e1'
+  },
+  { 
+    name: 'Slack', 
+    category: 'Communication', 
+    description: 'Real-time alert bots, webhook notifications & interactive blocks.', 
+    iconBg: 'bg-pink-500/10 text-pink-400 border-pink-500/20',
+    experience: '4+ Years Exp',
+    link: 'https://slack.com',
+    orbit: 'outer',
+    glowColor: 'rgba(236, 72, 153, 0.6)',
+    accentColor: '#ec4899'
+  },
+  { 
+    name: 'VAPI', 
+    category: 'Voice AI Agents', 
+    description: 'Sub-second latency AI phone receptionists and voice booking bots.', 
+    iconBg: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
+    experience: '2+ Years Exp',
+    link: 'https://vapi.ai',
+    orbit: 'outer',
+    glowColor: 'rgba(99, 102, 241, 0.6)',
+    accentColor: '#6366f1'
+  },
+  { 
+    name: 'Google Workspace', 
+    category: 'Productivity APIs', 
+    description: 'Calendar, Sheets, Gmail, Drive & Docs API integration workflows.', 
+    iconBg: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
+    experience: '4+ Years Exp',
+    link: 'https://workspace.google.com',
+    orbit: 'outer',
+    glowColor: 'rgba(56, 189, 248, 0.6)',
+    accentColor: '#38bdf8'
+  }
 ];
 
 export const processSteps = [

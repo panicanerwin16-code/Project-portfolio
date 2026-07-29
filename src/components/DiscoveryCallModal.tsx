@@ -89,17 +89,46 @@ export const DiscoveryCallModal: React.FC<DiscoveryCallModalProps> = ({
         ) : (
           <form onSubmit={handleConfirmBooking} className="space-y-5">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 text-sky-400 text-xs font-semibold mb-2">
-                <CalendarIcon className="w-3.5 h-3.5" />
-                <span>Calendly Schedule Sync</span>
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <a 
+                  href="https://calendly.com/panicanerwin16/30min"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold hover:bg-amber-500/20 transition-all"
+                >
+                  <CalendarIcon className="w-3.5 h-3.5" />
+                  <span>Calendly Direct Booking</span>
+                  <span>↗</span>
+                </a>
               </div>
               <h3 className="text-2xl font-bold text-white light:text-slate-900 tracking-tight">
                 Schedule Your Automation Call
               </h3>
               <p className="text-xs text-slate-300 light:text-slate-600 mt-1">
-                Select your preferred date, time, and focus area.
+                Book a 30-minute discovery session with Erwin Panican.
               </p>
             </div>
+
+            {/* Direct Calendly Banner CTA */}
+            <a
+              href="https://calendly.com/panicanerwin16/30min"
+              target="_blank"
+              rel="noreferrer"
+              className="w-full p-3.5 rounded-2xl bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-amber-500/20 border border-amber-400/50 hover:border-amber-300 text-amber-300 hover:text-white font-bold text-xs transition-all flex items-center justify-between gap-2 shadow-lg shadow-amber-500/10 group cursor-pointer"
+            >
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black text-xs shrink-0">
+                  <CalendarIcon className="w-4 h-4" />
+                </div>
+                <div className="text-left">
+                  <span className="block text-white font-bold text-xs">Book Directly on Calendly</span>
+                  <span className="block text-[10px] text-amber-400 font-mono">calendly.com/panicanerwin16/30min</span>
+                </div>
+              </div>
+              <span className="px-3 py-1 rounded-lg bg-amber-400 text-slate-950 text-xs font-extrabold group-hover:scale-105 transition-transform">
+                Open Calendly ↗
+              </span>
+            </a>
 
             {/* Select Focus Area */}
             <div>

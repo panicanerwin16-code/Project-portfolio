@@ -64,6 +64,11 @@ export interface TechStackItem {
   category: string;
   description: string;
   iconBg: string;
+  experience?: string;
+  link?: string;
+  orbit?: 'inner' | 'middle' | 'outer';
+  glowColor?: string;
+  accentColor?: string;
 }
 
 export interface TestimonialItem {
