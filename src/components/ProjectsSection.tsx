@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { CheckCircle2, Sparkles, Layers, ArrowUpRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { CheckCircle2, Sparkles, Layers, ArrowUpRight, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ProjectItem } from '../types';
 
@@ -31,6 +31,22 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   const [activeCategory, setActiveCategory] = useState<FilterCategory>('n8n');
   const [activeModal, setActiveModal] = useState<ProjectItem | null>(null);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setActiveModal(null);
+      }
+    };
+    if (activeModal) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [activeModal]);
+
   const filterButtons: FilterOption[] = [
     { id: 'n8n', label: 'n8n' },
     { id: 'zapier', label: 'Zapier' },
@@ -49,6 +65,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     problem: string;
     solution: string;
     impact: string;
+    result?: string;
     features: string[];
   }> = [
     {
@@ -93,19 +110,20 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       id: 'ai-voice-receptionist',
       category: 'n8n',
       platform: 'N8N',
-      title: 'AI Voice Receptionist',
+      title: 'AI Receptionist & Automated Appointment Management System',
       description:
-        'Voice AI receptionist built on n8n with modular branches for checking available slots, booking, updating, and cancelling appointments, synced with Google Calendar & Airtable.',
-      image: n8nReceptionistImg,
-      tools: ['n8n', 'VAPI', 'Google Calendar', 'Airtable', 'Webhooks'],
-      problem: 'Service businesses lose up to 30% of calls after-hours and during peak operation times due to busy reception desks.',
-      solution: 'Deployed a 24/7 autonomous VAPI voice receptionist connected to an n8n backend for real-time calendar slot lookup, instant booking, and Airtable call logging.',
-      impact: 'Eliminated missed call revenue loss and automated 100% of routine appointment scheduling.',
+        'I built an AI-powered receptionist using n8n that automates customer inquiries, appointment booking, confirmations, cancellations, rescheduling, no-show follow-ups, and CRM updates.',
+      image: 'https://i.im.ge/QMJlyCP/AI_RECEPTIONIST.png',
+      tools: ['n8n', 'VAPI', 'Google Calendar', 'Airtable', 'Webhooks', 'CRM'],
+      problem: 'Businesses often manage appointments manually, leading to slow responses, missed follow-ups, cancellations, and no-shows that can result in lost opportunities and unnecessary administrative work.',
+      solution: 'I built an AI-powered receptionist using n8n that automates customer inquiries, appointment booking, confirmations, cancellations, rescheduling, no-show follow-ups, and CRM updates.',
+      result: 'The automation reduces manual work, improves response time, keeps appointment records organized, and provides a consistent customer experience while allowing the business to handle more appointments efficiently.',
+      impact: 'The automation reduces manual work, improves response time, keeps appointment records organized, and provides a consistent customer experience while allowing the business to handle more appointments efficiently.',
       features: [
-        'Modular slot lookup & time conversion',
-        'Real-time Google Calendar event creation',
-        'Rescheduling & cancellation handler',
-        'Airtable call log & status records',
+        'Automated customer inquiries & 24/7 AI answering',
+        'Direct appointment booking & slot verification',
+        'Automatic confirmations, cancellations & rescheduling',
+        'No-show follow-ups & automated CRM/calendar updates',
       ],
     },
     {
@@ -361,6 +379,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     problem: proj.problem,
                     solution: proj.solution,
                     impact: proj.impact,
+                    result: proj.result,
                     metrics: [{ label: 'Impact', value: 'High ROI' }],
                     features: proj.features,
                     clientSector: 'Automation Build',
@@ -387,6 +406,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     <img
                       src={proj.image}
                       alt={proj.title}
+                      referrerPolicy="no-referrer"
                       className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-300"
                     />
                     <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-r from-[#ff9000] to-[#ff3700] text-white p-1.5 rounded-lg shadow-md">
@@ -467,105 +487,185 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         )}
 
         {/* Detail Blueprint Modal */}
-        {activeModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
-            <div 
-              className="relative w-full max-w-2xl border p-6 sm:p-8 rounded-3xl shadow-2xl my-8 card-crimson-glow"
-              style={{
-                backgroundColor: 'var(--bg-secondary)',
-                color: 'var(--text-primary)',
-              }}
+        <AnimatePresence>
+          {activeModal && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setActiveModal(null)}
+              className="fixed inset-x-0 bottom-0 top-16 sm:top-20 z-40 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md overflow-y-auto"
             >
-              <button
-                onClick={() => setActiveModal(null)}
-                className="absolute top-4 right-4 text-xs font-mono px-2.5 py-1.5 rounded-lg border transition-colors cursor-pointer hover:border-red-500"
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 15 }}
+                transition={{ duration: 0.22, ease: 'easeOut' }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative w-full max-w-2xl max-h-[calc(100vh-5.5rem)] sm:max-h-[calc(100vh-6.5rem)] flex flex-col border rounded-3xl shadow-2xl card-crimson-glow overflow-hidden my-auto"
                 style={{
-                  backgroundColor: 'var(--bg-primary)',
-                  borderColor: 'var(--border-color)',
-                  color: 'var(--text-secondary)',
-                }}
-              >
-                ✕ Close
-              </button>
-
-              <span className="text-xs font-mono text-[#ff9000] font-bold uppercase tracking-wider block mb-1">
-                {activeModal.category} PROJECT
-              </span>
-              <h3 className="text-2xl font-bold mb-4">{activeModal.title}</h3>
-
-              {/* Large Image Preview in Modal */}
-              <div 
-                className="mb-6 rounded-2xl overflow-hidden border p-3 flex items-center justify-center max-h-[500px] bg-[#080102]"
-                style={{
+                  backgroundColor: 'var(--bg-secondary)',
+                  color: 'var(--text-primary)',
                   borderColor: 'var(--border-color)',
                 }}
               >
-                <img
-                  src={activeModal.image}
-                  alt={activeModal.title}
-                  className="w-full h-auto max-h-[460px] object-contain rounded-xl"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                {/* Fixed/Sticky Header with Dedicated Close Button */}
                 <div 
-                  className="p-4 border rounded-2xl text-xs"
+                  className="p-5 sm:p-6 pb-4 border-b flex items-start justify-between gap-4 shrink-0 z-20"
                   style={{
-                    backgroundColor: 'var(--bg-primary)',
+                    backgroundColor: 'var(--bg-secondary)',
                     borderColor: 'var(--border-color)',
                   }}
                 >
-                  <span className="text-rose-400 font-bold block mb-1">The Problem</span>
-                  <p style={{ color: 'var(--text-secondary)' }} className="leading-relaxed">{activeModal.problem}</p>
+                  <div>
+                    <span className="text-xs font-mono text-[#ff9000] font-bold uppercase tracking-wider block mb-1">
+                      {activeModal.category} WORKFLOW
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-bold leading-snug">
+                      {activeModal.title}
+                    </h3>
+                  </div>
+
+                  {/* Prominent High-Visibility Close Button */}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveModal(null);
+                    }}
+                    className="p-2 sm:px-3 sm:py-2 text-xs font-mono rounded-xl border transition-all cursor-pointer hover:border-red-500 hover:bg-red-500/10 flex items-center gap-1.5 shrink-0 select-none shadow-sm group"
+                    style={{
+                      backgroundColor: 'var(--bg-primary)',
+                      borderColor: 'var(--border-color)',
+                      color: 'var(--text-primary)',
+                    }}
+                    aria-label="Close project modal"
+                  >
+                    <X className="w-4 h-4 text-[#ff9000] group-hover:rotate-90 transition-transform duration-200" />
+                    <span className="hidden sm:inline font-bold text-xs">Close</span>
+                  </button>
                 </div>
+
+                {/* Scrollable Content Body */}
+                <div className="p-5 sm:p-6 overflow-y-auto space-y-6">
+                  {/* Large Image Preview in Modal */}
+                  <div 
+                    className="rounded-2xl overflow-hidden border p-3 flex items-center justify-center max-h-[440px] bg-[#080102]"
+                    style={{
+                      borderColor: 'var(--border-color)',
+                    }}
+                  >
+                    <img
+                      src={activeModal.image}
+                      alt={activeModal.title}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-auto max-h-[400px] object-contain rounded-xl"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div 
+                      className="p-4 border rounded-2xl text-xs"
+                      style={{
+                        backgroundColor: 'var(--bg-primary)',
+                        borderColor: 'var(--border-color)',
+                      }}
+                    >
+                      <span className="text-rose-400 font-bold block mb-1 font-mono uppercase tracking-wide">The Problem</span>
+                      <p style={{ color: 'var(--text-secondary)' }} className="leading-relaxed">{activeModal.problem}</p>
+                    </div>
+                    <div 
+                      className="p-4 border rounded-2xl text-xs"
+                      style={{
+                        backgroundColor: 'var(--bg-primary)',
+                        borderColor: 'var(--border-color)',
+                      }}
+                    >
+                      <span className="text-[#ff9000] font-bold block mb-1 font-mono uppercase tracking-wide">The Solution</span>
+                      <p style={{ color: 'var(--text-secondary)' }} className="leading-relaxed">{activeModal.solution}</p>
+                    </div>
+                  </div>
+
+                  {activeModal.result ? (
+                    <div 
+                      className="p-4 border rounded-2xl"
+                      style={{
+                        backgroundColor: 'var(--bg-primary)',
+                        borderColor: 'var(--border-color)',
+                      }}
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <Sparkles className="w-4 h-4 text-[#ff9000]" />
+                        <span className="text-[#ff9000] text-xs font-bold font-mono tracking-wider uppercase">
+                          RESULT
+                        </span>
+                      </div>
+                      <p style={{ color: 'var(--text-secondary)' }} className="text-xs leading-relaxed">
+                        {activeModal.result}
+                      </p>
+                    </div>
+                  ) : (
+                    <div 
+                      className="p-4 border rounded-2xl"
+                      style={{
+                        backgroundColor: 'var(--bg-primary)',
+                        borderColor: 'var(--border-color)',
+                      }}
+                    >
+                      <span className="text-[#ff9000] text-xs font-bold font-mono block mb-2 tracking-wider uppercase">
+                        KEY FEATURES & DELIVERABLES
+                      </span>
+                      <ul className="space-y-2 text-xs" style={{ color: 'var(--text-secondary)' }}>
+                        {activeModal.features.map((feat, i) => (
+                          <li key={i} className="flex items-center gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#ff9000] shrink-0" />
+                            <span>{feat}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+
+                {/* Sticky Modal Footer */}
                 <div 
-                  className="p-4 border rounded-2xl text-xs"
+                  className="p-4 sm:p-5 border-t flex items-center justify-between gap-3 shrink-0"
                   style={{
-                    backgroundColor: 'var(--bg-primary)',
+                    backgroundColor: 'var(--bg-secondary)',
                     borderColor: 'var(--border-color)',
                   }}
                 >
-                  <span className="text-[#ff9000] font-bold block mb-1">The Solution</span>
-                  <p style={{ color: 'var(--text-secondary)' }} className="leading-relaxed">{activeModal.solution}</p>
+                  <button
+                    type="button"
+                    onClick={() => setActiveModal(null)}
+                    className="px-4 py-2.5 rounded-xl border text-xs font-mono font-bold transition-colors hover:border-red-500/50 cursor-pointer"
+                    style={{
+                      backgroundColor: 'var(--bg-primary)',
+                      borderColor: 'var(--border-color)',
+                      color: 'var(--text-secondary)',
+                    }}
+                  >
+                    ← Back to Projects
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const title = activeModal.title;
+                      setActiveModal(null);
+                      onOpenBookingForProject(title);
+                    }}
+                    className="px-5 sm:px-6 py-2.5 bg-gradient-to-r from-[#ff9000] to-[#ff3700] hover:brightness-110 text-white font-bold text-xs rounded-xl flex items-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(255,80,0,0.4)]"
+                  >
+                    <span>Build This Workflow</span>
+                    <span>→</span>
+                  </button>
                 </div>
-              </div>
-
-              <div 
-                className="mb-6 p-4 border rounded-2xl"
-                style={{
-                  backgroundColor: 'var(--bg-primary)',
-                  borderColor: 'var(--border-color)',
-                }}
-              >
-                <span className="text-[#ff9000] text-xs font-bold font-mono block mb-2">
-                  KEY FEATURES
-                </span>
-                <ul className="space-y-2 text-xs" style={{ color: 'var(--text-secondary)' }}>
-                  {activeModal.features.map((feat, i) => (
-                    <li key={i} className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#ff9000] shrink-0" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="pt-4 border-t flex justify-end gap-3" style={{ borderColor: 'var(--border-color)' }}>
-                <button
-                  onClick={() => {
-                    const title = activeModal.title;
-                    setActiveModal(null);
-                    onOpenBookingForProject(title);
-                  }}
-                  className="px-6 py-3 bg-gradient-to-r from-[#ff9000] to-[#ff3700] hover:brightness-110 text-white font-bold text-xs rounded-xl flex items-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(255,80,0,0.4)]"
-                >
-                  <span>Build This Workflow</span>
-                  <span>→</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       </div>
     </section>

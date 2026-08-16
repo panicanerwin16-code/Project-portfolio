@@ -29,6 +29,7 @@ export interface ProjectItem {
   impact: string;
   metrics: { label: string; value: string }[];
   features: string[];
+  result?: string;
   workflowDiagram: WorkflowStep[];
   clientSector: string;
 }
