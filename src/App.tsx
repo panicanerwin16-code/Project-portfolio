@@ -86,7 +86,13 @@ export default function App() {
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-[#0B0F19] text-white' : 'bg-slate-50 text-slate-900 light'}`}>
+    <div 
+      className="min-h-screen transition-colors duration-300"
+      style={{
+        backgroundColor: 'var(--bg-primary)',
+        color: 'var(--text-primary)',
+      }}
+    >
       
       {/* Scroll Progress Bar */}
       <ScrollProgressBar />
@@ -159,44 +165,56 @@ export default function App() {
 
       {/* Service Detail Modal */}
       {selectedService && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md overflow-y-auto">
-          <div className="relative w-full max-w-lg glass-panel p-6 rounded-3xl bg-slate-950 light:bg-white border border-white/10 light:border-slate-200 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
+          <div 
+            className="relative w-full max-w-lg card-crimson-glow p-6 sm:p-8 rounded-3xl border shadow-2xl transition-colors"
+            style={{
+              backgroundColor: 'var(--bg-secondary)',
+              borderColor: 'var(--border-color)',
+              color: 'var(--text-primary)',
+            }}
+          >
             <button
               onClick={() => setSelectedService(null)}
-              className="absolute top-4 right-4 p-2 rounded-xl bg-slate-900 light:bg-slate-100 text-slate-400 hover:text-white cursor-pointer"
+              className="absolute top-4 right-4 p-2 rounded-xl border transition-colors cursor-pointer hover:border-orange-500"
+              style={{
+                backgroundColor: 'var(--bg-primary)',
+                borderColor: 'var(--border-color)',
+                color: 'var(--text-secondary)',
+              }}
             >
               <X className="w-5 h-5" />
             </button>
 
-            <span className="text-xs font-semibold text-sky-400 uppercase tracking-wider">
+            <span className="text-xs font-semibold text-[#ff9000] uppercase tracking-wider">
               Service Details
             </span>
-            <h3 className="text-2xl font-bold text-white light:text-slate-900 mt-1 mb-3">
+            <h3 className="text-2xl font-bold mt-1 mb-3" style={{ color: 'var(--text-primary)' }}>
               {selectedService.title}
             </h3>
 
-            <p className="text-xs text-slate-300 light:text-slate-600 leading-relaxed mb-4">
+            <p className="text-xs leading-relaxed mb-4" style={{ color: 'var(--text-secondary)' }}>
               {selectedService.description}
             </p>
 
             <div className="space-y-2 mb-6">
-              <h4 className="text-xs font-bold text-slate-200 light:text-slate-800">Key Deliverables:</h4>
+              <h4 className="text-xs font-bold" style={{ color: 'var(--text-primary)' }}>Key Deliverables:</h4>
               {selectedService.deliverables.map((del, i) => (
-                <div key={i} className="flex items-center gap-2 text-xs text-slate-300 light:text-slate-700">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <div key={i} className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-secondary)' }}>
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#ff9000] shrink-0" />
                   <span>{del}</span>
                 </div>
               ))}
             </div>
 
-            <div className="flex items-center gap-3 pt-4 border-t border-white/10">
+            <div className="flex items-center gap-3 pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
               <button
                 onClick={() => {
                   const serviceName = selectedService.title;
                   setSelectedService(null);
                   handleOpenBooking(`Service Inquiry: ${serviceName}`);
                 }}
-                className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-[#ff9000] to-[#ff3700] hover:brightness-110 text-white font-semibold text-xs shadow-lg shadow-orange-500/25 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book Call for {selectedService.title}</span>

@@ -2,25 +2,31 @@
 
 @layer base {
   :root {
-    --bg-primary: #0b0f19;
-    --bg-secondary: #111827;
-    --bg-card: rgba(17, 24, 39, 0.75);
-    --border-color: rgba(255, 255, 255, 0.08);
+    --bg-primary: #0a0103;
+    --bg-secondary: #120205;
+    --bg-card: rgba(18, 3, 6, 0.85);
+    --border-color: rgba(255, 60, 30, 0.25);
+    --border-glow: rgba(255, 80, 20, 0.45);
     --text-primary: #ffffff;
-    --text-secondary: #9ca3af;
-    --accent-blue: #2563eb;
-    --accent-sky: #38bdf8;
+    --text-secondary: #c4b5b8;
+    --accent-orange: #ff9000;
+    --accent-fire: #ff4500;
+    --accent-crimson: #e60026;
+    --accent-red: #ff2a2a;
   }
 
   .light {
-    --bg-primary: #f8fafc;
+    --bg-primary: #fcf8f8;
     --bg-secondary: #ffffff;
-    --bg-card: rgba(255, 255, 255, 0.85);
-    --border-color: rgba(0, 0, 0, 0.08);
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --accent-blue: #2563eb;
-    --accent-sky: #0284c7;
+    --bg-card: rgba(255, 255, 255, 0.95);
+    --border-color: rgba(200, 40, 40, 0.15);
+    --border-glow: rgba(230, 50, 30, 0.35);
+    --text-primary: #1a0508;
+    --text-secondary: #5c4548;
+    --accent-orange: #ea580c;
+    --accent-fire: #dc2626;
+    --accent-crimson: #b91c1c;
+    --accent-red: #c2410c;
   }
 
   html {
@@ -36,72 +42,48 @@
   }
 }
 
-/* Custom Utilities for High-End Linear/Stripe Glass Aesthetics */
-.glass-panel {
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-color);
+/* Background Grid Overlay matching Reference Image */
+.bg-crimson-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 40, 60, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 40, 60, 0.08) 1px, transparent 1px);
+  background-size: 34px 34px;
 }
 
-.glass-panel-hover {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.light .bg-crimson-grid {
+  background-image: 
+    linear-gradient(to right, rgba(200, 30, 50, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(200, 30, 50, 0.05) 1px, transparent 1px);
+  background-size: 34px 34px;
 }
 
-.glass-panel-hover:hover {
-  border-color: rgba(56, 189, 248, 0.3);
-  box-shadow: 0 12px 32px -8px rgba(37, 99, 235, 0.15);
-  transform: translateY(-2px);
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, #ffffff 20%, #38bdf8 80%);
+/* Fiery Headline Gradient matching "Hyper Design" reference */
+.gradient-fiery-text {
+  background: linear-gradient(135deg, #ffaa00 0%, #ff6a00 50%, #ff2a2a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.light .gradient-text {
-  background: linear-gradient(135deg, #0f172a 20%, #2563eb 80%);
+.light .gradient-fiery-text {
+  background: linear-gradient(135deg, #c2410c 0%, #ea580c 50%, #dc2626 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.gradient-blue-text {
-  background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Glowing Card Border & Shadow */
+.card-crimson-glow {
+  border: 1px solid rgba(255, 60, 30, 0.35);
+  box-shadow: 0 0 35px rgba(230, 30, 30, 0.12), inset 0 0 20px rgba(255, 70, 0, 0.03);
 }
 
-.glow-bg {
-  position: relative;
+.card-crimson-glow:hover {
+  border-color: rgba(255, 100, 30, 0.6);
+  box-shadow: 0 0 45px rgba(255, 60, 30, 0.25), inset 0 0 25px rgba(255, 70, 0, 0.06);
 }
 
-.glow-bg::before {
-  content: '';
-  position: absolute;
-  top: -20%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 300px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, rgba(56, 189, 248, 0) 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Custom pulse line for workflow nodes */
-@keyframes pulse-flow {
-  0% {
-    stroke-dashoffset: 24;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-
-.animate-pulse-flow {
-  stroke-dasharray: 6 6;
-  animation: pulse-flow 1.5s linear infinite;
+/* Dotted Divider for reference card aesthetics */
+.border-dotted-crimson {
+  border-bottom: 1px dotted rgba(255, 70, 50, 0.35);
 }
 
 /* Custom Scrollbar */
@@ -114,89 +96,41 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 60, 30, 0.3);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(56, 189, 248, 0.4);
+  background: rgba(255, 90, 30, 0.6);
 }
 
-/* Solar System & Tech Stack Orbit Animations */
-@keyframes solar-orbit-cw {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Moving to the Right Marquee Animation */
+@keyframes marquee-to-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }
 
-@keyframes solar-orbit-ccw {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(-360deg); }
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marquee-to-right 35s linear infinite;
 }
 
-@keyframes solar-counter-cw {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(-360deg); }
+.animate-marquee-right:hover {
+  animation-play-state: paused;
 }
 
-@keyframes solar-counter-ccw {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.animate-marquee-right-fast {
+  display: flex;
+  width: max-content;
+  animation: marquee-to-right 28s linear infinite;
 }
 
-@keyframes float-subtle {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-7px); }
+.animate-marquee-right-fast:hover {
+  animation-play-state: paused;
 }
 
-@keyframes core-pulse-glow {
-  0%, 100% { transform: scale(1); opacity: 0.85; filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.5)); }
-  50% { transform: scale(1.08); opacity: 1; filter: drop-shadow(0 0 35px rgba(245, 158, 11, 0.8)); }
-}
-
-@keyframes particle-drift {
-  0% { transform: translateY(0px) translateX(0px); opacity: 0.2; }
-  50% { transform: translateY(-25px) translateX(12px); opacity: 0.6; }
-  100% { transform: translateY(0px) translateX(0px); opacity: 0.2; }
-}
-
-.animate-orbit-cw {
-  animation: solar-orbit-cw var(--orbit-speed, 20s) linear infinite;
-}
-
-.animate-orbit-ccw {
-  animation: solar-orbit-ccw var(--orbit-speed, 35s) linear infinite;
-}
-
-.animate-counter-cw {
-  animation: solar-counter-cw var(--orbit-speed, 20s) linear infinite;
-}
-
-.animate-counter-ccw {
-  animation: solar-counter-ccw var(--orbit-speed, 35s) linear infinite;
-}
-
-.animate-float-subtle {
-  animation: float-subtle 4s ease-in-out infinite;
-}
-
-.animate-core-pulse {
-  animation: core-pulse-glow 3.5s ease-in-out infinite;
-}
-
-.animate-particle-1 {
-  animation: particle-drift 8s ease-in-out infinite;
-}
-
-.animate-particle-2 {
-  animation: particle-drift 12s ease-in-out infinite 2s;
-}
-
-.animate-particle-3 {
-  animation: particle-drift 15s ease-in-out infinite 4s;
-}
-
-/* Pause animation on hover */
-.pause-on-hover:hover,
-.pause-on-hover:hover * {
-  animation-play-state: paused !important;
-}

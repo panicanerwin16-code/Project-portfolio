@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Sparkles, Layers, ArrowUpRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 import { ProjectItem } from '../types';
 
 import n8nFbAgentImg from '../assets/images/n8n_fb_agent_1784974450524.jpg';
@@ -10,18 +11,36 @@ import zapierContentImg from '../assets/images/zapier_content_1784974515788.jpg'
 import zapierAsanaImg from '../assets/images/zapier_asana_1784974531023.jpg';
 import makeGmailSortImg from '../assets/images/make_gmail_sort_1784974546586.jpg';
 import makeXeroAsanaImg from '../assets/images/make_xero_asana_1784974562223.jpg';
+import ghlPipelineImg from '../assets/images/ghl_pipeline_flow_1786899273169.jpg';
+import ghlNurtureImg from '../assets/images/ghl_lead_nurture_1786899297489.jpg';
 
 interface ProjectsSectionProps {
   onOpenBookingForProject: (projectTitle: string) => void;
 }
 
+type FilterCategory = 'n8n' | 'zapier' | 'make' | 'gohighlevel';
+
+interface FilterOption {
+  id: FilterCategory;
+  label: string;
+}
+
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   onOpenBookingForProject,
 }) => {
+  const [activeCategory, setActiveCategory] = useState<FilterCategory>('n8n');
   const [activeModal, setActiveModal] = useState<ProjectItem | null>(null);
+
+  const filterButtons: FilterOption[] = [
+    { id: 'n8n', label: 'n8n' },
+    { id: 'zapier', label: 'Zapier' },
+    { id: 'make', label: 'Make' },
+    { id: 'gohighlevel', label: 'Go High Level' },
+  ];
 
   const projects: Array<{
     id: string;
+    category: FilterCategory;
     platform: string;
     title: string;
     description: string;
@@ -34,6 +53,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   }> = [
     {
       id: 'ai-agent-facebook',
+      category: 'n8n',
       platform: 'N8N',
       title: 'AI Agent for Facebook',
       description:
@@ -52,6 +72,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     },
     {
       id: 'ai-job-scraper',
+      category: 'n8n',
       platform: 'N8N',
       title: 'AI Job Scraper + Resume Optimizer',
       description:
@@ -70,6 +91,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     },
     {
       id: 'ai-voice-receptionist',
+      category: 'n8n',
       platform: 'N8N',
       title: 'AI Voice Receptionist',
       description:
@@ -88,6 +110,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     },
     {
       id: 'leads-enrichment',
+      category: 'zapier',
       platform: 'ZAPIER',
       title: 'AI Automation Leads Enrichment',
       description:
@@ -106,6 +129,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     },
     {
       id: 'content-repurposing',
+      category: 'zapier',
       platform: 'ZAPIER',
       title: 'AI Content Repurposing',
       description:
@@ -124,6 +148,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     },
     {
       id: 'asana-crm-engagement',
+      category: 'zapier',
       platform: 'ZAPIER',
       title: 'Asana CRM Lead Engagement Workflow',
       description:
@@ -142,7 +167,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     },
     {
       id: 'make-gmail-sort',
-      platform: 'MAKE.COM',
+      category: 'make',
+      platform: 'MAKE',
       title: 'Auto Sort Gmail Attachments on Drive',
       description:
         'Monitors incoming Gmail attachments, uses Google Gemini AI to analyze content and generate structured filenames, uploads to organized Drive folders, and logs rows in Google Sheets.',
@@ -160,7 +186,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     },
     {
       id: 'make-xero-asana',
-      platform: 'MAKE.COM',
+      category: 'make',
+      platform: 'MAKE',
       title: 'Export Xero Transactions to Asana',
       description:
         'Monitors completed Asana tasks, fetches financial transaction data via Xero API, formats and aggregates rows in Google Sheets, and uploads the generated CSV directly to Asana.',
@@ -176,159 +203,364 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         'Automated CSV attachment upload back to Asana',
       ],
     },
+    {
+      id: 'ghl-lead-pipeline',
+      category: 'gohighlevel',
+      platform: 'GO HIGH LEVEL',
+      title: 'GoHighLevel Lead Pipeline & Speed-to-Lead Automation',
+      description:
+        'Full GHL snapshot automation converting cold form leads into booked appointments using 2-minute instant SMS response, conditional AI qualification, and automated pipeline stage updates.',
+      image: ghlPipelineImg,
+      tools: ['GoHighLevel', 'Conversational AI', 'SMS Sequences', 'Calendar Sync', 'Stripe'],
+      problem: 'Inbound leads waited over 4 hours for manual follow-ups, resulting in a 60% drop-off in appointment conversion.',
+      solution: 'Built an end-to-end GoHighLevel automation pipeline triggering instant 2-way SMS AI conversations, calendar slot allocation, and automated missed-call text-backs.',
+      impact: 'Increased booked sales appointments by 42% and achieved a sub-60-second lead response time.',
+      features: [
+        'Speed-to-lead under 60 seconds response',
+        'Conversational SMS AI booking agent',
+        'Automated pipeline stage tracking',
+        'Missed-call text-back & calendar lock',
+      ],
+    },
+    {
+      id: 'ghl-review-nurture',
+      category: 'gohighlevel',
+      platform: 'GO HIGH LEVEL',
+      title: 'GoHighLevel Omnichannel Nurture & Review Engine',
+      description:
+        'Multi-touch GHL workflow triggering automated post-purchase customer check-ins, automated 5-star Google review request routing, and reactivation email/SMS drips.',
+      image: ghlNurtureImg,
+      tools: ['GoHighLevel', 'Google Reviews', 'WhatsApp API', 'Email Sequences', 'Webhooks'],
+      problem: 'Client had hundreds of past customer records with no structured retention strategy and low Google Business review volume.',
+      solution: 'Engineered a smart GHL workflow with NPS condition branching, sending happy clients straight to Google Reviews while routing issues to support.',
+      impact: 'Grew 5-star Google reviews by 210% and reactivated $18,500 in repeat sales within 90 days.',
+      features: [
+        'Conditional NPS review routing',
+        'Automated WhatsApp & SMS follow-ups',
+        'Win-back reactivation sequences',
+        'Multi-location review monitoring',
+      ],
+    },
   ];
 
+  const filteredProjects = projects.filter((p) => p.category === activeCategory);
+
+  const getCategoryCount = (category: FilterCategory) => {
+    return projects.filter((p) => p.category === category).length;
+  };
+
   return (
-    <section id="work" className="py-20 md:py-28 relative bg-[#0B0F19]">
-      <div id="projects" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      id="work" 
+      className="py-20 md:py-28 relative transition-colors duration-300 bg-crimson-grid"
+      style={{ backgroundColor: 'var(--bg-primary)' }}
+    >
+      <div id="projects" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Eyebrow & Title */}
-        <div className="mb-12">
-          <span className="text-amber-400 text-xs font-bold uppercase tracking-widest block mb-2 font-mono">
-            SELECTED WORK
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            My Portfolio
-          </h2>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 text-left">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-[#ff9000] text-xs font-mono font-semibold uppercase tracking-widest mb-3 shadow-[0_0_12px_rgba(255,80,0,0.2)]">
+              <Layers className="w-3.5 h-3.5" />
+              <span>SELECTED WORK</span>
+            </div>
+            <h2 
+              className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              My Portfolio
+            </h2>
+            <p 
+              className="text-sm mt-2 max-w-xl"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              Explore production-tested automation workflows, AI bots, and CRM integrations built across leading platforms.
+            </p>
+          </div>
+
+          {/* Quick Stat Pill */}
+          <div 
+            className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-xl border text-xs font-mono"
+            style={{
+              backgroundColor: 'var(--bg-secondary)',
+              borderColor: 'var(--border-color)',
+              color: 'var(--text-secondary)',
+            }}
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#ff9000]" />
+            <span>Showing <strong className="text-[#ff9000]">{filteredProjects.length}</strong> {filterButtons.find((b) => b.id === activeCategory)?.label} Workflows</span>
+          </div>
         </div>
 
-        {/* 8 Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((proj) => (
-            <div
-              key={proj.id}
-              onClick={() => {
-                setActiveModal({
-                  id: proj.id,
-                  title: proj.title,
-                  category: proj.platform,
-                  image: proj.image,
-                  tools: proj.tools,
-                  problem: proj.problem,
-                  solution: proj.solution,
-                  impact: proj.impact,
-                  metrics: [{ label: 'Impact', value: 'High ROI' }],
-                  features: proj.features,
-                  clientSector: 'Automation Build',
-                  workflowDiagram: [
-                    { id: '1', label: 'Trigger Event', sublabel: 'Lead or Webhook', icon: 'Webhook', type: 'trigger' },
-                    { id: '2', label: 'AI Model / Logic', sublabel: 'Processing Payload', icon: 'Brain', type: 'ai' },
-                    { id: '3', label: 'CRM / Action', sublabel: 'Data Sync & Dispatch', icon: 'Database', type: 'action' },
-                  ],
-                });
-              }}
-              className="bg-[#111827]/90 border border-slate-800 hover:border-slate-700 rounded-2xl overflow-hidden transition-all duration-300 flex flex-col justify-between cursor-pointer group"
-            >
-              <div>
-                {/* Image Container - Displays full workflow image without cropping */}
-                <div className="relative h-56 overflow-hidden bg-[#0a0d14] border-b border-slate-800/80 flex items-center justify-center p-2">
-                  <img
-                    src={proj.image}
-                    alt={proj.title}
-                    className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-300"
-                  />
-                </div>
+        {/* Filter Buttons */}
+        <div className="mb-10">
+          <div 
+            className="flex flex-wrap items-center gap-3 sm:gap-4 p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl border backdrop-blur-sm w-fit max-w-full overflow-x-auto shadow-lg"
+            style={{
+              backgroundColor: 'var(--bg-secondary)',
+              borderColor: 'var(--border-color)',
+            }}
+          >
+            {filterButtons.map((btn) => {
+              const isActive = activeCategory === btn.id;
+              const count = getCategoryCount(btn.id);
 
-                {/* Card Content */}
-                <div className="p-6">
-                  {/* Platform Tag & Arrow */}
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-[11px] font-mono font-bold text-amber-400 tracking-wider">
-                      {proj.platform}
-                    </span>
-                    <span className="text-amber-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-sm font-bold">
-                      ↗
-                    </span>
+              return (
+                <button
+                  key={btn.id}
+                  onClick={() => setActiveCategory(btn.id)}
+                  className={`relative px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-mono text-sm sm:text-base md:text-lg font-black tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-2.5 sm:gap-3 select-none shrink-0 ${
+                    isActive
+                      ? 'bg-gradient-to-r from-[#ff9000] to-[#ff3700] text-white shadow-[0_0_24px_rgba(255,80,0,0.45)] scale-[1.03]'
+                      : 'hover:border-orange-500/50 hover:scale-[1.02]'
+                  }`}
+                  style={{
+                    backgroundColor: isActive ? '#ff4500' : 'var(--bg-card)',
+                    borderColor: isActive ? '#ff4500' : 'var(--border-color)',
+                    color: isActive ? '#ffffff' : 'var(--text-primary)',
+                    borderWidth: '1px',
+                  }}
+                >
+                  <span>{btn.label}</span>
+                  <span
+                    className={`px-2 py-0.5 rounded-lg text-xs sm:text-sm font-bold ${
+                      isActive
+                        ? 'bg-black/30 text-white'
+                        : 'bg-red-500/10 text-[#ff9000]'
+                    }`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Animated Projects Grid */}
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((proj) => (
+              <motion.div
+                key={proj.id}
+                layout
+                initial={{ opacity: 0, y: 15, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -15, scale: 0.97 }}
+                transition={{ duration: 0.28, ease: 'easeOut' }}
+                onClick={() => {
+                  setActiveModal({
+                    id: proj.id,
+                    title: proj.title,
+                    category: proj.platform,
+                    image: proj.image,
+                    tools: proj.tools,
+                    problem: proj.problem,
+                    solution: proj.solution,
+                    impact: proj.impact,
+                    metrics: [{ label: 'Impact', value: 'High ROI' }],
+                    features: proj.features,
+                    clientSector: 'Automation Build',
+                    workflowDiagram: [
+                      { id: '1', label: 'Trigger Event', sublabel: 'Lead or Webhook', icon: 'Webhook', type: 'trigger' },
+                      { id: '2', label: 'AI Model / Logic', sublabel: 'Processing Payload', icon: 'Brain', type: 'ai' },
+                      { id: '3', label: 'CRM / Action', sublabel: 'Data Sync & Dispatch', icon: 'Database', type: 'action' },
+                    ],
+                  });
+                }}
+                className="card-crimson-glow rounded-3xl overflow-hidden transition-all duration-300 flex flex-col justify-between cursor-pointer group shadow-xl"
+                style={{
+                  backgroundColor: 'var(--bg-card)',
+                }}
+              >
+                <div>
+                  {/* Image Container */}
+                  <div 
+                    className="relative h-56 overflow-hidden border-b flex items-center justify-center p-2 bg-[#090102]"
+                    style={{
+                      borderColor: 'var(--border-color)',
+                    }}
+                  >
+                    <img
+                      src={proj.image}
+                      alt={proj.title}
+                      className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-300"
+                    />
+                    <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-r from-[#ff9000] to-[#ff3700] text-white p-1.5 rounded-lg shadow-md">
+                      <ArrowUpRight className="w-4 h-4" />
+                    </div>
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-lg font-bold text-white mb-2 tracking-tight group-hover:text-amber-300 transition-colors">
-                    {proj.title}
-                  </h3>
+                  {/* Card Content */}
+                  <div className="p-6">
+                    {/* Platform Tag & Arrow */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-[11px] font-mono font-bold text-[#ff9000] tracking-wider px-2 py-0.5 rounded-md bg-red-500/10 border border-red-500/20">
+                        {proj.platform}
+                      </span>
+                      <span className="text-[#ff9000] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform text-sm font-bold">
+                        →
+                      </span>
+                    </div>
 
-                  {/* Description */}
-                  <p className="text-xs text-gray-400 leading-relaxed mb-6">
-                    {proj.description}
-                  </p>
+                    {/* Title */}
+                    <h3 
+                      className="text-lg font-bold mb-2 tracking-tight group-hover:text-[#ff9000] transition-colors"
+                      style={{ color: 'var(--text-primary)' }}
+                    >
+                      {proj.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p 
+                      className="text-xs leading-relaxed mb-6"
+                      style={{ color: 'var(--text-secondary)' }}
+                    >
+                      {proj.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
 
-              {/* Tech Pills */}
-              <div className="px-6 pb-6 pt-2 flex flex-wrap gap-1.5 border-t border-slate-800/60">
-                {proj.tools.map((t) => (
-                  <span
-                    key={t}
-                    className="px-2.5 py-1 rounded-full text-[10px] font-mono text-gray-300 bg-slate-900 border border-slate-800"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+                {/* Tech Pills */}
+                <div 
+                  className="px-6 pb-6 pt-2 flex flex-wrap gap-1.5 border-dotted-crimson"
+                >
+                  {proj.tools.map((t) => (
+                    <span
+                      key={t}
+                      className="px-2.5 py-1 rounded-full text-[10px] font-mono border"
+                      style={{
+                        backgroundColor: 'var(--bg-secondary)',
+                        borderColor: 'var(--border-color)',
+                        color: 'var(--text-secondary)',
+                      }}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Empty State if category has 0 items */}
+        {filteredProjects.length === 0 && (
+          <div 
+            className="py-16 text-center rounded-2xl border"
+            style={{
+              backgroundColor: 'var(--bg-secondary)',
+              borderColor: 'var(--border-color)',
+            }}
+          >
+            <p className="font-mono text-sm" style={{ color: 'var(--text-secondary)' }}>No projects found in this category.</p>
+            <button
+              onClick={() => setActiveCategory('all')}
+              className="mt-3 px-4 py-2 rounded-xl bg-gradient-to-r from-[#ff9000] to-[#ff3700] text-white font-mono text-xs font-bold"
+            >
+              Reset to All Projects
+            </button>
+          </div>
+        )}
 
         {/* Detail Blueprint Modal */}
         {activeModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
-            <div className="relative w-full max-w-2xl bg-[#111827] border border-slate-700 p-6 sm:p-8 rounded-2xl text-white shadow-2xl my-8">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
+            <div 
+              className="relative w-full max-w-2xl border p-6 sm:p-8 rounded-3xl shadow-2xl my-8 card-crimson-glow"
+              style={{
+                backgroundColor: 'var(--bg-secondary)',
+                color: 'var(--text-primary)',
+              }}
+            >
               <button
                 onClick={() => setActiveModal(null)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-white text-sm font-mono px-2 py-1 rounded bg-slate-800 cursor-pointer"
+                className="absolute top-4 right-4 text-xs font-mono px-2.5 py-1.5 rounded-lg border transition-colors cursor-pointer hover:border-red-500"
+                style={{
+                  backgroundColor: 'var(--bg-primary)',
+                  borderColor: 'var(--border-color)',
+                  color: 'var(--text-secondary)',
+                }}
               >
                 ✕ Close
               </button>
 
-              <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-wider block mb-1">
+              <span className="text-xs font-mono text-[#ff9000] font-bold uppercase tracking-wider block mb-1">
                 {activeModal.category} PROJECT
               </span>
               <h3 className="text-2xl font-bold mb-4">{activeModal.title}</h3>
 
               {/* Large Image Preview in Modal */}
-              <div className="mb-6 rounded-xl overflow-hidden border border-slate-800 bg-[#0a0d14] p-3 flex items-center justify-center max-h-[500px]">
+              <div 
+                className="mb-6 rounded-2xl overflow-hidden border p-3 flex items-center justify-center max-h-[500px] bg-[#080102]"
+                style={{
+                  borderColor: 'var(--border-color)',
+                }}
+              >
                 <img
                   src={activeModal.image}
                   alt={activeModal.title}
-                  className="w-full h-auto max-h-[460px] object-contain rounded-lg"
+                  className="w-full h-auto max-h-[460px] object-contain rounded-xl"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl text-xs">
+                <div 
+                  className="p-4 border rounded-2xl text-xs"
+                  style={{
+                    backgroundColor: 'var(--bg-primary)',
+                    borderColor: 'var(--border-color)',
+                  }}
+                >
                   <span className="text-rose-400 font-bold block mb-1">The Problem</span>
-                  <p className="text-gray-300 leading-relaxed">{activeModal.problem}</p>
+                  <p style={{ color: 'var(--text-secondary)' }} className="leading-relaxed">{activeModal.problem}</p>
                 </div>
-                <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl text-xs">
-                  <span className="text-emerald-400 font-bold block mb-1">The Solution</span>
-                  <p className="text-gray-300 leading-relaxed">{activeModal.solution}</p>
+                <div 
+                  className="p-4 border rounded-2xl text-xs"
+                  style={{
+                    backgroundColor: 'var(--bg-primary)',
+                    borderColor: 'var(--border-color)',
+                  }}
+                >
+                  <span className="text-[#ff9000] font-bold block mb-1">The Solution</span>
+                  <p style={{ color: 'var(--text-secondary)' }} className="leading-relaxed">{activeModal.solution}</p>
                 </div>
               </div>
 
-              <div className="mb-6 p-4 bg-slate-900 border border-slate-800 rounded-xl">
-                <span className="text-amber-400 text-xs font-bold font-mono block mb-2">
+              <div 
+                className="mb-6 p-4 border rounded-2xl"
+                style={{
+                  backgroundColor: 'var(--bg-primary)',
+                  borderColor: 'var(--border-color)',
+                }}
+              >
+                <span className="text-[#ff9000] text-xs font-bold font-mono block mb-2">
                   KEY FEATURES
                 </span>
-                <ul className="space-y-2 text-xs text-gray-300">
+                <ul className="space-y-2 text-xs" style={{ color: 'var(--text-secondary)' }}>
                   {activeModal.features.map((feat, i) => (
                     <li key={i} className="flex items-center gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#ff9000] shrink-0" />
                       <span>{feat}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="pt-4 border-t border-slate-800 flex justify-end gap-3">
+              <div className="pt-4 border-t flex justify-end gap-3" style={{ borderColor: 'var(--border-color)' }}>
                 <button
                   onClick={() => {
                     const title = activeModal.title;
                     setActiveModal(null);
                     onOpenBookingForProject(title);
                   }}
-                  className="px-5 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs rounded-xl flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-3 bg-gradient-to-r from-[#ff9000] to-[#ff3700] hover:brightness-110 text-white font-bold text-xs rounded-xl flex items-center gap-2 cursor-pointer shadow-[0_0_20px_rgba(255,80,0,0.4)]"
                 >
                   <span>Build This Workflow</span>
-                  <span>↗</span>
+                  <span>→</span>
                 </button>
               </div>
             </div>
@@ -339,3 +571,4 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     </section>
   );
 };
+

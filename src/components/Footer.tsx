@@ -1,5 +1,5 @@
 import React from 'react';
-import { Zap, ArrowUp, Linkedin, Github, Mail, Globe, Sparkles } from 'lucide-react';
+import { Zap, ArrowUp, Linkedin, Mail } from 'lucide-react';
 import { personalInfo } from '../data/portfolioData';
 
 interface FooterProps {
@@ -12,52 +12,75 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
   };
 
   return (
-    <footer className="bg-slate-950 border-t border-white/10 light:border-slate-200 pt-16 pb-12 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer 
+      className="border-t pt-16 pb-12 relative transition-colors duration-300 bg-crimson-grid"
+      style={{
+        backgroundColor: 'var(--bg-card)',
+        borderColor: 'var(--border-color)',
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Top Footer Row */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-white/10 light:border-slate-200">
+        <div 
+          className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b"
+          style={{ borderColor: 'var(--border-color)' }}
+        >
           
           {/* Brand Info */}
-          <div className="md:col-span-5 space-y-4">
+          <div className="md:col-span-5 space-y-4 text-left">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-sky-500 p-0.5 flex items-center justify-center">
-                <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                  <Zap className="w-4 h-4 text-sky-400" />
-                </div>
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-[#ff9000] to-[#ff3700] flex items-center justify-center shadow-[0_0_15px_rgba(255,80,0,0.4)]">
+                <Zap className="w-4 h-4 text-white fill-white" />
               </div>
-              <span className="font-bold text-lg text-white light:text-slate-900 tracking-tight">
+              <span 
+                className="font-bold text-lg tracking-tight"
+                style={{ color: 'var(--text-primary)' }}
+              >
                 {personalInfo.name}
               </span>
             </div>
 
-            <p className="text-xs text-slate-400 light:text-slate-600 max-w-sm leading-relaxed">
+            <p 
+              className="text-xs max-w-sm leading-relaxed"
+              style={{ color: 'var(--text-secondary)' }}
+            >
               {personalInfo.tagline} Building autonomous n8n, Zapier, and AI agent pipelines for global businesses.
             </p>
 
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[11px] font-mono border border-emerald-500/20">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-500/10 text-[#ff9000] text-[11px] font-mono border border-red-500/20">
+              <span className="w-2 h-2 rounded-full bg-[#ff4500] animate-pulse shadow-[0_0_8px_#ff4500]" />
               <span>All Systems Operational (99.99% Uptime)</span>
             </div>
           </div>
 
           {/* Navigation Links */}
-          <div className="md:col-span-3 space-y-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">Quick Navigation</h4>
-            <ul className="space-y-2 text-xs text-slate-400">
-              <li><a href="#about" className="hover:text-sky-400">About Erwin</a></li>
-              <li><a href="#services" className="hover:text-sky-400">Services</a></li>
-              <li><a href="#projects" className="hover:text-sky-400">Case Studies</a></li>
-              <li><a href="#roi-calculator" className="hover:text-sky-400">ROI Calculator</a></li>
-              <li><a href="#process" className="hover:text-sky-400">7-Step Process</a></li>
-              <li><a href="#faq" className="hover:text-sky-400">FAQ</a></li>
+          <div className="md:col-span-3 space-y-3 text-left">
+            <h4 
+              className="text-xs font-bold uppercase tracking-wider"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              Quick Navigation
+            </h4>
+            <ul className="space-y-2 text-xs" style={{ color: 'var(--text-secondary)' }}>
+              <li><a href="#home" className="hover:text-[#ff9000] transition-colors">Home</a></li>
+              <li><a href="#services" className="hover:text-[#ff9000] transition-colors">Services</a></li>
+              <li><a href="#experience" className="hover:text-[#ff9000] transition-colors">Experience</a></li>
+              <li><a href="#work" className="hover:text-[#ff9000] transition-colors">Portfolio Work</a></li>
+              <li><a href="#testimonials" className="hover:text-[#ff9000] transition-colors">Testimonials</a></li>
+              <li><a href="#contact" className="hover:text-[#ff9000] transition-colors">Contact</a></li>
             </ul>
           </div>
 
           {/* Social & Contact */}
-          <div className="md:col-span-4 space-y-4">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">Connect & Book</h4>
-            <p className="text-xs text-slate-400">
+          <div className="md:col-span-4 space-y-4 text-left">
+            <h4 
+              className="text-xs font-bold uppercase tracking-wider"
+              style={{ color: 'var(--text-primary)' }}
+            >
+              Connect & Book
+            </h4>
+            <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
               Manila, Philippines • Global Remote Collaboration
             </p>
 
@@ -66,25 +89,25 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2.5 rounded-xl bg-slate-900 light:bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-300 transition-colors"
+                className="p-2.5 rounded-xl border hover:border-orange-500 hover:text-[#ff9000] transition-colors cursor-pointer"
+                style={{
+                  backgroundColor: 'var(--bg-secondary)',
+                  borderColor: 'var(--border-color)',
+                  color: 'var(--text-primary)',
+                }}
                 title="LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
 
               <a
-                href={personalInfo.github}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2.5 rounded-xl bg-slate-900 light:bg-slate-100 hover:bg-slate-800 text-slate-300 transition-colors"
-                title="GitHub"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-
-              <a
                 href={`mailto:${personalInfo.email}`}
-                className="p-2.5 rounded-xl bg-slate-900 light:bg-slate-100 hover:bg-sky-500 hover:text-white text-slate-300 transition-colors"
+                className="p-2.5 rounded-xl border hover:border-orange-500 hover:text-[#ff9000] transition-colors cursor-pointer"
+                style={{
+                  backgroundColor: 'var(--bg-secondary)',
+                  borderColor: 'var(--border-color)',
+                  color: 'var(--text-primary)',
+                }}
                 title="Email"
               >
                 <Mail className="w-4 h-4" />
@@ -93,7 +116,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
 
             <button
               onClick={onOpenBooking}
-              className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-md shadow-blue-500/20"
+              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#ff9000] to-[#ff3700] hover:brightness-110 text-white text-xs font-extrabold shadow-[0_0_20px_rgba(255,80,0,0.35)] cursor-pointer"
             >
               Book a Call
             </button>
@@ -101,16 +124,23 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
 
         </div>
 
-
         {/* Bottom Copyright & Back To Top */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-300 light:text-slate-600">
+        <div 
+          className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs"
+          style={{ color: 'var(--text-secondary)' }}
+        >
           <div>
-            © {new Date().getFullYear()} Erwin Panican. All rights reserved. Built with React & Tailwind CSS.
+            © {new Date().getFullYear()} Erwin Panican. All rights reserved.
           </div>
 
           <button
             onClick={scrollToTop}
-            className="p-2.5 rounded-xl bg-slate-900 light:bg-slate-100 hover:bg-slate-800 text-slate-300 hover:text-white border border-white/10 flex items-center gap-2 cursor-pointer transition-colors"
+            className="p-2.5 rounded-xl border flex items-center gap-2 cursor-pointer transition-colors hover:border-orange-500 hover:text-[#ff9000]"
+            style={{
+              backgroundColor: 'var(--bg-secondary)',
+              borderColor: 'var(--border-color)',
+              color: 'var(--text-primary)',
+            }}
           >
             <span>Back to top</span>
             <ArrowUp className="w-4 h-4" />
@@ -121,3 +151,4 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
     </footer>
   );
 };
+

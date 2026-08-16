@@ -26,15 +26,22 @@ export const TestimonialsSection: React.FC = () => {
   ];
 
   return (
-    <section id="testimonials" className="py-20 md:py-28 relative bg-[#0B0F19]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      id="testimonials" 
+      className="py-20 md:py-28 relative transition-colors duration-300 bg-crimson-grid"
+      style={{ backgroundColor: 'var(--bg-primary)' }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Eyebrow & Title */}
-        <div className="mb-12">
-          <span className="text-amber-400 text-xs font-bold uppercase tracking-widest block mb-2 font-mono">
+        <div className="mb-12 text-left">
+          <span className="text-[#ff9000] text-xs font-bold uppercase tracking-widest block mb-2 font-mono">
             TESTIMONIALS
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+          <h2 
+            className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight"
+            style={{ color: 'var(--text-primary)' }}
+          >
             What clients say
           </h2>
         </div>
@@ -44,26 +51,40 @@ export const TestimonialsSection: React.FC = () => {
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className="bg-[#111827]/90 border border-slate-800 p-8 rounded-2xl flex flex-col justify-between hover:border-slate-700 transition-all duration-300"
+              className="card-crimson-glow p-8 rounded-3xl flex flex-col justify-between hover:border-orange-500/60 transition-all duration-300 shadow-xl"
+              style={{
+                backgroundColor: 'var(--bg-card)',
+              }}
             >
               <div>
-                {/* Gold Quote Icon */}
-                <div className="text-amber-400 font-serif text-4xl font-bold mb-4 leading-none">
+                {/* Neon Orange Quote Icon */}
+                <div className="text-[#ff9000] font-serif text-4xl font-bold mb-4 leading-none">
                   “
                 </div>
 
                 {/* Quote Body */}
-                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed mb-8">
+                <p 
+                  className="text-xs sm:text-sm leading-relaxed mb-8"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
                   "{item.quote}"
                 </p>
               </div>
 
               {/* Author */}
-              <div className="pt-4 border-t border-slate-800/80">
-                <h4 className="text-sm font-bold text-white tracking-tight">
+              <div 
+                className="pt-4 border-dotted-crimson"
+              >
+                <h4 
+                  className="text-sm font-bold tracking-tight"
+                  style={{ color: 'var(--text-primary)' }}
+                >
                   {item.name}
                 </h4>
-                <p className="text-xs text-gray-400 mt-0.5">
+                <p 
+                  className="text-xs mt-0.5"
+                  style={{ color: 'var(--text-secondary)' }}
+                >
                   {item.role}
                 </p>
               </div>
@@ -75,3 +96,4 @@ export const TestimonialsSection: React.FC = () => {
     </section>
   );
 };
+

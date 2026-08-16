@@ -137,20 +137,36 @@ Languages:
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/85 backdrop-blur-md overflow-y-auto">
-      <div className="relative w-full max-w-4xl bg-[#080C14] border border-amber-400/30 rounded-3xl shadow-2xl my-6 max-h-[90vh] flex flex-col overflow-hidden text-white">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md overflow-y-auto">
+      <div 
+        className="relative w-full max-w-4xl border rounded-3xl shadow-2xl my-6 max-h-[90vh] flex flex-col overflow-hidden transition-colors card-crimson-glow"
+        style={{
+          backgroundColor: 'var(--bg-primary)',
+          borderColor: 'var(--border-color)',
+          color: 'var(--text-primary)',
+        }}
+      >
         
         {/* Header Bar */}
-        <div className="px-6 py-4 bg-[#0E1526] border-b border-slate-800 flex items-center justify-between shrink-0">
+        <div 
+          className="px-6 py-4 border-b flex items-center justify-between shrink-0"
+          style={{
+            backgroundColor: 'var(--bg-card)',
+            borderColor: 'var(--border-color)',
+          }}
+        >
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-amber-400/10 border border-amber-400/30 text-amber-400 flex items-center justify-center font-bold">
+            <div className="w-9 h-9 rounded-xl bg-orange-500/10 border border-orange-500/30 text-[#ff9000] flex items-center justify-center font-bold">
               <FileText className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-white tracking-tight">
+              <h2 
+                className="text-base font-bold tracking-tight"
+                style={{ color: 'var(--text-primary)' }}
+              >
                 Erwin Panican — Official Resume
               </h2>
-              <span className="text-[10px] font-mono uppercase tracking-widest text-amber-400">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-[#ff9000]">
                 AI Automation Specialist
               </span>
             </div>
@@ -158,18 +174,32 @@ Languages:
 
           <button
             onClick={onClose}
-            className="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white transition-colors cursor-pointer"
+            className="p-2 rounded-xl border transition-colors cursor-pointer hover:border-red-500"
+            style={{
+              backgroundColor: 'var(--bg-secondary)',
+              borderColor: 'var(--border-color)',
+              color: 'var(--text-secondary)',
+            }}
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Scrollable Document Body */}
-        <div className="p-6 sm:p-8 overflow-y-auto space-y-8 bg-[#080C14] text-xs sm:text-sm">
+        <div 
+          className="p-6 sm:p-8 overflow-y-auto space-y-8 text-xs sm:text-sm text-left"
+          style={{ backgroundColor: 'var(--bg-primary)' }}
+        >
           
           {/* Header Profile Info Banner */}
-          <div className="p-6 rounded-2xl bg-[#0E1526] border border-slate-800/90 flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg">
-            <div className="relative group w-24 h-28 sm:w-28 sm:h-32 rounded-2xl overflow-hidden border-2 border-amber-400/50 shrink-0 shadow-xl shadow-amber-400/10">
+          <div 
+            className="p-6 rounded-2xl border flex flex-col md:flex-row items-center md:items-start gap-6 shadow-lg"
+            style={{
+              backgroundColor: 'var(--bg-card)',
+              borderColor: 'var(--border-color)',
+            }}
+          >
+            <div className="relative group w-24 h-28 sm:w-28 sm:h-32 rounded-2xl overflow-hidden border-2 border-orange-500/50 shrink-0 shadow-[0_0_20px_rgba(255,80,0,0.2)]">
               <img
                 src={headshot}
                 alt="Erwin Panican"
@@ -187,11 +217,11 @@ Languages:
               {onUploadHeadshot && (
                 <label
                   htmlFor="resume-photo-upload"
-                  className="absolute inset-0 bg-slate-950/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-1 text-center cursor-pointer"
+                  className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-1 text-center cursor-pointer"
                   title="Upload new headshot"
                 >
-                  <Camera className="w-5 h-5 text-amber-400 mb-1" />
-                  <span className="text-[10px] font-mono font-bold text-amber-300 leading-tight">
+                  <Camera className="w-5 h-5 text-[#ff9000] mb-1" />
+                  <span className="text-[10px] font-mono font-bold text-[#ff9000] leading-tight">
                     Change Photo
                   </span>
                   <input
@@ -206,22 +236,28 @@ Languages:
             </div>
 
             <div className="flex-1 text-center md:text-left space-y-2">
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              <h1 
+                className="text-2xl sm:text-3xl font-extrabold tracking-tight"
+                style={{ color: 'var(--text-primary)' }}
+              >
                 Erwin Panican
               </h1>
-              <p className="text-amber-400 font-bold text-xs sm:text-sm font-mono">
+              <p className="text-[#ff9000] font-bold text-xs sm:text-sm font-mono">
                 AI Automation Specialist | n8n • Zapier • Make • GoHighLevel
               </p>
 
-              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-slate-300 pt-1">
+              <div 
+                className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs pt-1"
+                style={{ color: 'var(--text-secondary)' }}
+              >
                 <span className="flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-amber-400" /> Manila, Philippines
+                  <MapPin className="w-3.5 h-3.5 text-[#ff9000]" /> Manila, Philippines
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Phone className="w-3.5 h-3.5 text-amber-400" /> +63 915305890
+                  <Phone className="w-3.5 h-3.5 text-[#ff9000]" /> +63 915305890
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <Mail className="w-3.5 h-3.5 text-amber-400" /> panicanerwin16@gmail.com
+                  <Mail className="w-3.5 h-3.5 text-[#ff9000]" /> panicanerwin16@gmail.com
                 </span>
               </div>
 
@@ -231,25 +267,40 @@ Languages:
                   href="https://linkedin.com/in/erwinpanican"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-amber-400/50 text-[11px] font-mono text-slate-300 hover:text-white flex items-center gap-1.5 transition-colors"
+                  className="px-3 py-1.5 rounded-lg border hover:border-orange-500 text-[11px] font-mono flex items-center gap-1.5 transition-colors"
+                  style={{
+                    backgroundColor: 'var(--bg-secondary)',
+                    borderColor: 'var(--border-color)',
+                    color: 'var(--text-secondary)',
+                  }}
                 >
-                  <Linkedin className="w-3.5 h-3.5 text-amber-400" /> LinkedIn
+                  <Linkedin className="w-3.5 h-3.5 text-[#ff9000]" /> LinkedIn
                 </a>
                 <a
                   href="https://v2.onlinejobs.ph/jobseekers/info/5106135"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-amber-400/50 text-[11px] font-mono text-slate-300 hover:text-white flex items-center gap-1.5 transition-colors"
+                  className="px-3 py-1.5 rounded-lg border hover:border-orange-500 text-[11px] font-mono flex items-center gap-1.5 transition-colors"
+                  style={{
+                    backgroundColor: 'var(--bg-secondary)',
+                    borderColor: 'var(--border-color)',
+                    color: 'var(--text-secondary)',
+                  }}
                 >
-                  <ExternalLink className="w-3.5 h-3.5 text-amber-400" /> OnlineJobsPh
+                  <ExternalLink className="w-3.5 h-3.5 text-[#ff9000]" /> OnlineJobsPh
                 </a>
                 <a
                   href="https://www.upwork.com/freelancers/~01c544a89e40992a44"
                   target="_blank"
                   rel="noreferrer"
-                  className="px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 hover:border-amber-400/50 text-[11px] font-mono text-slate-300 hover:text-white flex items-center gap-1.5 transition-colors"
+                  className="px-3 py-1.5 rounded-lg border hover:border-orange-500 text-[11px] font-mono flex items-center gap-1.5 transition-colors"
+                  style={{
+                    backgroundColor: 'var(--bg-secondary)',
+                    borderColor: 'var(--border-color)',
+                    color: 'var(--text-secondary)',
+                  }}
                 >
-                  <ExternalLink className="w-3.5 h-3.5 text-amber-400" /> Upwork Profile
+                  <ExternalLink className="w-3.5 h-3.5 text-[#ff9000]" /> Upwork Profile
                 </a>
               </div>
             </div>
@@ -257,58 +308,82 @@ Languages:
 
           {/* Section: Professional Summary */}
           <div className="space-y-2">
-            <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
-              <Sparkles className="w-4 h-4 text-amber-400" />
-              <h3 className="text-xs font-mono uppercase font-bold text-amber-400 tracking-wider">
+            <div className="flex items-center gap-2 border-b pb-2" style={{ borderColor: 'var(--border-color)' }}>
+              <Sparkles className="w-4 h-4 text-[#ff9000]" />
+              <h3 className="text-xs font-mono uppercase font-bold text-[#ff9000] tracking-wider">
                 Professional Summary
               </h3>
             </div>
-            <p className="text-slate-300 leading-relaxed text-xs sm:text-sm">
-              AI Automation Specialist with expertise in designing and implementing intelligent workflow automation using <strong>n8n, Zapier, Make.com, and GoHighLevel</strong>. Experienced in API integrations, AI agents, CRM automation, webhooks, and business process optimization. Skilled at building scalable automation solutions that reduce manual work, improve operational efficiency, and support business growth through AI-powered workflows.
+            <p className="leading-relaxed text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
+              AI Automation Specialist with expertise in designing and implementing intelligent workflow automation using <strong className="text-[#ff9000]">n8n, Zapier, Make.com, and GoHighLevel</strong>. Experienced in API integrations, AI agents, CRM automation, webhooks, and business process optimization. Skilled at building scalable automation solutions that reduce manual work, improve operational efficiency, and support business growth through AI-powered workflows.
             </p>
           </div>
 
           {/* Section: Technical Skills Grid */}
           <div className="space-y-3">
-            <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
-              <Wrench className="w-4 h-4 text-amber-400" />
-              <h3 className="text-xs font-mono uppercase font-bold text-amber-400 tracking-wider">
+            <div className="flex items-center gap-2 border-b pb-2" style={{ borderColor: 'var(--border-color)' }}>
+              <Wrench className="w-4 h-4 text-[#ff9000]" />
+              <h3 className="text-xs font-mono uppercase font-bold text-[#ff9000] tracking-wider">
                 Technical Skill
               </h3>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="p-3.5 rounded-xl bg-[#0E1526] border border-slate-800/80">
-                <span className="text-[11px] font-mono uppercase font-bold text-slate-400 block mb-1">
+              <div 
+                className="p-3.5 rounded-xl border"
+                style={{
+                  backgroundColor: 'var(--bg-card)',
+                  borderColor: 'var(--border-color)',
+                }}
+              >
+                <span className="text-[11px] font-mono uppercase font-bold block mb-1 text-[#ff9000]">
                   Automation Platforms
                 </span>
-                <p className="font-semibold text-white">n8n, Make.com, Zapier, GoHighLevel</p>
+                <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>n8n, Make.com, Zapier, GoHighLevel</p>
               </div>
-              <div className="p-3.5 rounded-xl bg-[#0E1526] border border-slate-800/80">
-                <span className="text-[11px] font-mono uppercase font-bold text-slate-400 block mb-1">
+              <div 
+                className="p-3.5 rounded-xl border"
+                style={{
+                  backgroundColor: 'var(--bg-card)',
+                  borderColor: 'var(--border-color)',
+                }}
+              >
+                <span className="text-[11px] font-mono uppercase font-bold block mb-1 text-[#ff9000]">
                   AI & LLMs
                 </span>
-                <p className="font-semibold text-white">OpenAI, Claude, Google Gemini, Anthropic</p>
+                <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>OpenAI, Claude, Google Gemini, Anthropic</p>
               </div>
-              <div className="p-3.5 rounded-xl bg-[#0E1526] border border-slate-800/80">
-                <span className="text-[11px] font-mono uppercase font-bold text-slate-400 block mb-1">
+              <div 
+                className="p-3.5 rounded-xl border"
+                style={{
+                  backgroundColor: 'var(--bg-card)',
+                  borderColor: 'var(--border-color)',
+                }}
+              >
+                <span className="text-[11px] font-mono uppercase font-bold block mb-1 text-[#ff9000]">
                   Business
                 </span>
-                <p className="font-semibold text-white">Workflow Design, CRM Automation, Lead Management, Process Improvement</p>
+                <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>Workflow Design, CRM Automation, Lead Management, Process Improvement</p>
               </div>
-              <div className="p-3.5 rounded-xl bg-[#0E1526] border border-slate-800/80">
-                <span className="text-[11px] font-mono uppercase font-bold text-slate-400 block mb-1">
+              <div 
+                className="p-3.5 rounded-xl border"
+                style={{
+                  backgroundColor: 'var(--bg-card)',
+                  borderColor: 'var(--border-color)',
+                }}
+              >
+                <span className="text-[11px] font-mono uppercase font-bold block mb-1 text-[#ff9000]">
                   Technical
                 </span>
-                <p className="font-semibold text-white">API Integrations, REST APIs, Webhooks</p>
+                <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>API Integrations, REST APIs, Webhooks</p>
               </div>
             </div>
           </div>
 
           {/* Section: Certification */}
           <div className="space-y-3">
-            <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
-              <Award className="w-4 h-4 text-amber-400" />
-              <h3 className="text-xs font-mono uppercase font-bold text-amber-400 tracking-wider">
+            <div className="flex items-center gap-2 border-b pb-2" style={{ borderColor: 'var(--border-color)' }}>
+              <Award className="w-4 h-4 text-[#ff9000]" />
+              <h3 className="text-xs font-mono uppercase font-bold text-[#ff9000] tracking-wider">
                 Certification
               </h3>
             </div>
@@ -321,9 +396,14 @@ Languages:
               ].map((cert, idx) => (
                 <div
                   key={idx}
-                  className="p-3 rounded-xl bg-[#0E1526] border border-slate-800/80 flex items-center gap-2.5 text-slate-200"
+                  className="p-3 rounded-xl border flex items-center gap-2.5"
+                  style={{
+                    backgroundColor: 'var(--bg-card)',
+                    borderColor: 'var(--border-color)',
+                    color: 'var(--text-primary)',
+                  }}
                 >
-                  <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />
+                  <span className="w-2 h-2 rounded-full bg-[#ff4500] shadow-[0_0_6px_#ff4500] shrink-0" />
                   <span className="font-semibold text-xs">{cert}</span>
                 </div>
               ))}
@@ -332,9 +412,9 @@ Languages:
 
           {/* Section: Automation Projects */}
           <div className="space-y-3">
-            <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
-              <Briefcase className="w-4 h-4 text-amber-400" />
-              <h3 className="text-xs font-mono uppercase font-bold text-amber-400 tracking-wider">
+            <div className="flex items-center gap-2 border-b pb-2" style={{ borderColor: 'var(--border-color)' }}>
+              <Briefcase className="w-4 h-4 text-[#ff9000]" />
+              <h3 className="text-xs font-mono uppercase font-bold text-[#ff9000] tracking-wider">
                 Automation Projects
               </h3>
             </div>
@@ -366,13 +446,20 @@ Languages:
                   tech: 'GoHighLevel',
                 },
               ].map((proj, idx) => (
-                <div key={idx} className="p-4 rounded-xl bg-[#0E1526] border border-slate-800/80 space-y-1.5">
-                  <h4 className="font-bold text-amber-400 text-xs sm:text-sm">
+                <div 
+                  key={idx} 
+                  className="p-4 rounded-xl border space-y-1.5"
+                  style={{
+                    backgroundColor: 'var(--bg-card)',
+                    borderColor: 'var(--border-color)',
+                  }}
+                >
+                  <h4 className="font-bold text-[#ff9000] text-xs sm:text-sm">
                     {idx + 1}. {proj.title}
                   </h4>
-                  <p className="text-slate-300 text-xs leading-relaxed">{proj.desc}</p>
-                  <p className="text-[11px] font-mono text-slate-400 pt-1">
-                    <strong className="text-slate-300">Technologies:</strong> {proj.tech}
+                  <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{proj.desc}</p>
+                  <p className="text-[11px] font-mono pt-1" style={{ color: 'var(--text-secondary)' }}>
+                    <strong>Technologies:</strong> {proj.tech}
                   </p>
                 </div>
               ))}
@@ -381,20 +468,26 @@ Languages:
 
           {/* Section: Professional Experience */}
           <div className="space-y-3">
-            <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
-              <Briefcase className="w-4 h-4 text-amber-400" />
-              <h3 className="text-xs font-mono uppercase font-bold text-amber-400 tracking-wider">
+            <div className="flex items-center gap-2 border-b pb-2" style={{ borderColor: 'var(--border-color)' }}>
+              <Briefcase className="w-4 h-4 text-[#ff9000]" />
+              <h3 className="text-xs font-mono uppercase font-bold text-[#ff9000] tracking-wider">
                 Professional Experience
               </h3>
             </div>
 
             <div className="space-y-4">
-              <div className="p-4 rounded-xl bg-[#0E1526] border border-slate-800/80 space-y-2">
-                <div className="flex flex-wrap items-center justify-between gap-1 font-bold text-white">
+              <div 
+                className="p-4 rounded-xl border space-y-2"
+                style={{
+                  backgroundColor: 'var(--bg-card)',
+                  borderColor: 'var(--border-color)',
+                }}
+              >
+                <div className="flex flex-wrap items-center justify-between gap-1 font-bold" style={{ color: 'var(--text-primary)' }}>
                   <span>Freelance / Independent — AI Automation Specialist</span>
-                  <span className="text-amber-400 font-mono text-xs">(2026–Present)</span>
+                  <span className="text-[#ff9000] font-mono text-xs">(2026–Present)</span>
                 </div>
-                <ul className="list-disc pl-5 space-y-1 text-slate-300 text-xs">
+                <ul className="list-disc pl-5 space-y-1 text-xs" style={{ color: 'var(--text-secondary)' }}>
                   <li>Designed AI-powered workflow automations using n8n, Make.com, and Zapier.</li>
                   <li>Integrated OpenAI and Anthropic models.</li>
                   <li>Built API integrations and custom webhooks.</li>
@@ -402,12 +495,18 @@ Languages:
                 </ul>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#0E1526] border border-slate-800/80 space-y-2">
-                <div className="flex flex-wrap items-center justify-between gap-1 font-bold text-white">
+              <div 
+                className="p-4 rounded-xl border space-y-2"
+                style={{
+                  backgroundColor: 'var(--bg-card)',
+                  borderColor: 'var(--border-color)',
+                }}
+              >
+                <div className="flex flex-wrap items-center justify-between gap-1 font-bold" style={{ color: 'var(--text-primary)' }}>
                   <span>Documentation Associate — Seidopro Global Inc</span>
-                  <span className="text-amber-400 font-mono text-xs">(2018–2026)</span>
+                  <span className="text-[#ff9000] font-mono text-xs">(2018–2026)</span>
                 </div>
-                <ul className="list-disc pl-5 space-y-1 text-slate-300 text-xs">
+                <ul className="list-disc pl-5 space-y-1 text-xs" style={{ color: 'var(--text-secondary)' }}>
                   <li>Managed shipping documentation, compliance, coordination, and records.</li>
                 </ul>
               </div>
@@ -416,50 +515,62 @@ Languages:
 
           {/* Section: Tools and Technologies */}
           <div className="space-y-3">
-            <div className="flex items-center gap-2 border-b border-slate-800 pb-2">
-              <Wrench className="w-4 h-4 text-amber-400" />
-              <h3 className="text-xs font-mono uppercase font-bold text-amber-400 tracking-wider">
+            <div className="flex items-center gap-2 border-b pb-2" style={{ borderColor: 'var(--border-color)' }}>
+              <Wrench className="w-4 h-4 text-[#ff9000]" />
+              <h3 className="text-xs font-mono uppercase font-bold text-[#ff9000] tracking-wider">
                 Tools and Technologies
               </h3>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
-              <div className="p-3 rounded-xl bg-[#0E1526] border border-slate-800/80">
-                <strong className="text-amber-400 font-mono block mb-0.5">Automation:</strong> n8n, Zapier, Make.com, GoHighLevel, Pabbly Connect
+              <div className="p-3 rounded-xl border" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-color)' }}>
+                <strong className="text-[#ff9000] font-mono block mb-0.5">Automation:</strong> n8n, Zapier, Make.com, GoHighLevel, Pabbly Connect
               </div>
-              <div className="p-3 rounded-xl bg-[#0E1526] border border-slate-800/80">
-                <strong className="text-amber-400 font-mono block mb-0.5">CRM:</strong> HubSpot, ActiveCampaign
+              <div className="p-3 rounded-xl border" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-color)' }}>
+                <strong className="text-[#ff9000] font-mono block mb-0.5">CRM:</strong> HubSpot, ActiveCampaign
               </div>
-              <div className="p-3 rounded-xl bg-[#0E1526] border border-slate-800/80">
-                <strong className="text-amber-400 font-mono block mb-0.5">Development:</strong> JavaScript, SQL, Google Apps Script
+              <div className="p-3 rounded-xl border" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-color)' }}>
+                <strong className="text-[#ff9000] font-mono block mb-0.5">Development:</strong> JavaScript, SQL, Google Apps Script
               </div>
-              <div className="p-3 rounded-xl bg-[#0E1526] border border-slate-800/80">
-                <strong className="text-amber-400 font-mono block mb-0.5">Integrations:</strong> REST APIs, Webhooks, API Integrations
+              <div className="p-3 rounded-xl border" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-color)' }}>
+                <strong className="text-[#ff9000] font-mono block mb-0.5">Integrations:</strong> REST APIs, Webhooks, API Integrations
               </div>
-              <div className="p-3 rounded-xl bg-[#0E1526] border border-slate-800/80 sm:col-span-2">
-                <strong className="text-amber-400 font-mono block mb-0.5">Productivity:</strong> Google Sheets, Airtable, Notion
+              <div className="p-3 rounded-xl border sm:col-span-2" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-color)' }}>
+                <strong className="text-[#ff9000] font-mono block mb-0.5">Productivity:</strong> Google Sheets, Airtable, Notion
               </div>
             </div>
           </div>
 
           {/* Section: Education & Language */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-            <div className="p-4 rounded-xl bg-[#0E1526] border border-slate-800/80 space-y-1.5">
-              <div className="flex items-center gap-2 text-amber-400 font-mono text-xs font-bold uppercase">
+            <div 
+              className="p-4 rounded-xl border space-y-1.5"
+              style={{
+                backgroundColor: 'var(--bg-card)',
+                borderColor: 'var(--border-color)',
+              }}
+            >
+              <div className="flex items-center gap-2 text-[#ff9000] font-mono text-xs font-bold uppercase">
                 <GraduationCap className="w-4 h-4" /> Education
               </div>
-              <h4 className="font-bold text-white text-xs sm:text-sm">Bachelor in Business Management</h4>
-              <p className="text-slate-400 text-xs">Taguig City University (2017)</p>
+              <h4 className="font-bold text-xs sm:text-sm" style={{ color: 'var(--text-primary)' }}>Bachelor in Business Management</h4>
+              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Taguig City University (2017)</p>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#0E1526] border border-slate-800/80 space-y-1.5">
-              <div className="flex items-center gap-2 text-amber-400 font-mono text-xs font-bold uppercase">
+            <div 
+              className="p-4 rounded-xl border space-y-1.5"
+              style={{
+                backgroundColor: 'var(--bg-card)',
+                borderColor: 'var(--border-color)',
+              }}
+            >
+              <div className="flex items-center gap-2 text-[#ff9000] font-mono text-xs font-bold uppercase">
                 <Globe className="w-4 h-4" /> Languages
               </div>
-              <p className="text-xs text-slate-200">
-                <strong className="text-white">English:</strong> Professional Working Proficiency
+              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>English:</strong> Professional Working Proficiency
               </p>
-              <p className="text-xs text-slate-200">
-                <strong className="text-white">Filipino:</strong> Native
+              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+                <strong style={{ color: 'var(--text-primary)' }}>Filipino:</strong> Native
               </p>
             </div>
           </div>
@@ -467,18 +578,29 @@ Languages:
         </div>
 
         {/* Footer Buttons */}
-        <div className="px-6 py-4 bg-[#0E1526] border-t border-slate-800 flex flex-wrap items-center justify-end gap-3 shrink-0">
+        <div 
+          className="px-6 py-4 border-t flex flex-wrap items-center justify-end gap-3 shrink-0"
+          style={{
+            backgroundColor: 'var(--bg-card)',
+            borderColor: 'var(--border-color)',
+          }}
+        >
           <button
             onClick={handleCopyText}
-            className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-xs font-bold font-mono text-slate-200 border border-slate-800 flex items-center gap-2 cursor-pointer transition-colors"
+            className="px-4 py-2.5 rounded-xl border text-xs font-bold font-mono flex items-center gap-2 cursor-pointer transition-colors hover:border-orange-500"
+            style={{
+              backgroundColor: 'var(--bg-secondary)',
+              borderColor: 'var(--border-color)',
+              color: 'var(--text-primary)',
+            }}
           >
-            {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4 text-amber-400" />}
+            {copied ? <Check className="w-4 h-4 text-[#ff9000]" /> : <Copy className="w-4 h-4 text-[#ff9000]" />}
             <span>{copied ? 'Copied Full Text!' : 'Copy Text'}</span>
           </button>
 
           <button
             onClick={handleDownload}
-            className="px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold font-mono shadow-lg shadow-amber-400/20 flex items-center gap-2 cursor-pointer transition-all"
+            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#ff9000] to-[#ff3700] hover:brightness-110 text-white text-xs font-bold font-mono shadow-[0_0_20px_rgba(255,80,0,0.35)] flex items-center gap-2 cursor-pointer transition-all"
           >
             <Download className="w-4 h-4" />
             <span>Download Resume (.txt)</span>
@@ -489,3 +611,4 @@ Languages:
     </div>
   );
 };
+

@@ -61,25 +61,35 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 md:py-28 relative bg-[#080C14] text-white">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section 
+      id="contact" 
+      className="py-20 md:py-28 relative transition-colors duration-300 bg-crimson-grid"
+      style={{ backgroundColor: 'var(--bg-primary)' }}
+    >
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* WORK WITH ME TEXT & CONTACT CARDS */}
-        <div className="space-y-8">
+        <div className="space-y-8 text-left">
           
           {/* Eyebrow Label */}
-          <span className="text-amber-400 text-xs font-bold uppercase tracking-widest block font-mono">
+          <span className="text-[#ff9000] text-xs font-bold uppercase tracking-widest block font-mono">
             WORK WITH ME
           </span>
 
           {/* Headline */}
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.15]">
+          <h2 
+            className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.15]"
+            style={{ color: 'var(--text-primary)' }}
+          >
             You've seen what I build. <br />
-            <span className="text-amber-400">Let's talk about yours.</span>
+            <span className="gradient-fiery-text">Let's talk about yours.</span>
           </h2>
 
           {/* Paragraph Description */}
-          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl font-normal">
+          <p 
+            className="text-xs sm:text-sm leading-relaxed max-w-2xl font-normal"
+            style={{ color: 'var(--text-secondary)' }}
+          >
             30 minutes. You walk me through your stack, your current workflows, and where things are slipping — leads going cold, sequences not firing, manual tasks your team shouldn't be touching. I'll tell you exactly what I'd build, in what order, and what it would actually change for your business.
           </p>
 
@@ -96,27 +106,34 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
                   rel="noreferrer"
                   className={`group flex items-center justify-between p-4 rounded-2xl transition-all duration-200 shadow-md ${
                     isPrimary
-                      ? 'md:col-span-2 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-amber-500/20 border-2 border-amber-400/80 hover:border-amber-300 hover:shadow-[0_0_25px_rgba(245,158,11,0.3)]'
-                      : 'bg-[#0E1526]/90 border border-slate-800/90 hover:border-amber-400/40 hover:bg-[#131C30]/80'
+                      ? 'md:col-span-2 card-crimson-glow border-2 border-[#ff4500]/80 hover:border-[#ff9000] shadow-[0_0_30px_rgba(255,80,0,0.3)]'
+                      : 'card-crimson-glow hover:border-orange-500/50'
                   }`}
+                  style={{
+                    backgroundColor: isPrimary ? 'var(--bg-card)' : 'var(--bg-secondary)',
+                  }}
                 >
                   <div className="flex items-center gap-4">
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform ${
                       isPrimary 
-                        ? 'bg-amber-400 text-slate-950 font-bold shadow-md shadow-amber-400/30' 
-                        : 'bg-amber-400/10 border border-amber-400/25 text-amber-400'
+                        ? 'bg-gradient-to-r from-[#ff9000] to-[#ff3700] text-white font-bold shadow-md shadow-orange-500/30' 
+                        : 'bg-orange-500/10 border border-orange-500/30 text-[#ff9000]'
                     }`}>
                       <IconComp className="w-5 h-5" />
                     </div>
                     <div>
-                      <span className={`text-[10px] font-mono uppercase font-bold tracking-wider block mb-0.5 ${
-                        isPrimary ? 'text-amber-400' : 'text-slate-400'
-                      }`}>
+                      <span 
+                        className={`text-[10px] font-mono uppercase font-bold tracking-wider block mb-0.5 ${
+                          isPrimary ? 'text-[#ff9000]' : ''
+                        }`}
+                        style={{ color: isPrimary ? '#ff9000' : 'var(--text-secondary)' }}
+                      >
                         {item.label}
                       </span>
-                      <span className={`text-xs sm:text-sm font-semibold transition-colors ${
-                        isPrimary ? 'text-white group-hover:text-amber-300 font-bold' : 'text-white group-hover:text-amber-300'
-                      }`}>
+                      <span 
+                        className="text-xs sm:text-sm font-semibold transition-colors group-hover:text-[#ff9000]"
+                        style={{ color: 'var(--text-primary)' }}
+                      >
                         {item.text}
                       </span>
                     </div>
@@ -124,12 +141,12 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
 
                   <div className="flex items-center gap-2">
                     {isPrimary && (
-                      <span className="hidden sm:inline-block px-2.5 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-[10px] font-mono font-bold text-amber-300">
+                      <span className="hidden sm:inline-block px-2.5 py-1 rounded-full bg-orange-500/10 border border-orange-500/30 text-[10px] font-mono font-bold text-[#ff9000]">
                         INSTANT BOOKING
                       </span>
                     )}
-                    <span className="text-amber-400 font-bold text-sm group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
-                      ↗
+                    <span className="text-[#ff9000] font-bold text-sm group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
+                      →
                     </span>
                   </div>
                 </a>
@@ -143,4 +160,5 @@ export const ContactSection: React.FC<ContactSectionProps> = () => {
     </section>
   );
 };
+
 
