@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, Sparkles, Layers, ArrowUpRight, X } from 'lucide-react';
+import { CheckCircle2, Sparkles, Layers, ArrowUpRight, X, ZoomIn, ZoomOut, Maximize2, RotateCcw, Eye } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ProjectItem } from '../types';
 
@@ -30,14 +30,25 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 }) => {
   const [activeCategory, setActiveCategory] = useState<FilterCategory>('n8n');
   const [activeModal, setActiveModal] = useState<ProjectItem | null>(null);
+  const [zoomedImage, setZoomedImage] = useState<{
+    src: string;
+    title: string;
+    category?: string;
+  } | null>(null);
+  const [zoomScale, setZoomScale] = useState<number>(1);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setActiveModal(null);
+        if (zoomedImage) {
+          setZoomedImage(null);
+          setZoomScale(1);
+        } else if (activeModal) {
+          setActiveModal(null);
+        }
       }
     };
-    if (activeModal) {
+    if (activeModal || zoomedImage) {
       window.addEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'hidden';
     }
@@ -45,7 +56,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
     };
-  }, [activeModal]);
+  }, [activeModal, zoomedImage]);
 
   const filterButtons: FilterOption[] = [
     { id: 'n8n', label: 'n8n' },
@@ -72,19 +83,20 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       id: 'ai-agent-facebook',
       category: 'n8n',
       platform: 'N8N',
-      title: 'AI Agent for Facebook',
+      title: 'AI-Powered Facebook Customer Support & Lead Response Automation',
       description:
-        'n8n workflow connecting Facebook Messenger webhooks, Google Gemini Chat Model with Simple Memory, and document lookup to respond intelligently to user inquiries.',
-      image: n8nFbAgentImg,
-      tools: ['n8n', 'Google Gemini', 'Webhooks', 'Facebook API'],
-      problem: 'High volume of Facebook Messenger customer inquiries leading to delayed responses and missed leads.',
-      solution: 'Built an automated n8n agent using Google Gemini Chat Model and contextual memory to retrieve document data and deliver instant human-like responses.',
-      impact: '100% instant response rate on social channels with zero manual agent overhead.',
+        'I built an AI-powered Facebook Agent in n8n using Gemini, memory, webhooks, and HTTP requests to understand customer messages, generate intelligent responses, and automate communication.',
+      image: 'https://i.im.ge/QMJl8ec/AI_AGENT_FOR_FACEBOOK.png',
+      tools: ['n8n', 'Google Gemini', 'Memory', 'Webhooks', 'HTTP Requests', 'Facebook API'],
+      problem: 'Businesses often struggle to respond quickly and consistently to Facebook messages, causing missed inquiries, slow customer service, and repetitive manual work.',
+      solution: 'I built an AI-powered Facebook Agent in n8n using Gemini, memory, webhooks, and HTTP requests to understand customer messages, generate intelligent responses, and automate communication.',
+      result: 'The automation provides faster and more consistent customer responses, reduces repetitive workload, and helps businesses engage with Facebook inquiries 24/7.',
+      impact: 'The automation provides faster and more consistent customer responses, reduces repetitive workload, and helps businesses engage with Facebook inquiries 24/7.',
       features: [
-        'Facebook Messenger webhook integration',
-        'Google Gemini chat model',
-        'Simple Memory conversation state',
-        'Document retrieval & response dispatch',
+        'Facebook Messenger webhook & HTTP triggers',
+        'Google Gemini AI intelligent response generation',
+        'Contextual conversational memory',
+        'Automated 24/7 customer & lead engagement',
       ],
     },
     {
@@ -98,6 +110,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       tools: ['n8n', 'Slack', 'OpenRouter', 'Google Drive', 'Gmail'],
       problem: 'Manually finding targeted job posts, tailoring resumes, and writing personalized cover letters took hours per application.',
       solution: 'Automated Slack bot workflow that parses job listings, optimizes resume copies via LLM, and creates ready-to-send Gmail drafts.',
+      result: 'Cut application preparation time from 45 minutes down to 30 seconds, generating customized resumes and ready-to-send email drafts instantly.',
       impact: 'Cut application preparation time from 45 minutes down to 30 seconds.',
       features: [
         'Slack command trigger & query validation',
@@ -137,6 +150,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       tools: ['Zapier', 'Youform', 'Apollo', 'AI by Zapier', 'Slack', 'Gmail'],
       problem: 'Inbound leads sat unresearched for hours before sales representatives could manually look up company details and compose outreach.',
       solution: 'Automated Zapier pipeline extracting company URLs, enriching firmographics via Apollo webhooks, routing priority tiers, and drafting personalized AI emails.',
+      result: 'Reduced lead research time to zero, qualified prospects instantly, and boosted prospect reply rates by 35%.',
       impact: 'Reduced lead research time to zero and boosted prospect reply rates by 35%.',
       features: [
         'Instant Youform submission capture',
@@ -156,6 +170,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       tools: ['Zapier', 'Google Drive', 'AI by Zapier', 'Facebook Pages', 'LinkedIn'],
       problem: 'Repurposing long-form video or audio recordings into social posts and blogs required 10+ hours of manual writing per week.',
       solution: 'Built an automated Zapier workflow that transcribes media uploaded to Google Drive, generates structured blog & social posts via AI, and publishes to social channels.',
+      result: 'Saved 10+ hours weekly of manual production while doubling multi-platform publishing cadence across LinkedIn and Facebook.',
       impact: 'Saved 10+ hours weekly while doubling multi-platform publishing cadence.',
       features: [
         'Automated Google Drive media trigger',
@@ -175,6 +190,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       tools: ['Zapier', 'Asana', 'Google Drive', 'AI by Zapier', 'Gmail'],
       problem: 'Sales and ops teams struggled with inconsistent follow-ups and manual documentation as deal stages changed in Asana.',
       solution: 'Engineered a 26-step multi-path Zapier automation handling lead folder creation, automated AI quote drafting, delay timers, and stage-based email dispatches.',
+      result: 'Achieved 100% adherence to lead follow-up schedules with zero manual administrative tracking and seamless client onboarding.',
       impact: '100% adherence to lead follow-up schedules with zero manual administrative tracking.',
       features: [
         '26-step multi-path conditional logic',
@@ -194,6 +210,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       tools: ['Make.com', 'Gmail', 'Google Gemini AI', 'Google Drive', 'Google Sheets'],
       problem: 'Email attachments (invoices, receipts, contracts) were saved with messy filenames in random folders, making accounting searches tedious.',
       solution: 'Constructed a Make.com scenario using Gemini AI to read attachment contents, construct standardized file names, upload to specified Drive folders, and log records in Sheets.',
+      result: 'Organized 100% of incoming documents automatically with instant searchability and automated Google Sheets audit logs.',
       impact: 'Organized 100% of incoming documents automatically with instant searchability.',
       features: [
         'Automated Gmail attachment watcher',
@@ -213,6 +230,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       tools: ['Make.com', 'Asana', 'Xero API', 'Google Sheets', 'Tools Aggregator'],
       problem: 'Finance teams spent hours manually exporting transactions from Xero, cleaning CSV data, and attaching reports to Asana tasks.',
       solution: 'Built a multi-app Make.com scenario bridging Asana task completion triggers with Xero API queries, automated Sheets row aggregation, and instant CSV attachment uploads.',
+      result: 'Eliminated manual CSV manipulation, accelerated invoice reconciliation, and completely prevented financial record transfer errors.',
       impact: 'Eliminated manual CSV manipulation and financial record transfer errors.',
       features: [
         'Asana completed task trigger',
@@ -232,6 +250,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       tools: ['GoHighLevel', 'Conversational AI', 'SMS Sequences', 'Calendar Sync', 'Stripe'],
       problem: 'Inbound leads waited over 4 hours for manual follow-ups, resulting in a 60% drop-off in appointment conversion.',
       solution: 'Built an end-to-end GoHighLevel automation pipeline triggering instant 2-way SMS AI conversations, calendar slot allocation, and automated missed-call text-backs.',
+      result: 'Increased booked sales appointments by 42% and achieved a sub-60-second speed-to-lead response time 24/7.',
       impact: 'Increased booked sales appointments by 42% and achieved a sub-60-second lead response time.',
       features: [
         'Speed-to-lead under 60 seconds response',
@@ -251,6 +270,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       tools: ['GoHighLevel', 'Google Reviews', 'WhatsApp API', 'Email Sequences', 'Webhooks'],
       problem: 'Client had hundreds of past customer records with no structured retention strategy and low Google Business review volume.',
       solution: 'Engineered a smart GHL workflow with NPS condition branching, sending happy clients straight to Google Reviews while routing issues to support.',
+      result: 'Grew 5-star Google reviews by 210% and reactivated $18,500 in repeat sales within 90 days.',
       impact: 'Grew 5-star Google reviews by 210% and reactivated $18,500 in repeat sales within 90 days.',
       features: [
         'Conditional NPS review routing',
@@ -396,9 +416,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 }}
               >
                 <div>
-                  {/* Image Container */}
+                  {/* Image Container with Dedicated Enlarge/Zoom Button */}
                   <div 
-                    className="relative h-56 overflow-hidden border-b flex items-center justify-center p-2 bg-[#090102]"
+                    className="relative h-56 overflow-hidden border-b flex items-center justify-center p-2 bg-[#090102] group/img"
                     style={{
                       borderColor: 'var(--border-color)',
                     }}
@@ -407,11 +427,48 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       src={proj.image}
                       alt={proj.title}
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-300"
+                      className="w-full h-full object-contain group-hover:scale-[1.03] transition-transform duration-300"
                     />
-                    <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-r from-[#ff9000] to-[#ff3700] text-white p-1.5 rounded-lg shadow-md">
-                      <ArrowUpRight className="w-4 h-4" />
+
+                    {/* Gradient Overlay & Zoom Button on Hover */}
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-2 pointer-events-none">
+                      <div className="pointer-events-auto flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setZoomedImage({
+                              src: proj.image,
+                              title: proj.title,
+                              category: proj.platform,
+                            });
+                            setZoomScale(1);
+                          }}
+                          className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#ff9000] to-[#ff3700] hover:brightness-110 text-white font-mono text-xs font-bold flex items-center gap-1.5 shadow-lg transform hover:scale-105 transition-all cursor-pointer"
+                        >
+                          <Maximize2 className="w-3.5 h-3.5" />
+                          <span>Enlarge Diagram</span>
+                        </button>
+                      </div>
                     </div>
+
+                    {/* Corner Tag with Zoom Icon */}
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setZoomedImage({
+                          src: proj.image,
+                          title: proj.title,
+                          category: proj.platform,
+                        });
+                        setZoomScale(1);
+                      }}
+                      title="Enlarge diagram"
+                      className="absolute top-3 right-3 bg-black/70 hover:bg-orange-600 text-white border border-white/20 p-2 rounded-xl backdrop-blur-md shadow-md transition-all hover:scale-110 cursor-pointer z-10"
+                    >
+                      <ZoomIn className="w-4 h-4 text-[#ff9000] group-hover:text-white" />
+                    </button>
                   </div>
 
                   {/* Card Content */}
@@ -436,31 +493,125 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
                     {/* Description */}
                     <p 
-                      className="text-xs leading-relaxed mb-6"
+                      className="text-xs leading-relaxed mb-4"
                       style={{ color: 'var(--text-secondary)' }}
                     >
                       {proj.description}
                     </p>
+
+                    {/* Problem, Solution & Result Overview */}
+                    <div className="space-y-2.5 mb-4 text-xs">
+                      {/* Problem */}
+                      <div 
+                        className="p-3 rounded-2xl border text-left"
+                        style={{
+                          backgroundColor: 'var(--bg-primary)',
+                          borderColor: 'var(--border-color)',
+                        }}
+                      >
+                        <div className="flex items-center gap-1.5 mb-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0" />
+                          <span className="font-mono font-bold text-[10px] uppercase tracking-wider text-rose-400">
+                            Problem
+                          </span>
+                        </div>
+                        <p className="leading-relaxed text-[11px]" style={{ color: 'var(--text-secondary)' }}>
+                          {proj.problem}
+                        </p>
+                      </div>
+
+                      {/* Solution */}
+                      <div 
+                        className="p-3 rounded-2xl border text-left"
+                        style={{
+                          backgroundColor: 'var(--bg-primary)',
+                          borderColor: 'var(--border-color)',
+                        }}
+                      >
+                        <div className="flex items-center gap-1.5 mb-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#ff9000] shrink-0" />
+                          <span className="font-mono font-bold text-[10px] uppercase tracking-wider text-[#ff9000]">
+                            Solution
+                          </span>
+                        </div>
+                        <p className="leading-relaxed text-[11px]" style={{ color: 'var(--text-secondary)' }}>
+                          {proj.solution}
+                        </p>
+                      </div>
+
+                      {/* Result */}
+                      <div 
+                        className="p-3 rounded-2xl border text-left bg-gradient-to-br from-amber-500/5 to-orange-500/5"
+                        style={{
+                          borderColor: 'var(--border-color)',
+                        }}
+                      >
+                        <div className="flex items-center gap-1.5 mb-1">
+                          <Sparkles className="w-3.5 h-3.5 text-[#ff9000] shrink-0" />
+                          <span className="font-mono font-bold text-[10px] uppercase tracking-wider text-[#ff9000]">
+                            Result
+                          </span>
+                        </div>
+                        <p className="leading-relaxed text-[11px] font-medium" style={{ color: 'var(--text-primary)' }}>
+                          {proj.result || proj.impact}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                {/* Tech Pills */}
+                {/* Tech Pills & Quick Zoom Action */}
                 <div 
-                  className="px-6 pb-6 pt-2 flex flex-wrap gap-1.5 border-dotted-crimson"
+                  className="px-6 pb-6 pt-2 flex items-center justify-between gap-2 border-dotted-crimson"
                 >
-                  {proj.tools.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2.5 py-1 rounded-full text-[10px] font-mono border"
-                      style={{
-                        backgroundColor: 'var(--bg-secondary)',
-                        borderColor: 'var(--border-color)',
-                        color: 'var(--text-secondary)',
-                      }}
-                    >
-                      {t}
-                    </span>
-                  ))}
+                  <div className="flex flex-wrap gap-1.5">
+                    {proj.tools.slice(0, 4).map((t) => (
+                      <span
+                        key={t}
+                        className="px-2.5 py-1 rounded-full text-[10px] font-mono border"
+                        style={{
+                          backgroundColor: 'var(--bg-secondary)',
+                          borderColor: 'var(--border-color)',
+                          color: 'var(--text-secondary)',
+                        }}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                    {proj.tools.length > 4 && (
+                      <span
+                        className="px-2 py-1 rounded-full text-[10px] font-mono border"
+                        style={{
+                          backgroundColor: 'var(--bg-secondary)',
+                          borderColor: 'var(--border-color)',
+                          color: 'var(--text-secondary)',
+                        }}
+                      >
+                        +{proj.tools.length - 4}
+                      </span>
+                    )}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setZoomedImage({
+                        src: proj.image,
+                        title: proj.title,
+                        category: proj.platform,
+                      });
+                      setZoomScale(1);
+                    }}
+                    className="p-1.5 rounded-lg border hover:border-orange-500/60 text-[#ff9000] transition-colors shrink-0 cursor-pointer"
+                    title="View Enlarged Diagram"
+                    style={{
+                      backgroundColor: 'var(--bg-secondary)',
+                      borderColor: 'var(--border-color)',
+                    }}
+                  >
+                    <Eye className="w-3.5 h-3.5" />
+                  </button>
                 </div>
               </motion.div>
             ))}
@@ -549,9 +700,17 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
                 {/* Scrollable Content Body */}
                 <div className="p-5 sm:p-6 overflow-y-auto space-y-6">
-                  {/* Large Image Preview in Modal */}
+                  {/* Large Image Preview in Modal with Enlarge Trigger */}
                   <div 
-                    className="rounded-2xl overflow-hidden border p-3 flex items-center justify-center max-h-[440px] bg-[#080102]"
+                    onClick={() => {
+                      setZoomedImage({
+                        src: activeModal.image,
+                        title: activeModal.title,
+                        category: activeModal.category,
+                      });
+                      setZoomScale(1.2);
+                    }}
+                    className="relative group/modalimg rounded-2xl overflow-hidden border p-3 flex items-center justify-center max-h-[440px] bg-[#080102] cursor-zoom-in"
                     style={{
                       borderColor: 'var(--border-color)',
                     }}
@@ -560,8 +719,14 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       src={activeModal.image}
                       alt={activeModal.title}
                       referrerPolicy="no-referrer"
-                      className="w-full h-auto max-h-[400px] object-contain rounded-xl"
+                      className="w-full h-auto max-h-[400px] object-contain rounded-xl group-hover/modalimg:scale-[1.02] transition-transform duration-200"
                     />
+
+                    {/* Prominent Overlay Button to Enlarge */}
+                    <div className="absolute bottom-4 right-4 bg-black/80 hover:bg-orange-600 border border-white/20 text-white px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 shadow-lg backdrop-blur-md transition-all hover:scale-105">
+                      <Maximize2 className="w-3.5 h-3.5 text-[#ff9000] group-hover:text-white" />
+                      <span>Click to Enlarge / Full View</span>
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -663,6 +828,134 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   </button>
                 </div>
               </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* High-Resolution Fullscreen Image / Diagram Lightbox */}
+        <AnimatePresence>
+          {zoomedImage && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => {
+                setZoomedImage(null);
+                setZoomScale(1);
+              }}
+              className="fixed inset-0 z-50 flex flex-col bg-black/92 backdrop-blur-xl p-3 sm:p-6 select-none"
+            >
+              {/* Top Control Bar */}
+              <div 
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-6xl mx-auto flex items-center justify-between gap-3 p-3 sm:p-4 rounded-2xl border mb-3 shrink-0 shadow-2xl"
+                style={{
+                  backgroundColor: 'var(--bg-secondary)',
+                  borderColor: 'var(--border-color)',
+                }}
+              >
+                <div className="flex items-center gap-3 overflow-hidden">
+                  {zoomedImage.category && (
+                    <span className="text-[10px] sm:text-xs font-mono font-bold text-[#ff9000] px-2 py-0.5 rounded-md bg-red-500/10 border border-red-500/20 shrink-0 uppercase">
+                      {zoomedImage.category}
+                    </span>
+                  )}
+                  <h4 className="text-xs sm:text-sm font-bold truncate text-white">
+                    {zoomedImage.title}
+                  </h4>
+                </div>
+
+                {/* Zoom & Close Toolbar */}
+                <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setZoomScale((s) => Math.max(s - 0.25, 0.5))}
+                    className="p-2 sm:px-3 sm:py-1.5 rounded-xl border text-xs font-mono flex items-center gap-1 hover:border-orange-500 transition-colors cursor-pointer"
+                    style={{
+                      backgroundColor: 'var(--bg-primary)',
+                      borderColor: 'var(--border-color)',
+                      color: 'var(--text-primary)',
+                    }}
+                    title="Zoom Out"
+                  >
+                    <ZoomOut className="w-4 h-4 text-[#ff9000]" />
+                    <span className="hidden sm:inline">Zoom Out</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setZoomScale(1)}
+                    className="px-2.5 sm:px-3 py-1.5 rounded-xl border text-xs font-mono font-bold hover:border-orange-500 transition-colors cursor-pointer"
+                    style={{
+                      backgroundColor: 'var(--bg-primary)',
+                      borderColor: 'var(--border-color)',
+                      color: 'var(--text-primary)',
+                    }}
+                    title="Reset Zoom"
+                  >
+                    <span className="text-[#ff9000]">{Math.round(zoomScale * 100)}%</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setZoomScale((s) => Math.min(s + 0.25, 3))}
+                    className="p-2 sm:px-3 sm:py-1.5 rounded-xl border text-xs font-mono flex items-center gap-1 hover:border-orange-500 transition-colors cursor-pointer"
+                    style={{
+                      backgroundColor: 'var(--bg-primary)',
+                      borderColor: 'var(--border-color)',
+                      color: 'var(--text-primary)',
+                    }}
+                    title="Zoom In"
+                  >
+                    <ZoomIn className="w-4 h-4 text-[#ff9000]" />
+                    <span className="hidden sm:inline">Zoom In</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setZoomedImage(null);
+                      setZoomScale(1);
+                    }}
+                    className="p-2 sm:px-3.5 sm:py-1.5 rounded-xl bg-red-500/20 border border-red-500/40 hover:bg-red-500 hover:text-white text-rose-300 font-mono text-xs font-bold flex items-center gap-1 transition-all cursor-pointer shadow-md ml-1 sm:ml-2"
+                  >
+                    <X className="w-4 h-4" />
+                    <span>Close</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Main Interactive Zoom Viewport */}
+              <div 
+                className="flex-1 w-full max-w-6xl mx-auto overflow-auto rounded-3xl border flex items-center justify-center p-4 bg-[#050001] shadow-2xl relative"
+                style={{
+                  borderColor: 'var(--border-color)',
+                }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div 
+                  className="transition-transform duration-200 ease-out origin-center flex items-center justify-center max-w-full max-h-full"
+                  style={{
+                    transform: `scale(${zoomScale})`,
+                  }}
+                >
+                  <img
+                    src={zoomedImage.src}
+                    alt={zoomedImage.title}
+                    referrerPolicy="no-referrer"
+                    onClick={() => setZoomScale((prev) => (prev > 1.2 ? 1 : 1.6))}
+                    className={`max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl select-none ${
+                      zoomScale > 1.2 ? 'cursor-zoom-out' : 'cursor-zoom-in'
+                    }`}
+                  />
+                </div>
+
+                {/* Bottom hint pill */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 border border-white/10 px-4 py-1.5 rounded-full text-[11px] font-mono text-white/70 backdrop-blur-md pointer-events-none text-center">
+                  Click image to toggle zoom • Drag / scroll to pan • Press <kbd className="text-[#ff9000] font-bold">ESC</kbd> to exit
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
