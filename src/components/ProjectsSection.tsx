@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, Sparkles, Layers, ArrowUpRight, X, ZoomIn, ZoomOut, Maximize2, RotateCcw, Eye } from 'lucide-react';
+import { CheckCircle2, Sparkles, Layers, ArrowUpRight, X, ZoomIn, ZoomOut, Maximize2, RotateCcw, Eye, Play } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ProjectItem } from '../types';
 
@@ -72,6 +72,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     title: string;
     description: string;
     image: string;
+    gallery?: { url: string; title: string }[];
+    videoUrl?: string;
+    youtubeId?: string;
     tools: string[];
     problem: string;
     solution: string;
@@ -243,20 +246,32 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       id: 'ghl-lead-pipeline',
       category: 'gohighlevel',
       platform: 'GO HIGH LEVEL',
-      title: 'GoHighLevel Lead Pipeline & Speed-to-Lead Automation',
+      title: 'GoHighLevel Appointment Funnel & Lead Management Automation',
       description:
-        'Full GHL snapshot automation converting cold form leads into booked appointments using 2-minute instant SMS response, conditional AI qualification, and automated pipeline stage updates.',
-      image: ghlPipelineImg,
-      tools: ['GoHighLevel', 'Conversational AI', 'SMS Sequences', 'Calendar Sync', 'Stripe'],
-      problem: 'Inbound leads waited over 4 hours for manual follow-ups, resulting in a 60% drop-off in appointment conversion.',
-      solution: 'Built an end-to-end GoHighLevel automation pipeline triggering instant 2-way SMS AI conversations, calendar slot allocation, and automated missed-call text-backs.',
-      result: 'Increased booked sales appointments by 42% and achieved a sub-60-second speed-to-lead response time 24/7.',
-      impact: 'Increased booked sales appointments by 42% and achieved a sub-60-second lead response time.',
+        'A complete solar business appointment booking and pipeline automation built in GoHighLevel featuring automated multi-scenario workflows for confirmations, cancellations, reschedules, show-ups, and automated no-show recovery sequences.',
+      image: 'https://img.youtube.com/vi/V8dSVjujF1A/maxresdefault.jpg',
+      videoUrl: 'https://www.youtube.com/watch?v=V8dSVjujF1A',
+      youtubeId: 'V8dSVjujF1A',
+      gallery: [
+        { url: 'https://i.im.ge/QMnOycS/1.png', title: 'Solar Funnel Overview & Appointment Calendar' },
+        { url: 'https://i.im.ge/QMnOAGz/2.png', title: 'Solar Lead Booking Page & Funnel Steps' },
+        { url: 'https://i.im.ge/QMnOE76/3.png', title: 'Pipeline Stage & Opportunity Manager' },
+        { url: 'https://i.im.ge/QMnOxCF/4.png', title: 'Solar Lead Pipeline Opportunities View' },
+        { url: 'https://i.im.ge/QMnOW0M/WF1.png', title: 'Workflow 1: Appointment Confirmation & Reminder Sequence' },
+        { url: 'https://i.im.ge/QMnOKeD/WF2.png', title: 'Workflow 2: Appointment Cancellation Flow' },
+        { url: 'https://i.im.ge/QMnOkCC/WF3.png', title: 'Workflow 3: Appointment Rescheduling Sequence' },
+        { url: 'https://i.im.ge/QMnOb29/WF4.png', title: 'Workflow 4: Showed & No-Show Recovery Sequence' },
+      ],
+      tools: ['GoHighLevel', 'Sales Pipelines', 'Appointment Workflows', 'SMS & Email', 'Calendar Funnel'],
+      problem: 'The solar business needed a more organized way to manage appointment leads, track opportunities through the sales pipeline, and handle confirmations, cancellations, rescheduling, and no-shows without relying on manual follow-ups.',
+      solution: 'I built a complete appointment funnel in GoHighLevel with a structured sales pipeline and automated workflows for appointment confirmation, cancellation, rebooking, showed, and no-show scenarios. The system automatically updates opportunities and triggers the appropriate follow-up communication based on each appointment status.',
+      result: 'The automation creates a more organized appointment management process, reduces manual follow-up, keeps the sales pipeline updated, and helps recover missed or cancelled appointments through automated rebooking and follow-up sequences.',
+      impact: 'The automation creates a more organized appointment management process, reduces manual follow-up, keeps the sales pipeline updated, and helps recover missed or cancelled appointments through automated rebooking and follow-up sequences.',
       features: [
-        'Speed-to-lead under 60 seconds response',
-        'Conversational SMS AI booking agent',
-        'Automated pipeline stage tracking',
-        'Missed-call text-back & calendar lock',
+        'End-to-end solar appointment booking funnel & calendar sync',
+        'Multi-scenario workflow triggers (Confirmed, Cancelled, Rescheduled, Showed, No-Show)',
+        'Real-time automated opportunity pipeline stage updates',
+        'Automated rebooking & multi-touch no-show recovery sequences',
       ],
     },
     {
@@ -395,6 +410,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     title: proj.title,
                     category: proj.platform,
                     image: proj.image,
+                    gallery: proj.gallery,
+                    videoUrl: proj.videoUrl,
+                    youtubeId: proj.youtubeId,
                     tools: proj.tools,
                     problem: proj.problem,
                     solution: proj.solution,
@@ -416,7 +434,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 }}
               >
                 <div>
-                  {/* Image Container with Dedicated Enlarge/Zoom Button */}
+                  {/* Image Container with Dedicated Enlarge/Zoom Button / Video Indicator */}
                   <div 
                     className="relative h-56 overflow-hidden border-b flex items-center justify-center p-2 bg-[#090102] group/img"
                     style={{
@@ -427,47 +445,117 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       src={proj.image}
                       alt={proj.title}
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-contain group-hover:scale-[1.03] transition-transform duration-300"
+                      className="w-full h-full object-cover rounded-xl group-hover:scale-[1.03] transition-transform duration-300"
                     />
 
-                    {/* Gradient Overlay & Zoom Button on Hover */}
+                    {proj.youtubeId && (
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div className="w-12 h-12 rounded-full bg-red-600/90 text-white flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-red-600 transition-all">
+                          <Play className="w-5 h-5 fill-white translate-x-0.5" />
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Gradient Overlay & Zoom / Watch Button on Hover */}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-2 pointer-events-none">
                       <div className="pointer-events-auto flex items-center gap-2">
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setZoomedImage({
-                              src: proj.image,
-                              title: proj.title,
-                              category: proj.platform,
-                            });
-                            setZoomScale(1);
-                          }}
-                          className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#ff9000] to-[#ff3700] hover:brightness-110 text-white font-mono text-xs font-bold flex items-center gap-1.5 shadow-lg transform hover:scale-105 transition-all cursor-pointer"
-                        >
-                          <Maximize2 className="w-3.5 h-3.5" />
-                          <span>Enlarge Diagram</span>
-                        </button>
+                        {proj.youtubeId ? (
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveModal({
+                                id: proj.id,
+                                title: proj.title,
+                                category: proj.platform,
+                                image: proj.image,
+                                videoUrl: proj.videoUrl,
+                                youtubeId: proj.youtubeId,
+                                tools: proj.tools,
+                                problem: proj.problem,
+                                solution: proj.solution,
+                                impact: proj.impact,
+                                result: proj.result,
+                                metrics: [{ label: 'Impact', value: 'High ROI' }],
+                                features: proj.features,
+                                clientSector: 'Automation Build',
+                                workflowDiagram: [
+                                  { id: '1', label: 'Trigger Event', sublabel: 'Lead or Webhook', icon: 'Webhook', type: 'trigger' },
+                                  { id: '2', label: 'AI Model / Logic', sublabel: 'Processing Payload', icon: 'Brain', type: 'ai' },
+                                  { id: '3', label: 'CRM / Action', sublabel: 'Data Sync & Dispatch', icon: 'Database', type: 'action' },
+                                ],
+                              });
+                            }}
+                            className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-red-600 to-orange-600 hover:brightness-110 text-white font-mono text-xs font-bold flex items-center gap-1.5 shadow-lg transform hover:scale-105 transition-all cursor-pointer"
+                          >
+                            <Play className="w-3.5 h-3.5 fill-white" />
+                            <span>Watch Walkthrough Video</span>
+                          </button>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setZoomedImage({
+                                src: proj.image,
+                                title: proj.title,
+                                category: proj.platform,
+                              });
+                              setZoomScale(1);
+                            }}
+                            className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#ff9000] to-[#ff3700] hover:brightness-110 text-white font-mono text-xs font-bold flex items-center gap-1.5 shadow-lg transform hover:scale-105 transition-all cursor-pointer"
+                          >
+                            <Maximize2 className="w-3.5 h-3.5" />
+                            <span>Enlarge Diagram</span>
+                          </button>
+                        )}
                       </div>
                     </div>
 
-                    {/* Corner Tag with Zoom Icon */}
+                    {/* Corner Tag with Zoom / Video Icon */}
                     <button
                       type="button"
                       onClick={(e) => {
                         e.stopPropagation();
-                        setZoomedImage({
-                          src: proj.image,
-                          title: proj.title,
-                          category: proj.platform,
-                        });
-                        setZoomScale(1);
+                        if (proj.youtubeId) {
+                          setActiveModal({
+                            id: proj.id,
+                            title: proj.title,
+                            category: proj.platform,
+                            image: proj.image,
+                            videoUrl: proj.videoUrl,
+                            youtubeId: proj.youtubeId,
+                            tools: proj.tools,
+                            problem: proj.problem,
+                            solution: proj.solution,
+                            impact: proj.impact,
+                            result: proj.result,
+                            metrics: [{ label: 'Impact', value: 'High ROI' }],
+                            features: proj.features,
+                            clientSector: 'Automation Build',
+                            workflowDiagram: [
+                              { id: '1', label: 'Trigger Event', sublabel: 'Lead or Webhook', icon: 'Webhook', type: 'trigger' },
+                              { id: '2', label: 'AI Model / Logic', sublabel: 'Processing Payload', icon: 'Brain', type: 'ai' },
+                              { id: '3', label: 'CRM / Action', sublabel: 'Data Sync & Dispatch', icon: 'Database', type: 'action' },
+                            ],
+                          });
+                        } else {
+                          setZoomedImage({
+                            src: proj.image,
+                            title: proj.title,
+                            category: proj.platform,
+                          });
+                          setZoomScale(1);
+                        }
                       }}
-                      title="Enlarge diagram"
+                      title={proj.youtubeId ? "Watch video" : "Enlarge diagram"}
                       className="absolute top-3 right-3 bg-black/70 hover:bg-orange-600 text-white border border-white/20 p-2 rounded-xl backdrop-blur-md shadow-md transition-all hover:scale-110 cursor-pointer z-10"
                     >
-                      <ZoomIn className="w-4 h-4 text-[#ff9000] group-hover:text-white" />
+                      {proj.youtubeId ? (
+                        <Play className="w-4 h-4 text-red-400 group-hover:text-white fill-current" />
+                      ) : (
+                        <ZoomIn className="w-4 h-4 text-[#ff9000] group-hover:text-white" />
+                      )}
                     </button>
                   </div>
 
@@ -700,34 +788,53 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
 
                 {/* Scrollable Content Body */}
                 <div className="p-5 sm:p-6 overflow-y-auto space-y-6">
-                  {/* Large Image Preview in Modal with Enlarge Trigger */}
-                  <div 
-                    onClick={() => {
-                      setZoomedImage({
-                        src: activeModal.image,
-                        title: activeModal.title,
-                        category: activeModal.category,
-                      });
-                      setZoomScale(1.2);
-                    }}
-                    className="relative group/modalimg rounded-2xl overflow-hidden border p-3 flex items-center justify-center max-h-[440px] bg-[#080102] cursor-zoom-in"
-                    style={{
-                      borderColor: 'var(--border-color)',
-                    }}
-                  >
-                    <img
-                      src={activeModal.image}
-                      alt={activeModal.title}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-auto max-h-[400px] object-contain rounded-xl group-hover/modalimg:scale-[1.02] transition-transform duration-200"
-                    />
-
-                    {/* Prominent Overlay Button to Enlarge */}
-                    <div className="absolute bottom-4 right-4 bg-black/80 hover:bg-orange-600 border border-white/20 text-white px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 shadow-lg backdrop-blur-md transition-all hover:scale-105">
-                      <Maximize2 className="w-3.5 h-3.5 text-[#ff9000] group-hover:text-white" />
-                      <span>Click to Enlarge / Full View</span>
+                  {/* Large Video Embed or Image Preview in Modal */}
+                  {activeModal.youtubeId ? (
+                    <div 
+                      className="rounded-2xl overflow-hidden border shadow-lg bg-black"
+                      style={{
+                        borderColor: 'var(--border-color)',
+                      }}
+                    >
+                      <div className="relative aspect-video w-full">
+                        <iframe
+                          src={`https://www.youtube-nocookie.com/embed/${activeModal.youtubeId}?autoplay=1&rel=0`}
+                          title={activeModal.title}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="absolute inset-0 w-full h-full border-0"
+                        />
+                      </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div 
+                      onClick={() => {
+                        setZoomedImage({
+                          src: activeModal.image,
+                          title: activeModal.title,
+                          category: activeModal.category,
+                        });
+                        setZoomScale(1.2);
+                      }}
+                      className="relative group/modalimg rounded-2xl overflow-hidden border p-3 flex items-center justify-center max-h-[440px] bg-[#080102] cursor-zoom-in"
+                      style={{
+                        borderColor: 'var(--border-color)',
+                      }}
+                    >
+                      <img
+                        src={activeModal.image}
+                        alt={activeModal.title}
+                        referrerPolicy="no-referrer"
+                        className="w-full h-auto max-h-[400px] object-contain rounded-xl group-hover/modalimg:scale-[1.02] transition-transform duration-200"
+                      />
+
+                      {/* Prominent Overlay Button to Enlarge */}
+                      <div className="absolute bottom-4 right-4 bg-black/80 hover:bg-orange-600 border border-white/20 text-white px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5 shadow-lg backdrop-blur-md transition-all hover:scale-105">
+                        <Maximize2 className="w-3.5 h-3.5 text-[#ff9000] group-hover:text-white" />
+                        <span>Click to Enlarge / Full View</span>
+                      </div>
+                    </div>
+                  )}
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div 
@@ -751,6 +858,59 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       <p style={{ color: 'var(--text-secondary)' }} className="leading-relaxed">{activeModal.solution}</p>
                     </div>
                   </div>
+
+                  {/* Workflow Screenshots & Funnel Diagrams Gallery (if available) */}
+                  {activeModal.gallery && activeModal.gallery.length > 0 && (
+                    <div 
+                      className="p-5 border rounded-2xl space-y-4"
+                      style={{
+                        backgroundColor: 'var(--bg-primary)',
+                        borderColor: 'var(--border-color)',
+                      }}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <Layers className="w-4 h-4 text-[#ff9000]" />
+                          <span className="text-[#ff9000] text-xs font-bold font-mono tracking-wider uppercase">
+                            SYSTEM SCREENSHOTS & WORKFLOW BLUEPRINTS ({activeModal.gallery.length})
+                          </span>
+                        </div>
+                        <span className="text-[11px] font-mono text-zinc-400">Click any image to enlarge</span>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                        {activeModal.gallery.map((item, idx) => (
+                          <div
+                            key={idx}
+                            onClick={() => {
+                              setZoomedImage({
+                                src: item.url,
+                                title: `${activeModal.title} - ${item.title}`,
+                                category: activeModal.category,
+                              });
+                              setZoomScale(1.2);
+                            }}
+                            className="group/gal relative rounded-xl overflow-hidden border border-white/10 bg-[#090102] cursor-zoom-in hover:border-[#ff9000]/60 transition-all shadow-md flex flex-col"
+                          >
+                            <div className="h-32 w-full overflow-hidden flex items-center justify-center p-1.5 bg-black/50">
+                              <img
+                                src={item.url}
+                                alt={item.title}
+                                referrerPolicy="no-referrer"
+                                className="w-full h-full object-contain group-hover/gal:scale-105 transition-transform duration-200"
+                              />
+                            </div>
+                            <div className="p-2 bg-black/80 border-t border-white/5 flex items-center justify-between gap-1">
+                              <span className="text-[11px] font-medium text-zinc-300 truncate" title={item.title}>
+                                {item.title}
+                              </span>
+                              <Maximize2 className="w-3 h-3 text-[#ff9000] shrink-0 opacity-70 group-hover/gal:opacity-100" />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   {activeModal.result ? (
                     <div 

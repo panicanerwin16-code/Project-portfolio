@@ -23,6 +23,9 @@ export interface ProjectItem {
   title: string;
   category: string;
   image: string;
+  gallery?: { url: string; title: string }[];
+  videoUrl?: string;
+  youtubeId?: string;
   tools: string[];
   problem: string;
   solution: string;
