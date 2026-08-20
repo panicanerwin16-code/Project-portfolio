@@ -4,7 +4,7 @@ import { Calendar, Clock, Video, ExternalLink, ShieldCheck, Zap } from 'lucide-r
 
 export const CalendlySection: React.FC = () => {
   const [, setScriptLoaded] = useState(false);
-  const calendlyUrl = "https://calendly.com/panicanerwin16/30min?month=2026-07&hide_landing_page_details=0&hide_gdpr_banner=1&background_color=0a0103&text_color=ffffff&primary_color=ff4500";
+  const calendlyUrl = "https://calendly.com/panicanerwin16/30min?hide_landing_page_details=0&hide_gdpr_banner=1&background_color=0a0103&text_color=ffffff&primary_color=ff4500";
 
   useEffect(() => {
     // Check if Calendly script is already added
@@ -147,7 +147,7 @@ export const CalendlySection: React.FC = () => {
               </span>
 
               <a
-                href="https://calendly.com/panicanerwin16/30min?month=2026-07"
+                href="https://calendly.com/panicanerwin16/30min"
                 target="_blank"
                 rel="noreferrer"
                 className="px-3 py-1.5 rounded-xl bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 text-[#ff9000] text-xs font-mono font-semibold transition-all flex items-center gap-1.5"

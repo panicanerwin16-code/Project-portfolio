@@ -104,7 +104,7 @@
   background: rgba(255, 90, 30, 0.6);
 }
 
-/* Moving to the Right Marquee Animation */
+/* Bidirectional Marquee Animations */
 @keyframes marquee-to-right {
   0% {
     transform: translateX(-50%);
@@ -114,23 +114,33 @@
   }
 }
 
+@keyframes marquee-to-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 .animate-marquee-right {
   display: flex;
   width: max-content;
-  animation: marquee-to-right 35s linear infinite;
+  animation: marquee-to-right 34s linear infinite;
 }
 
 .animate-marquee-right:hover {
   animation-play-state: paused;
 }
 
-.animate-marquee-right-fast {
+.animate-marquee-left {
   display: flex;
   width: max-content;
-  animation: marquee-to-right 28s linear infinite;
+  animation: marquee-to-left 34s linear infinite;
 }
 
-.animate-marquee-right-fast:hover {
+.animate-marquee-left:hover {
   animation-play-state: paused;
 }
+
 

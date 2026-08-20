@@ -68,9 +68,13 @@ export default function App() {
     }
   }, [darkMode]);
 
-  const handleOpenBooking = (topic = '') => {
-    setBookingTopic(topic);
-    setIsBookingOpen(true);
+  const handleOpenBooking = (_topic = '') => {
+    const bookSection = document.getElementById('book-call');
+    if (bookSection) {
+      bookSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      window.open('https://calendly.com/panicanerwin16/30min', '_blank', 'noopener,noreferrer');
+    }
   };
 
   const handleOpenProjects = () => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { TechBrandIcon } from './TechBrandIcons';
 
 export const ExperienceSection: React.FC = () => {
   const experiences = [
@@ -26,209 +27,43 @@ export const ExperienceSection: React.FC = () => {
     },
   ];
 
-  const toolboxItems = [
-    {
-      name: 'n8n',
-      category: 'Workflow Engine',
-      color: '#EA4B71',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <rect x="2" y="5" width="6" height="6" rx="2" fill="#FF6D5A" />
-          <rect x="16" y="5" width="6" height="6" rx="2" fill="#EA4B71" />
-          <rect x="9" y="13" width="6" height="6" rx="2" fill="#FF4F7A" />
-          <path d="M8 8h8M5 11v3a2 2 0 002 2h2M19 11v3a2 2 0 01-2 2h-2" stroke="#EA4B71" strokeWidth="2" strokeLinecap="round" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Zapier',
-      category: 'Integration',
-      color: '#FF4F00',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <rect width="24" height="24" rx="6" fill="#FF4F00" fillOpacity="0.15" />
-          <path d="M12 4v16M4 12h16M6.34 6.34l11.32 11.32M6.34 17.66L17.66 6.34" stroke="#FF4F00" strokeWidth="2.8" strokeLinecap="round" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Make',
-      category: 'Visual Automation',
-      color: '#A855F7',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <path d="M4 8l4-4 4 4-4 4-4-4z" fill="#6D28D9" />
-          <path d="M12 8l4-4 4 4-4 4-4-4z" fill="#9333EA" />
-          <path d="M8 12l4-4 4 4-4 4-4-4z" fill="#A855F7" />
-          <path d="M12 16l4-4 4 4-4 4-4-4z" fill="#C084FC" />
-          <path d="M4 16l4-4 4 4-4 4-4-4z" fill="#7E22CE" />
-        </svg>
-      ),
-    },
-    {
-      name: 'GoHighLevel',
-      category: 'CRM & Marketing',
-      color: '#0084FF',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <rect width="24" height="24" rx="6" fill="#1877F2" fillOpacity="0.15" />
-          <path d="M6 16l4-4-4-4h3l4 4-4 4H6zm7 0l4-4-4-4h3l4 4-4 4h-3z" fill="#0084FF" />
-        </svg>
-      ),
-    },
-    {
-      name: 'OpenAI',
-      category: 'LLM Intelligence',
-      color: '#10A37F',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#10A37F" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M19.5 10c0-1.7-.9-3.2-2.3-4-.4-1.5-1.7-2.6-3.2-2.8-1.5-.2-3 .4-4 1.5-1.4-.4-2.9 0-4 1-1 1-1.5 2.5-1.2 3.9C3.6 10.3 3 11.6 3 13c0 1.7.9 3.2 2.3 4 .4 1.5 1.7 2.6 3.2 2.8 1.5.2 3-.4 4-1.5 1.4.4 2.9 0 4-1 1-1 1.5-2.5 1.2-3.9 1.2-.7 1.8-2 1.8-3.4z"/>
-          <path d="M12 8.5v7M9 10.5l6 3M9 13.5l6-3"/>
-        </svg>
-      ),
-    },
-    {
-      name: 'Anthropic',
-      category: 'Claude AI',
-      color: '#D97706',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <rect width="24" height="24" rx="6" fill="#D97706" fillOpacity="0.15" />
-          <path d="M12 4l1.8 5.2L19 11l-5.2 1.8L12 18l-1.8-5.2L5 11l5.2-1.8L12 4z" fill="#D97706" />
-        </svg>
-      ),
-    },
-    {
-      name: 'HubSpot',
-      category: 'CRM Platform',
-      color: '#FF7A59',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <path d="M17 11V8.5a2.5 2.5 0 10-2.5 2.5h.5V11a5 5 0 01-3 4.58V12a2 2 0 10-2 0v3.58A5 5 0 017 11v-.5H7.5A2.5 2.5 0 105 8v3a7 7 0 005 6.7V20a2 2 0 104 0v-2.3A7 7 0 0019 11h-2z" fill="#FF7A59"/>
-        </svg>
-      ),
-    },
-    {
-      name: 'ActiveCampaign',
-      category: 'Marketing Auto',
-      color: '#356AE6',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <rect width="24" height="24" rx="6" fill="#356AE6" fillOpacity="0.15" />
-          <path d="M6 15l4-6h3l-4 6H6zm6 0l4-6h3l-4 6h-3z" fill="#356AE6" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Airtable',
-      category: 'Relational DB',
-      color: '#FCB400',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <path d="M11.5 3.5l9 4.5-8.5 4.5-9-4.5 8.5-4.5z" fill="#FCB400" />
-          <path d="M11 13.5v7l-8-4v-7l8 4z" fill="#18BFFF" />
-          <path d="M13 13.5l8-4v7l-8 4v-7z" fill="#F82B60" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Notion',
-      category: 'Workspace',
-      color: '#ffffff',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <rect x="3" y="3" width="18" height="18" rx="4" fill="currentColor" fillOpacity="0.1" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M7 7.5l7 1.5v7.5l-7-1.5V7.5z" fill="currentColor" fillOpacity="0.2" />
-          <path d="M8 7v10l3.5-1v-8L16 17V7l-3.5 1v8L8 7z" fill="currentColor" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Google Sheets',
-      category: 'Spreadsheets',
-      color: '#0F9D58',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <rect x="4" y="2" width="16" height="20" rx="3" fill="#0F9D58" />
-          <path d="M8 8h8v2H8V8zm0 3h8v2H8v-2zm0 3h8v2H8v-2z" fill="#FFFFFF" />
-          <path d="M11 8v8M14 8v8" stroke="#0B8043" strokeWidth="1.2" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Google Apps Script',
-      category: 'Cloud Scripting',
-      color: '#4285F4',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <path d="M7 8l-4 4 4 4M17 8l4 4-4 4" stroke="#4285F4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M14 4l-4 16" stroke="#34A853" strokeWidth="2.5" strokeLinecap="round"/>
-        </svg>
-      ),
-    },
-    {
-      name: 'JavaScript',
-      category: 'Custom Logic',
-      color: '#F7DF1E',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <rect width="24" height="24" rx="4" fill="#F7DF1E" />
-          <path d="M7.5 11v5c0 1.5-.8 2-2 2h-.5v-1.5h.3c.6 0 .7-.2.7-.8V11h1.5zm9 0c-1.5 0-2.3.8-2.3 2 0 1.5 1.2 1.8 2.3 2.1.8.2 1 .5 1 .9 0 .5-.4.8-1 .8-.8 0-1.2-.4-1.3-1.1h-1.5c.1 1.5 1.1 2.3 2.8 2.3 1.6 0 2.6-.8 2.6-2.1 0-1.4-1-1.8-2.2-2.1-.8-.2-1.1-.4-1.1-.9 0-.4.4-.7 1-.7.6 0 1 .3 1.1.9h1.4c-.1-1.3-1-2.2-2.8-2.2z" fill="#000000" />
-        </svg>
-      ),
-    },
-    {
-      name: 'SQL & Databases',
-      category: 'Database Querying',
-      color: '#336791',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#336791" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <ellipse cx="12" cy="5" rx="9" ry="3" fill="#336791" fillOpacity="0.2"/>
-          <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
-          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-        </svg>
-      ),
-    },
-    {
-      name: 'Pabbly Connect',
-      category: 'App Integrator',
-      color: '#00C49F',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <circle cx="6" cy="12" r="3" fill="#00C49F" />
-          <circle cx="18" cy="6" r="3" fill="#00C49F" />
-          <circle cx="18" cy="18" r="3" fill="#00C49F" />
-          <path d="M8.5 10.5l7-3M8.5 13.5l7 3" stroke="#00C49F" strokeWidth="2" />
-        </svg>
-      ),
-    },
-    {
-      name: 'REST APIs',
-      category: 'API Protocols',
-      color: '#F97316',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <rect width="24" height="24" rx="6" fill="#F97316" fillOpacity="0.15" />
-          <path d="M5 8l3-3 3 3M19 16l-3 3-3-3M8 5v8a3 3 0 003 3h5" stroke="#F97316" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      ),
-    },
-    {
-      name: 'Webhooks',
-      category: 'Event Triggers',
-      color: '#EC4899',
-      logo: (
-        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
-          <rect width="24" height="24" rx="6" fill="#EC4899" fillOpacity="0.15" />
-          <path d="M12 4v4m0 0a4 4 0 014 4v4a4 4 0 01-8 0v-4a4 4 0 014-4zm0 0V4" stroke="#EC4899" strokeWidth="2" strokeLinecap="round" />
-          <circle cx="12" cy="16" r="1.5" fill="#EC4899" />
-        </svg>
-      ),
-    },
+  // Row 1 Tools (Moving from Left to Right)
+  const leftToRightTools = [
+    { name: 'GoHighLevel', displayName: 'GoHighLevel', category: 'CRM & GROWTH', color: '#1877F2' },
+    { name: 'n8n', displayName: 'n8n', category: 'WORKFLOW ENGINE', color: '#EA4B71' },
+    { name: 'Zapier', displayName: 'Zapier', category: 'AUTOMATION', color: '#FF4F00' },
+    { name: 'Make.com', displayName: 'Make.com', category: 'INTEGRATION', color: '#A855F7' },
+    { name: 'Stripe', displayName: 'Stripe', category: 'PAYMENT GATEWAY', color: '#635BFF' },
+    { name: 'OpenAI', displayName: 'OpenAI', category: 'AI & LLM', color: '#10A37F' },
+    { name: 'Claude', displayName: 'Claude', category: 'AI & LLM', color: '#D97706' },
+    { name: 'Grok', displayName: 'Grok', category: 'AI & LLM', color: '#FFFFFF' },
+    { name: 'Gemini', displayName: 'Gemini', category: 'AI & LLM', color: '#4E8CFF' },
+    { name: 'Lovable', displayName: 'Lovable', category: 'AI APP BUILDER', color: '#FF4F7A' },
+    { name: 'Vapi', displayName: 'Vapi', category: 'VOICE AI', color: '#A855F7' },
+    { name: 'LangChain', displayName: 'LangChain', category: 'AI FRAMEWORK', color: '#10B981' },
+    { name: 'OpenRouter', displayName: 'OpenRouter', category: 'AI GATEWAY', color: '#14B8A6' },
   ];
 
-  // Duplicate for seamless infinite rightward marquee
-  const marqueeList = [...toolboxItems, ...toolboxItems];
+  // Row 2 Tools (Moving from Right to Left)
+  const rightToLeftTools = [
+    { name: 'Canva', displayName: 'Canva', category: 'DESIGN & ASSETS', color: '#00C4CC' },
+    { name: 'Gmail', displayName: 'Gmail', category: 'EMAIL DISPATCH', color: '#EA4335' },
+    { name: 'Google Workspace', displayName: 'Google Workspace', category: 'ECOSYSTEM', color: '#4285F4' },
+    { name: 'Google Docs', displayName: 'Google Docs', category: 'DOCUMENT GEN', color: '#4285F4' },
+    { name: 'Google Sheets', displayName: 'Google Sheets', category: 'DATA & SYNC', color: '#0F9D58' },
+    { name: 'Google Calendar', displayName: 'Google Calendar', category: 'SCHEDULING', color: '#4285F4' },
+    { name: 'Slack', displayName: 'Slack', category: 'TEAM CHAT', color: '#E01E5A' },
+    { name: 'Telegram', displayName: 'Telegram', category: 'BOT AUTOMATION', color: '#229ED9' },
+    { name: 'WhatsApp', displayName: 'WhatsApp', category: 'MESSAGING API', color: '#25D366' },
+    { name: 'Airtable', displayName: 'Airtable', category: 'RELATIONAL DB', color: '#FCB400' },
+    { name: 'Notion', displayName: 'Notion', category: 'KNOWLEDGE BASE', color: '#FFFFFF' },
+    { name: 'Asana', displayName: 'Asana', category: 'PROJECT MGMT', color: '#F06A6A' },
+    { name: 'Apollo.io', displayName: 'Apollo.io', category: 'LEAD INTELLIGENCE', color: '#7C3AED' },
+  ];
+
+  // Duplicated arrays for seamless infinite marquee wrap
+  const row1Marquee = [...leftToRightTools, ...leftToRightTools];
+  const row2Marquee = [...rightToLeftTools, ...rightToLeftTools];
 
   return (
     <section 
@@ -311,129 +146,166 @@ export const ExperienceSection: React.FC = () => {
 
         </div>
 
-        {/* Toolbox Section with Animated Marquee moving to the right */}
+        {/* Toolbox & Tech Stack Section with Bidirectional Animated Marquees */}
         <div 
           className="pt-12 border-t overflow-hidden"
           style={{ borderColor: 'var(--border-color)' }}
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+          {/* Section Header */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
             <div>
               <span className="text-xs font-mono font-bold uppercase tracking-widest block text-[#ff9000]">
                 TOOLBOX & TECH STACK
               </span>
               <p className="text-xs mt-1" style={{ color: 'var(--text-secondary)' }}>
-                Platforms, APIs, and AI models powering end-to-end autonomous workflows
+                Platforms, APIs, AI models, and databases powering autonomous business pipelines
               </p>
             </div>
-            <div className="flex items-center gap-1.5 text-[11px] font-mono" style={{ color: 'var(--text-secondary)' }}>
-              <span className="w-2 h-2 rounded-full bg-[#ff4500] animate-ping" />
-              <span>Moving Right • Hover to Pause</span>
+            <div className="flex items-center gap-3 text-[11px] font-mono" style={{ color: 'var(--text-secondary)' }}>
+              <span className="inline-flex items-center gap-1.5 bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Live Bidirectional Marquee • Hover to Pause
+              </span>
             </div>
           </div>
 
-          {/* Marquee Track with Edge Gradients */}
-          <div className="relative w-full overflow-hidden py-3">
-            {/* Left & Right Gradient Shadows for seamless edge fade */}
-            <div 
-              className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 z-10 pointer-events-none"
-              style={{
-                background: 'linear-gradient(to right, var(--bg-primary) 0%, transparent 100%)',
-              }}
-            />
-            <div 
-              className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 z-10 pointer-events-none"
-              style={{
-                background: 'linear-gradient(to left, var(--bg-primary) 0%, transparent 100%)',
-              }}
-            />
-
-            {/* Row 1 Moving Right */}
-            <div className="animate-marquee-right flex gap-3 sm:gap-4 items-center">
-              {marqueeList.map((item, idx) => (
-                <div
-                  key={`${item.name}-${idx}`}
-                  className="group flex items-center gap-3 px-4 py-2.5 rounded-2xl border transition-all duration-300 hover:scale-105 shrink-0 cursor-default select-none shadow-md"
-                  style={{
-                    backgroundColor: 'var(--bg-card)',
-                    borderColor: 'var(--border-color)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = item.color;
-                    e.currentTarget.style.boxShadow = `0 0 20px ${item.color}33`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--border-color)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                >
-                  {/* Tool Perspective Logo Icon Container */}
-                  <div 
-                    className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
-                    style={{
-                      backgroundColor: `${item.color}15`,
-                      borderColor: `${item.color}40`,
-                    }}
-                  >
-                    {item.logo}
-                  </div>
-
-                  {/* Tool Details */}
-                  <div className="text-left">
-                    <span 
-                      className="block font-mono text-xs sm:text-sm font-black tracking-tight"
-                      style={{ color: 'var(--text-primary)' }}
-                    >
-                      {item.name}
-                    </span>
-                    <span className="block text-[10px] font-mono tracking-wider text-[#ff9000] uppercase">
-                      {item.category}
-                    </span>
-                  </div>
-                </div>
-              ))}
+          {/* Integrated Production Stack Container */}
+          <div 
+            className="rounded-3xl border overflow-hidden p-4 sm:p-6 relative shadow-2xl transition-colors duration-300"
+            style={{
+              backgroundColor: 'var(--bg-card)',
+              borderColor: 'var(--border-color)',
+            }}
+          >
+            {/* Top Status Header */}
+            <div className="flex items-center justify-between gap-4 pb-4 mb-4 border-b text-[11px] font-mono" style={{ borderColor: 'var(--border-color)' }}>
+              <div className="flex items-center gap-2 text-emerald-400 font-semibold tracking-wider">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
+                <span>PRODUCTION INTEGRATED STACK</span>
+              </div>
+              <div className="hidden sm:block tracking-wider uppercase" style={{ color: 'var(--text-secondary)' }}>
+                26+ CERTIFIED CONNECTORS • ENTERPRISE GRADE
+              </div>
             </div>
 
-            {/* Row 2 Moving Right (Offset reversed list for visual depth) */}
-            <div className="animate-marquee-right-fast flex gap-3 sm:gap-4 items-center mt-3 sm:mt-4">
-              {[...marqueeList].reverse().map((item, idx) => (
-                <div
-                  key={`rev-${item.name}-${idx}`}
-                  className="group flex items-center gap-3 px-4 py-2 rounded-2xl border transition-all duration-300 hover:scale-105 shrink-0 cursor-default select-none shadow-md"
-                  style={{
-                    backgroundColor: 'var(--bg-secondary)',
-                    borderColor: 'var(--border-color)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = item.color;
-                    e.currentTarget.style.boxShadow = `0 0 20px ${item.color}33`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--border-color)';
-                    e.currentTarget.style.boxShadow = 'none';
-                  }}
-                >
-                  {/* Tool Perspective Logo Icon Container */}
-                  <div 
-                    className="w-8 h-8 rounded-xl flex items-center justify-center shrink-0 border transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3"
+            {/* Marquee Track Container with Fade Masks */}
+            <div className="relative w-full overflow-hidden py-2 space-y-3.5">
+              {/* Left & Right Gradient Shadows for seamless edge fade */}
+              <div 
+                className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 z-10 pointer-events-none"
+                style={{
+                  background: 'linear-gradient(to right, var(--bg-card) 0%, transparent 100%)',
+                }}
+              />
+              <div 
+                className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 z-10 pointer-events-none"
+                style={{
+                  background: 'linear-gradient(to left, var(--bg-card) 0%, transparent 100%)',
+                }}
+              />
+
+              {/* Row 1: Moving Left to Right */}
+              <div className="animate-marquee-right flex gap-3 sm:gap-3.5 items-center">
+                {row1Marquee.map((item, idx) => (
+                  <div
+                    key={`r1-${item.name}-${idx}`}
+                    className="group flex items-center gap-3 px-3.5 py-2.5 rounded-2xl border transition-all duration-300 hover:scale-105 shrink-0 cursor-default select-none shadow-sm"
                     style={{
-                      backgroundColor: `${item.color}15`,
-                      borderColor: `${item.color}40`,
+                      backgroundColor: 'var(--bg-primary)',
+                      borderColor: 'var(--border-color)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = item.color;
+                      e.currentTarget.style.boxShadow = `0 0 20px ${item.color}33`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border-color)';
+                      e.currentTarget.style.boxShadow = 'none';
                     }}
                   >
-                    {item.logo}
-                  </div>
-
-                  {/* Tool Details */}
-                  <div className="text-left">
-                    <span 
-                      className="block font-mono text-xs font-bold tracking-tight"
-                      style={{ color: 'var(--text-primary)' }}
+                    {/* Brand Icon */}
+                    <div 
+                      className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 shadow-inner"
+                      style={{
+                        backgroundColor: `${item.color}15`,
+                        borderColor: `${item.color}35`,
+                      }}
                     >
-                      {item.name}
-                    </span>
+                      <TechBrandIcon name={item.name} className="w-5 h-5" color={item.color} />
+                    </div>
+
+                    {/* Details */}
+                    <div className="text-left">
+                      <span 
+                        className="block font-mono text-xs sm:text-sm font-bold tracking-tight"
+                        style={{ color: 'var(--text-primary)' }}
+                      >
+                        {item.displayName}
+                      </span>
+                      <span className="block text-[9px] sm:text-[10px] font-mono tracking-wider text-[#ff9000] uppercase font-semibold">
+                        {item.category}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              {/* Row 2: Moving Right to Left */}
+              <div className="animate-marquee-left flex gap-3 sm:gap-3.5 items-center">
+                {row2Marquee.map((item, idx) => (
+                  <div
+                    key={`r2-${item.name}-${idx}`}
+                    className="group flex items-center gap-3 px-3.5 py-2.5 rounded-2xl border transition-all duration-300 hover:scale-105 shrink-0 cursor-default select-none shadow-sm"
+                    style={{
+                      backgroundColor: 'var(--bg-primary)',
+                      borderColor: 'var(--border-color)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = item.color;
+                      e.currentTarget.style.boxShadow = `0 0 20px ${item.color}33`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border-color)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  >
+                    {/* Brand Icon */}
+                    <div 
+                      className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3 shadow-inner"
+                      style={{
+                        backgroundColor: `${item.color}15`,
+                        borderColor: `${item.color}35`,
+                      }}
+                    >
+                      <TechBrandIcon name={item.name} className="w-5 h-5" color={item.color} />
+                    </div>
+
+                    {/* Details */}
+                    <div className="text-left">
+                      <span 
+                        className="block font-mono text-xs sm:text-sm font-bold tracking-tight"
+                        style={{ color: 'var(--text-primary)' }}
+                      >
+                        {item.displayName}
+                      </span>
+                      <span className="block text-[9px] sm:text-[10px] font-mono tracking-wider text-[#ff9000] uppercase font-semibold">
+                        {item.category}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom Status Footer */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pt-4 mt-4 border-t text-[11px] font-mono" style={{ borderColor: 'var(--border-color)', color: 'var(--text-secondary)' }}>
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                <span>Custom Webhooks, REST API endpoints, OAuth 2.0 & LLM agent tool calling integrations.</span>
+              </div>
+              <div className="text-[#ff9000] font-semibold shrink-0">
+                99.9% Pipeline Uptime SLA
+              </div>
             </div>
           </div>
         </div>
@@ -442,3 +314,4 @@ export const ExperienceSection: React.FC = () => {
     </section>
   );
 };
+
