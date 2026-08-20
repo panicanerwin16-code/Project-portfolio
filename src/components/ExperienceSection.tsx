@@ -148,168 +148,169 @@ export const ExperienceSection: React.FC = () => {
 
         {/* Toolbox & Tech Stack Section with Bidirectional Animated Marquees */}
         <div 
-          className="pt-12 border-t overflow-hidden"
+          className="pt-14 border-t overflow-hidden"
           style={{ borderColor: 'var(--border-color)' }}
         >
           {/* Section Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
             <div>
-              <span className="text-xs font-mono font-bold uppercase tracking-widest block text-[#ff9000]">
+              <span className="text-xs sm:text-sm font-mono font-bold uppercase tracking-widest block text-[#ff9000]">
                 TOOLBOX & TECH STACK
               </span>
-              <p className="text-xs mt-1" style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-xs sm:text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>
                 Platforms, APIs, AI models, and databases powering autonomous business pipelines
               </p>
             </div>
-            <div className="flex items-center gap-3 text-[11px] font-mono" style={{ color: 'var(--text-secondary)' }}>
-              <span className="inline-flex items-center gap-1.5 bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-full border border-emerald-500/20">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="flex items-center gap-3 text-[11px] sm:text-xs font-mono" style={{ color: 'var(--text-secondary)' }}>
+              <span className="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-full border border-emerald-500/20 shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 Live Bidirectional Marquee • Hover to Pause
               </span>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* Integrated Production Stack Container */}
-          <div 
-            className="rounded-3xl border overflow-hidden p-4 sm:p-6 relative shadow-2xl transition-colors duration-300"
-            style={{
-              backgroundColor: 'var(--bg-card)',
-              borderColor: 'var(--border-color)',
-            }}
-          >
-            {/* Top Status Header */}
-            <div className="flex items-center justify-between gap-4 pb-4 mb-4 border-b text-[11px] font-mono" style={{ borderColor: 'var(--border-color)' }}>
-              <div className="flex items-center gap-2 text-emerald-400 font-semibold tracking-wider">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
-                <span>PRODUCTION INTEGRATED STACK</span>
-              </div>
-              <div className="hidden sm:block tracking-wider uppercase" style={{ color: 'var(--text-secondary)' }}>
-                26+ CERTIFIED CONNECTORS • ENTERPRISE GRADE
-              </div>
+      {/* Full-Width / Ultra-Wide Production Stack Marquee Canvas */}
+      <div className="max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-6 relative z-10">
+        <div 
+          className="rounded-3xl border overflow-hidden p-5 sm:p-7 md:p-8 relative shadow-2xl transition-colors duration-300 backdrop-blur-md"
+          style={{
+            backgroundColor: 'var(--bg-card)',
+            borderColor: 'var(--border-color)',
+          }}
+        >
+          {/* Top Status Header */}
+          <div className="flex items-center justify-between gap-4 pb-4 mb-5 border-b text-xs sm:text-sm font-mono" style={{ borderColor: 'var(--border-color)' }}>
+            <div className="flex items-center gap-2.5 text-emerald-400 font-bold tracking-wider">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_#34d399]" />
+              <span>PRODUCTION INTEGRATED STACK</span>
             </div>
+            <div className="hidden sm:block text-xs tracking-wider uppercase font-semibold" style={{ color: 'var(--text-secondary)' }}>
+              26+ CERTIFIED CONNECTORS • ENTERPRISE GRADE
+            </div>
+          </div>
 
-            {/* Marquee Track Container with Fade Masks */}
-            <div className="relative w-full overflow-hidden py-2 space-y-3.5">
-              {/* Left & Right Gradient Shadows for seamless edge fade */}
-              <div 
-                className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 z-10 pointer-events-none"
-                style={{
-                  background: 'linear-gradient(to right, var(--bg-card) 0%, transparent 100%)',
-                }}
-              />
-              <div 
-                className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 z-10 pointer-events-none"
-                style={{
-                  background: 'linear-gradient(to left, var(--bg-card) 0%, transparent 100%)',
-                }}
-              />
+          {/* Marquee Track Container with Fade Masks */}
+          <div className="relative w-full overflow-hidden py-3 space-y-5">
+            {/* Left & Right Gradient Shadows for seamless edge fade */}
+            <div 
+              className="absolute left-0 top-0 bottom-0 w-20 sm:w-36 lg:w-44 z-10 pointer-events-none"
+              style={{
+                background: 'linear-gradient(to right, var(--bg-card) 0%, transparent 100%)',
+              }}
+            />
+            <div 
+              className="absolute right-0 top-0 bottom-0 w-20 sm:w-36 lg:w-44 z-10 pointer-events-none"
+              style={{
+                background: 'linear-gradient(to left, var(--bg-card) 0%, transparent 100%)',
+              }}
+            />
 
-              {/* Row 1: Moving Left to Right */}
-              <div className="animate-marquee-right flex gap-3 sm:gap-3.5 items-center">
-                {row1Marquee.map((item, idx) => (
-                  <div
-                    key={`r1-${item.name}-${idx}`}
-                    className="group flex items-center gap-3 px-3.5 py-2.5 rounded-2xl border transition-all duration-300 hover:scale-105 shrink-0 cursor-default select-none shadow-sm"
+            {/* Row 1: Moving Left to Right */}
+            <div className="animate-marquee-right flex gap-4 sm:gap-5 items-center">
+              {row1Marquee.map((item, idx) => (
+                <div
+                  key={`r1-${item.name}-${idx}`}
+                  className="group flex items-center gap-3.5 sm:gap-4 px-4 sm:px-5 py-3 sm:py-3.5 rounded-2xl border transition-all duration-300 hover:scale-105 shrink-0 cursor-default select-none shadow-md"
+                  style={{
+                    backgroundColor: 'var(--bg-primary)',
+                    borderColor: 'var(--border-color)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = item.color;
+                    e.currentTarget.style.boxShadow = `0 0 24px ${item.color}40`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--border-color)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  {/* Brand Icon */}
+                  <div 
+                    className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center shrink-0 border transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 shadow-inner"
                     style={{
-                      backgroundColor: 'var(--bg-primary)',
-                      borderColor: 'var(--border-color)',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = item.color;
-                      e.currentTarget.style.boxShadow = `0 0 20px ${item.color}33`;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--border-color)';
-                      e.currentTarget.style.boxShadow = 'none';
+                      backgroundColor: `${item.color}15`,
+                      borderColor: `${item.color}35`,
                     }}
                   >
-                    {/* Brand Icon */}
-                    <div 
-                      className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 shadow-inner"
-                      style={{
-                        backgroundColor: `${item.color}15`,
-                        borderColor: `${item.color}35`,
-                      }}
-                    >
-                      <TechBrandIcon name={item.name} className="w-5 h-5" color={item.color} />
-                    </div>
-
-                    {/* Details */}
-                    <div className="text-left">
-                      <span 
-                        className="block font-mono text-xs sm:text-sm font-bold tracking-tight"
-                        style={{ color: 'var(--text-primary)' }}
-                      >
-                        {item.displayName}
-                      </span>
-                      <span className="block text-[9px] sm:text-[10px] font-mono tracking-wider text-[#ff9000] uppercase font-semibold">
-                        {item.category}
-                      </span>
-                    </div>
+                    <TechBrandIcon name={item.name} className="w-6 h-6 sm:w-7 sm:h-7" color={item.color} />
                   </div>
-                ))}
-              </div>
 
-              {/* Row 2: Moving Right to Left */}
-              <div className="animate-marquee-left flex gap-3 sm:gap-3.5 items-center">
-                {row2Marquee.map((item, idx) => (
-                  <div
-                    key={`r2-${item.name}-${idx}`}
-                    className="group flex items-center gap-3 px-3.5 py-2.5 rounded-2xl border transition-all duration-300 hover:scale-105 shrink-0 cursor-default select-none shadow-sm"
-                    style={{
-                      backgroundColor: 'var(--bg-primary)',
-                      borderColor: 'var(--border-color)',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = item.color;
-                      e.currentTarget.style.boxShadow = `0 0 20px ${item.color}33`;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--border-color)';
-                      e.currentTarget.style.boxShadow = 'none';
-                    }}
-                  >
-                    {/* Brand Icon */}
-                    <div 
-                      className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3 shadow-inner"
-                      style={{
-                        backgroundColor: `${item.color}15`,
-                        borderColor: `${item.color}35`,
-                      }}
+                  {/* Details */}
+                  <div className="text-left">
+                    <span 
+                      className="block font-mono text-sm sm:text-base font-extrabold tracking-tight"
+                      style={{ color: 'var(--text-primary)' }}
                     >
-                      <TechBrandIcon name={item.name} className="w-5 h-5" color={item.color} />
-                    </div>
-
-                    {/* Details */}
-                    <div className="text-left">
-                      <span 
-                        className="block font-mono text-xs sm:text-sm font-bold tracking-tight"
-                        style={{ color: 'var(--text-primary)' }}
-                      >
-                        {item.displayName}
-                      </span>
-                      <span className="block text-[9px] sm:text-[10px] font-mono tracking-wider text-[#ff9000] uppercase font-semibold">
-                        {item.category}
-                      </span>
-                    </div>
+                      {item.displayName}
+                    </span>
+                    <span className="block text-[10px] sm:text-xs font-mono tracking-wider text-[#ff9000] uppercase font-bold mt-0.5">
+                      {item.category}
+                    </span>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
 
-            {/* Bottom Status Footer */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pt-4 mt-4 border-t text-[11px] font-mono" style={{ borderColor: 'var(--border-color)', color: 'var(--text-secondary)' }}>
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span>Custom Webhooks, REST API endpoints, OAuth 2.0 & LLM agent tool calling integrations.</span>
-              </div>
-              <div className="text-[#ff9000] font-semibold shrink-0">
-                99.9% Pipeline Uptime SLA
-              </div>
+            {/* Row 2: Moving Right to Left */}
+            <div className="animate-marquee-left flex gap-4 sm:gap-5 items-center">
+              {row2Marquee.map((item, idx) => (
+                <div
+                  key={`r2-${item.name}-${idx}`}
+                  className="group flex items-center gap-3.5 sm:gap-4 px-4 sm:px-5 py-3 sm:py-3.5 rounded-2xl border transition-all duration-300 hover:scale-105 shrink-0 cursor-default select-none shadow-md"
+                  style={{
+                    backgroundColor: 'var(--bg-primary)',
+                    borderColor: 'var(--border-color)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = item.color;
+                    e.currentTarget.style.boxShadow = `0 0 24px ${item.color}40`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--border-color)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  {/* Brand Icon */}
+                  <div 
+                    className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center shrink-0 border transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-3 shadow-inner"
+                    style={{
+                      backgroundColor: `${item.color}15`,
+                      borderColor: `${item.color}35`,
+                    }}
+                  >
+                    <TechBrandIcon name={item.name} className="w-6 h-6 sm:w-7 sm:h-7" color={item.color} />
+                  </div>
+
+                  {/* Details */}
+                  <div className="text-left">
+                    <span 
+                      className="block font-mono text-sm sm:text-base font-extrabold tracking-tight"
+                      style={{ color: 'var(--text-primary)' }}
+                    >
+                      {item.displayName}
+                    </span>
+                    <span className="block text-[10px] sm:text-xs font-mono tracking-wider text-[#ff9000] uppercase font-bold mt-0.5">
+                      {item.category}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom Status Footer */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pt-5 mt-5 border-t text-xs sm:text-sm font-mono" style={{ borderColor: 'var(--border-color)', color: 'var(--text-secondary)' }}>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              <span>Custom Webhooks, REST API endpoints, OAuth 2.0 & LLM agent tool calling integrations.</span>
+            </div>
+            <div className="text-[#ff9000] font-bold shrink-0">
+              99.9% Pipeline Uptime SLA
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

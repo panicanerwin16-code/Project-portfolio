@@ -308,7 +308,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       className="py-20 md:py-28 relative transition-colors duration-300 bg-crimson-grid"
       style={{ backgroundColor: 'var(--bg-primary)' }}
     >
-      <div id="projects" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div id="projects" className="max-w-[1600px] mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
         
         {/* Eyebrow & Title */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 text-left">
@@ -324,7 +324,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               My Portfolio
             </h2>
             <p 
-              className="text-sm mt-2 max-w-xl"
+              className="text-sm sm:text-base mt-2 max-w-2xl"
               style={{ color: 'var(--text-secondary)' }}
             >
               Explore production-tested automation workflows, AI bots, and CRM integrations built across leading platforms.
@@ -345,10 +345,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           </div>
         </div>
 
-        {/* Filter Buttons */}
-        <div className="mb-10">
+        {/* Filter Buttons - Centered */}
+        <div className="mb-12 flex justify-center">
           <div 
-            className="flex flex-wrap items-center gap-3 sm:gap-4 p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl border backdrop-blur-sm w-fit max-w-full overflow-x-auto shadow-lg"
+            className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl border backdrop-blur-sm shadow-xl"
             style={{
               backgroundColor: 'var(--bg-secondary)',
               borderColor: 'var(--border-color)',
@@ -362,7 +362,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 <button
                   key={btn.id}
                   onClick={() => setActiveCategory(btn.id)}
-                  className={`relative px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl sm:rounded-2xl font-mono text-sm sm:text-base md:text-lg font-black tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-2.5 sm:gap-3 select-none shrink-0 ${
+                  className={`relative px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl font-mono text-sm sm:text-base md:text-lg font-black tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-2.5 sm:gap-3 select-none shrink-0 ${
                     isActive
                       ? 'bg-gradient-to-r from-[#ff9000] to-[#ff3700] text-white shadow-[0_0_24px_rgba(255,80,0,0.45)] scale-[1.03]'
                       : 'hover:border-orange-500/50 hover:scale-[1.02]'
@@ -376,7 +376,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 >
                   <span>{btn.label}</span>
                   <span
-                    className={`px-2 py-0.5 rounded-lg text-xs sm:text-sm font-bold ${
+                    className={`px-2.5 py-0.5 rounded-lg text-xs sm:text-sm font-bold ${
                       isActive
                         ? 'bg-black/30 text-white'
                         : 'bg-red-500/10 text-[#ff9000]'
@@ -393,7 +393,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         {/* Animated Projects Grid */}
         <motion.div 
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((proj) => (
@@ -434,9 +434,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 }}
               >
                 <div>
-                  {/* Image Container with Dedicated Enlarge/Zoom Button / Video Indicator */}
+                  {/* Image Container with Dedicated Enlarge/Zoom Button / Video Indicator - Larger Height */}
                   <div 
-                    className="relative h-56 overflow-hidden border-b flex items-center justify-center p-2 bg-[#090102] group/img"
+                    className="relative h-72 sm:h-80 md:h-88 lg:h-80 xl:h-96 overflow-hidden border-b flex items-center justify-center p-2.5 sm:p-3 bg-[#090102] group/img"
                     style={{
                       borderColor: 'var(--border-color)',
                     }}
