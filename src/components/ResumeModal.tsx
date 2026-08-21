@@ -23,7 +23,7 @@ import {
   Eye,
   Info,
 } from 'lucide-react';
-import { downloadATSResumeFile } from '../utils/resumeDownloader';
+import { downloadATSResumeFile, generateATSPdfDocument } from '../utils/resumeDownloader';
 
 const erwinHeadshotDefault = "https://i.im.ge/QMc34OT/ERN_1.png";
 
@@ -46,19 +46,29 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({
   const [pdfFileName, setPdfFileName] = useState<string>('Erwin_Panican_ATS_Resume.docx (1).pdf');
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
-  // Load saved PDF from localStorage on mount
+  // Load saved PDF from localStorage on mount or generate initial PDF Data URI
   useEffect(() => {
     try {
       const savedPdf = localStorage.getItem('erwin_resume_pdf_data');
       const savedName = localStorage.getItem('erwin_resume_filename');
       if (savedPdf) {
         setPdfDataUrl(savedPdf);
+      } else {
+        const generatedDoc = generateATSPdfDocument();
+        const dataUri = generatedDoc.output('datauristring');
+        setPdfDataUrl(dataUri);
       }
       if (savedName) {
         setPdfFileName(savedName);
       }
     } catch {
-      // ignore storage errors
+      try {
+        const generatedDoc = generateATSPdfDocument();
+        const dataUri = generatedDoc.output('datauristring');
+        setPdfDataUrl(dataUri);
+      } catch {
+        // ignore
+      }
     }
   }, []);
 

@@ -4,9 +4,10 @@ import { personalInfo } from '../data/portfolioData';
 
 interface FooterProps {
   onOpenBooking: () => void;
+  onOpenResume?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenBooking, onOpenResume }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -69,6 +70,16 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               <li><a href="#work" className="hover:text-[#ff9000] transition-colors">Portfolio Work</a></li>
               <li><a href="#testimonials" className="hover:text-[#ff9000] transition-colors">Testimonials</a></li>
               <li><a href="#contact" className="hover:text-[#ff9000] transition-colors">Contact</a></li>
+              {onOpenResume && (
+                <li>
+                  <button
+                    onClick={onOpenResume}
+                    className="hover:text-[#ff9000] text-[#ff9000] font-semibold transition-colors cursor-pointer text-left"
+                  >
+                    ATS Resume (.PDF) ↓
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
 

@@ -154,7 +154,10 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer onOpenBooking={() => handleOpenBooking('Footer Booking')} />
+      <Footer 
+        onOpenBooking={() => handleOpenBooking('Footer Booking')} 
+        onOpenResume={handleOpenResume}
+      />
 
       {/* Discovery Call Booking Modal */}
       <DiscoveryCallModal
