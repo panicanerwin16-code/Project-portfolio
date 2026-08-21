@@ -7,7 +7,6 @@ import { ExperienceSection } from './components/ExperienceSection';
 import { ProjectsSection } from './components/ProjectsSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { ContactSection } from './components/ContactSection';
-import { CalendlySection } from './components/CalendlySection';
 import { DiscoveryCallModal } from './components/DiscoveryCallModal';
 import { ResumeModal } from './components/ResumeModal';
 import { Footer } from './components/Footer';
@@ -138,15 +137,12 @@ export default function App() {
         {/* 4. Testimonials Section */}
         <TestimonialsSection />
 
-        {/* 5. Contact Section */}
+        {/* 5. Contact & Calendly Section */}
         <ContactSection
           onOpenBooking={() => handleOpenBooking('Contact Form Booking')}
           onOpenResume={() => setIsResumeOpen(true)}
           prefilledMessage={contactMessagePrefill}
         />
-
-        {/* 6. Calendly Inline Booking Section */}
-        <CalendlySection />
       </main>
 
       {/* Footer */}
