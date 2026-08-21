@@ -43,7 +43,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState<'ats' | 'pdf' | 'upload'>('ats');
   const [pdfDataUrl, setPdfDataUrl] = useState<string | null>(null);
-  const [pdfFileName, setPdfFileName] = useState<string>('Erwin_Panican_ATS_Resume.docx (1).pdf');
+  const [pdfFileName, setPdfFileName] = useState<string>('Erwin_Panican_resume (1).pdf');
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
   // Load saved PDF from localStorage on mount or generate initial PDF Data URI
@@ -755,7 +755,7 @@ Languages:
                     Upload Your PDF Resume
                   </h3>
                   <p className="text-xs mt-1" style={{ color: 'var(--text-secondary)' }}>
-                    Attach <code className="text-[#ff9000] bg-black/40 px-1.5 py-0.5 rounded">Erwin_Panican_ATS_Resume.docx (1).pdf</code> to enable interactive PDF document preview and 1-click downloads.
+                    Attach <code className="text-[#ff9000] bg-black/40 px-1.5 py-0.5 rounded">Erwin_Panican_resume (1).pdf</code> to enable interactive PDF document preview and 1-click downloads.
                   </p>
                 </div>
 
@@ -797,7 +797,7 @@ Languages:
                 <Info className="w-5 h-5 text-[#ff9000] shrink-0 mt-0.5" />
                 <div className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                   <p className="font-bold text-white mb-0.5">Resume File Attachment:</p>
-                  To attach your local file <code className="text-[#ff9000] bg-black/40 px-1 py-0.5 rounded">Erwin_Panican_ATS_Resume.docx (1).pdf</code> from your Downloads folder, simply select it below. It will be stored and linked directly to every "View Resume" & "Download Resume" button on your portfolio!
+                  To attach your local file <code className="text-[#ff9000] bg-black/40 px-1 py-0.5 rounded">Erwin_Panican_resume (1).pdf</code> from your Downloads folder, simply select it below. It will be stored and linked directly to every "View Resume" & "Download Resume" button on your portfolio!
                 </div>
               </div>
 
@@ -818,7 +818,7 @@ Languages:
                   {uploadSuccess ? 'Resume Attached Successfully!' : 'Click to Browse or Drag & Drop'}
                 </h4>
                 <p className="text-xs mb-4" style={{ color: 'var(--text-secondary)' }}>
-                  Select <strong className="text-[#ff9000]">Erwin_Panican_ATS_Resume.docx (1).pdf</strong>
+                  Select <strong className="text-[#ff9000]">Erwin_Panican_resume (1).pdf</strong>
                 </p>
 
                 <span className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#ff9000] to-[#ff3700] text-white font-bold text-xs font-mono shadow-md">

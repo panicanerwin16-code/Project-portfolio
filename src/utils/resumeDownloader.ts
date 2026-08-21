@@ -361,7 +361,7 @@ export const downloadATSResumeFile = (customPdfDataUrl?: string | null) => {
   if (customPdfDataUrl) {
     const link = document.createElement('a');
     link.href = customPdfDataUrl;
-    link.download = 'Erwin_Panican_ATS_Resume.pdf';
+    link.download = 'Erwin_Panican_resume (1).pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -371,7 +371,7 @@ export const downloadATSResumeFile = (customPdfDataUrl?: string | null) => {
   // Check localStorage for saved PDF
   try {
     const savedPdf = localStorage.getItem('erwin_resume_pdf_data');
-    const savedName = localStorage.getItem('erwin_resume_filename') || 'Erwin_Panican_ATS_Resume.pdf';
+    const savedName = localStorage.getItem('erwin_resume_filename') || 'Erwin_Panican_resume (1).pdf';
     if (savedPdf) {
       const link = document.createElement('a');
       link.href = savedPdf;
@@ -388,7 +388,7 @@ export const downloadATSResumeFile = (customPdfDataUrl?: string | null) => {
   // Generate authentic PDF document via jsPDF and trigger browser download
   try {
     const doc = generateATSPdfDocument();
-    doc.save('Erwin_Panican_ATS_Resume.pdf');
+    doc.save('Erwin_Panican_resume (1).pdf');
   } catch (error) {
     console.error('Failed to generate PDF, fallback to download:', error);
   }
