@@ -2,7 +2,8 @@ import { jsPDF } from 'jspdf';
 
 /**
  * Erwin Panican ATS Resume PDF Generator & Instant Downloader
- * Generates genuine high-fidelity ATS-compliant PDF file 'Erwin_Panican_ATS_Resume.pdf'
+ * Accurately reproduces the exact 4-page PDF document attached by the user.
+ * Generates and triggers instant browser download of 'Erwin_Panican_ATS_Resume.pdf'
  */
 
 export const generateATSPdfDocument = (): jsPDF => {
@@ -13,268 +14,341 @@ export const generateATSPdfDocument = (): jsPDF => {
   });
 
   const pageWidth = doc.internal.pageSize.getWidth();
-  const pageHeight = doc.internal.pageSize.getHeight();
-  const margin = 38;
-  const contentWidth = pageWidth - margin * 2;
-  let y = margin + 4;
+  const leftMargin = 65;
+  const rightMargin = 65;
+  const contentWidth = pageWidth - leftMargin - rightMargin;
 
-  const checkPageBreak = (neededHeight: number) => {
-    if (y + neededHeight > pageHeight - margin) {
-      doc.addPage();
-      y = margin + 10;
-    }
-  };
+  // Colors based on the attached document
+  const primaryNavy = [30, 58, 95] as const; // #1e3a5f
+  const accentBlue = [45, 104, 196] as const; // #2d68c4
+  const textDark = [17, 24, 39] as const; // #111827
+  const textMuted = [55, 65, 81] as const; // #374151
+  const linkBlue = [37, 99, 235] as const; // #2563eb
 
-  const drawSectionHeader = (title: string) => {
-    checkPageBreak(32);
-    y += 8;
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.setTextColor(217, 64, 0); // #d94000
-    doc.text(title.toUpperCase(), margin, y);
-    
-    y += 4;
-    doc.setDrawColor(229, 231, 235); // #e5e7eb
-    doc.setLineWidth(1);
-    doc.line(margin, y, pageWidth - margin, y);
-    y += 10;
-  };
+  // ==========================================
+  // PAGE 1: Header, Summary, Core Competencies, Certifications
+  // ==========================================
+  let y = 100;
 
-  // --- HEADER ---
+  // Title: Erwin Panican
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(22);
-  doc.setTextColor(15, 23, 42); // #0f172a
-  doc.text('ERWIN PANICAN', pageWidth / 2, y, { align: 'center' });
+  doc.setFontSize(28);
+  doc.setTextColor(...primaryNavy);
+  doc.text('Erwin Panican', pageWidth / 2, y, { align: 'center' });
+  y += 32;
+
+  // Subtitle
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10.5);
+  doc.setTextColor(...textDark);
+  doc.text('AI Automation Specialist | n8n • Zapier • Make • GoHighLevel', pageWidth / 2, y, { align: 'center' });
+  y += 18;
+
+  // Location & Contact
+  doc.text('Manila, Philippines | +63 915300090 | panicanerwin16@gmail.com', pageWidth / 2, y, { align: 'center' });
+  y += 18;
+
+  // Links
+  doc.text('LinkedIn: ', leftMargin + 8, y);
+  doc.setTextColor(...linkBlue);
+  doc.textWithLink('linkedin.com/in/erwinpanican', leftMargin + 56, y, { url: 'https://linkedin.com/in/erwinpanican' });
   y += 16;
 
-  doc.setFontSize(11);
-  doc.setTextColor(217, 64, 0); // #d94000
-  doc.text('AI Automation Specialist | n8n • Zapier • Make • GoHighLevel', pageWidth / 2, y, { align: 'center' });
-  y += 14;
+  doc.setTextColor(...textDark);
+  doc.text('OnlineJobsPh: ', leftMargin + 8, y);
+  doc.setTextColor(...linkBlue);
+  doc.textWithLink('https://v2.onlinejobs.ph/jobseekers/info/5106135', leftMargin + 84, y, { url: 'https://v2.onlinejobs.ph/jobseekers/info/5106135' });
+  y += 16;
+
+  doc.setTextColor(...textDark);
+  doc.text('Upwork: ', leftMargin + 8, y);
+  doc.setTextColor(...linkBlue);
+  doc.textWithLink('https://www.upwork.com/freelancers/~01c544a89e40992a44', leftMargin + 54, y, { url: 'https://www.upwork.com/freelancers/~01c544a89e40992a44' });
+  y += 38;
+
+  // Professional Summary
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(14);
+  doc.setTextColor(...primaryNavy);
+  doc.text('Professional Summary', leftMargin, y);
+  y += 18;
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8.5);
-  doc.setTextColor(75, 85, 99); // #4b5563
-  doc.text('Manila, Philippines  |  +63 915300090  |  panicanerwin16@gmail.com', pageWidth / 2, y, { align: 'center' });
-  y += 12;
-
-  doc.text('LinkedIn: linkedin.com/in/erwinpanican   •   OnlineJobsPh: onlinejobs.ph/jobseekers/info/5106135', pageWidth / 2, y, { align: 'center' });
-  y += 12;
-  doc.text('Upwork: upwork.com/freelancers/~01c544a89e40992a44', pageWidth / 2, y, { align: 'center' });
-  y += 6;
-
-  // Header Divider
-  doc.setDrawColor(255, 80, 0); // #ff5000
-  doc.setLineWidth(2);
-  doc.line(margin, y, pageWidth - margin, y);
-  y += 6;
-
-  // --- PROFESSIONAL SUMMARY ---
-  drawSectionHeader('Professional Summary');
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9);
-  doc.setTextColor(55, 65, 81); // #374151
+  doc.setFontSize(10);
+  doc.setTextColor(...textDark);
   const summaryText =
     'AI Automation Specialist with expertise in designing and implementing intelligent workflow automation using n8n, Zapier, Make.com, and GoHighLevel. Experienced in API integrations, AI agents, CRM automation, webhooks, and business process optimization. Skilled at building scalable automation solutions that reduce manual work, improve operational efficiency, and support business growth through AI-powered workflows.';
   const summaryLines = doc.splitTextToSize(summaryText, contentWidth);
-  doc.text(summaryLines, margin, y);
-  y += summaryLines.length * 11.5;
+  doc.text(summaryLines, leftMargin, y);
+  y += summaryLines.length * 14 + 28;
 
-  // --- CORE COMPETENCIES ---
-  drawSectionHeader('Core Competencies');
+  // CORE COMPETENCIES
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(8.5);
-  doc.setTextColor(31, 41, 55);
-  const compText = '• Workflow Automation  • AI Agents  • CRM Architecture  • GoHighLevel  • n8n  • Zapier\n• Make.com  • API Integrations  • Webhooks  • Lead Routing  • SOP Documentation';
-  const compLines = doc.splitTextToSize(compText, contentWidth);
-  doc.text(compLines, margin, y);
-  y += compLines.length * 11;
+  doc.setFontSize(14);
+  doc.setTextColor(...primaryNavy);
+  doc.text('CORE COMPETENCIES', leftMargin, y);
+  y += 18;
 
-  // --- CERTIFICATION ---
-  drawSectionHeader('Certification');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(9.5);
+  doc.setTextColor(...textDark);
+  const compText = '• Workflow Automation • AI Agents • CRM Architecture • GoHighLevel • n8n • Zapier •\nMake.com • API Integrations • Webhooks • Lead Routing • SOP Documentation';
+  const compLines = doc.splitTextToSize(compText, contentWidth);
+  doc.text(compLines, leftMargin, y);
+  y += compLines.length * 14 + 28;
+
+  // Certification
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(14);
+  doc.setTextColor(...primaryNavy);
+  doc.text('Certification', leftMargin, y);
+  y += 18;
+
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8.5);
-  doc.setTextColor(31, 41, 55);
-  
+  doc.setFontSize(10);
+  doc.setTextColor(...textDark);
   const certs = [
     '• Zapier Automation Certification',
     '• Make.com Automation Certification',
     '• n8n Workflow Automation Certification',
     '• GoHighLevel Certification',
   ];
-  
-  const colWidth = contentWidth / 2;
-  certs.forEach((cert, idx) => {
-    const col = idx % 2;
-    const row = Math.floor(idx / 2);
-    doc.text(cert, margin + col * colWidth, y + row * 12);
+  certs.forEach((cert) => {
+    doc.text(cert, leftMargin, y);
+    y += 16;
   });
-  y += Math.ceil(certs.length / 2) * 12 + 2;
 
-  // --- AUTOMATION PROJECTS ---
-  drawSectionHeader('Automation Projects');
-  
+  // ==========================================
+  // PAGE 2: Automation Projects:
+  // ==========================================
+  doc.addPage();
+  y = 70;
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(14);
+  doc.setTextColor(...primaryNavy);
+  doc.text('Automation Projects:', leftMargin, y);
+  y += 22;
+
   const projects = [
     {
-      title: '1. AI-Powered Facebook Customer Support & Lead Response Automation',
+      title: 'AI-Powered Facebook Customer Support & Lead Response Automation',
       desc: 'AI-powered Facebook Messenger automation system that instantly responds to customer inquiries, provides intelligent answers, qualifies potential leads, and sends qualified prospects to the sales team for follow-up—helping businesses improve response time, customer engagement, and lead conversion.',
-      tech: 'Technologies: n8n, Gemini, Facebook',
+      tech: 'n8n, Gemini, Facebook',
     },
     {
-      title: '2. AI-Powered Lead Qualification & Nurturing Automation',
+      title: 'AI-Powered Lead Qualification & Nurturing Automation',
       desc: 'AI-powered automation system that analyzes and qualifies leads based on their information and behavior, assigns lead priority, and automatically sends personalized follow-up messages to nurture prospects and improve conversion opportunities.',
-      tech: 'Technologies: n8n, Gemini, Google Sheets, Apollo, Gmail, Slack',
+      tech: 'n8n, Gemini, Google Sheets, Apollo, Gmail, Slack',
     },
     {
-      title: '3. AI Receptionist & Automated Appointment Management',
+      title: 'AI Receptionist & Automated Appointment Management',
       desc: 'AI receptionist system that responds to customer inquiries, manages appointment scheduling, sends automated confirmations and reminders, and handles cancellations and rescheduling—reducing manual work and improving the overall customer experience.',
-      tech: 'Technologies: n8n, Vapi, Airtable, Google Calendar',
+      tech: 'n8n, Vapi, Airtable, Google Calendar',
     },
     {
-      title: '4. Asana CRM Lead Management & Automated Engagement',
+      title: 'Asana CRM Lead Management & Automated Engagement',
       desc: 'Automated lead management system that organizes prospects in Asana, tracks lead progress, triggers personalized follow-ups, and notifies the sales team of important lead activities—improving lead visibility, engagement, and follow-up efficiency.',
-      tech: 'Technologies: Zapier, Asana, OpenAI, Slack',
+      tech: 'Zapier, Asana, OpenAI, Slack',
     },
     {
-      title: '5. Xero Financial Data Export & Asana Workflow Automation',
+      title: 'Xero Financial Data Export & Asana Workflow Automation',
       desc: 'Automated workflow that exports financial transaction data from Xero and organizes it into Asana, enabling teams to track accounting-related tasks, streamline financial operations, and reduce manual data entry.',
-      tech: 'Technologies: Make, Asana, Xero, Google Sheets',
+      tech: 'Make, Asana, Xero, Google Sheets',
     },
     {
-      title: '6. Appointment Funnel & Lead Management Automation',
+      title: 'Appointment Funnel & Lead Management Automation',
       desc: 'Automated appointment funnel that captures and manages leads, streamlines appointment booking, and triggers automated confirmations, reminders, cancellations, rescheduling, and no-show follow-ups—helping improve lead conversion and appointment management.',
-      tech: 'Technologies: GoHighLevel',
+      tech: 'GoHighLevel',
     },
   ];
 
   projects.forEach((proj) => {
-    checkPageBreak(44);
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9);
-    doc.setTextColor(15, 23, 42); // #0f172a
-    doc.text(proj.title, margin, y);
-    y += 10.5;
+    doc.setFontSize(10.5);
+    doc.setTextColor(...accentBlue);
+    const titleLines = doc.splitTextToSize(proj.title, contentWidth);
+    doc.text(titleLines, leftMargin, y);
+    y += titleLines.length * 13;
 
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8.5);
-    doc.setTextColor(75, 85, 99);
+    doc.setFontSize(9.5);
+    doc.setTextColor(...textMuted);
     const descLines = doc.splitTextToSize(proj.desc, contentWidth);
-    doc.text(descLines, margin, y);
-    y += descLines.length * 10.5;
+    doc.text(descLines, leftMargin, y);
+    y += descLines.length * 12.5 + 2;
 
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(8);
-    doc.setTextColor(217, 64, 0);
-    doc.text(proj.tech, margin, y);
-    y += 12;
+    doc.setFontSize(9.5);
+    doc.setTextColor(...textDark);
+    doc.text('Technologies: ', leftMargin, y);
+    doc.setFont('helvetica', 'normal');
+    doc.text(proj.tech, leftMargin + 66, y);
+    y += 18;
   });
 
-  // --- PROFESSIONAL EXPERIENCE ---
-  drawSectionHeader('Professional Experience');
+  // ==========================================
+  // PAGE 3: Professional Experience & Tools and Technologies
+  // ==========================================
+  doc.addPage();
+  y = 70;
 
-  const experiences = [
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(14);
+  doc.setTextColor(...primaryNavy);
+  doc.text('Professional Experience', leftMargin, y);
+  y += 20;
+
+  // Freelance
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10.5);
+  doc.setTextColor(...accentBlue);
+  doc.text('Freelance / Independent — AI Automation Specialist (2026–Present)', leftMargin, y);
+  y += 15;
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9.5);
+  doc.setTextColor(...textDark);
+  const freelanceBullets = [
+    '● Designed AI-powered workflow automations using n8n, Make.com, and Zapier.',
+    '● Integrated OpenAI and Anthropic models.',
+    '● Built API integrations and custom webhooks.',
+    '● Maintained 99% workflow uptime.',
+  ];
+  freelanceBullets.forEach((b) => {
+    doc.text(b, leftMargin, y);
+    y += 13.5;
+  });
+  y += 6;
+
+  // Documentation Associate
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10.5);
+  doc.setTextColor(...accentBlue);
+  doc.text('Documentation Associate — Seidopro Global Inc (2018–2020)', leftMargin, y);
+  y += 15;
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9.5);
+  doc.setTextColor(...textDark);
+  const docText =
+    '● Responsible for preparing and verifying shipping documents, coordinating with freight forwarders, shipping lines, and internal teams, maintaining accurate shipment records, monitoring documentation requirements, and ensuring timely and error-free processing of shipments.';
+  const docLines = doc.splitTextToSize(docText, contentWidth);
+  doc.text(docLines, leftMargin, y);
+  y += docLines.length * 13 + 6;
+
+  // Assistant Supervisor
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10.5);
+  doc.setTextColor(...accentBlue);
+  doc.text('Assistant Supervisor - Seidopro Global Inc (2020 - 2022)', leftMargin, y);
+  y += 15;
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9.5);
+  doc.setTextColor(...textDark);
+  const supText =
+    '● Responsible for supporting daily operations, coordinating team activities, monitoring employee performance, assigning tasks, ensuring work quality and productivity, assisting with problem-solving, and providing guidance and support to team members to achieve operational goals.';
+  const supLines = doc.splitTextToSize(supText, contentWidth);
+  doc.text(supLines, leftMargin, y);
+  y += supLines.length * 13 + 6;
+
+  // Performance Coach
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10.5);
+  doc.setTextColor(...accentBlue);
+  doc.text('Performance Coach - Seidorpo Global Inc (2022 to 2026)', leftMargin, y);
+  y += 15;
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9.5);
+  doc.setTextColor(...textDark);
+  const coachText =
+    '● Responsible for monitoring and evaluating employee performance, providing coaching and constructive feedback, identifying performance gaps, creating improvement plans, conducting regular coaching sessions, and supporting team members in achieving their performance and productivity goals.';
+  const coachLines = doc.splitTextToSize(coachText, contentWidth);
+  doc.text(coachLines, leftMargin, y);
+  y += coachLines.length * 13 + 14;
+
+  // Tools and Technologies
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(14);
+  doc.setTextColor(...primaryNavy);
+  doc.text('Tools and Technologies', leftMargin, y);
+  y += 18;
+
+  const toolCategories = [
     {
-      role: 'Freelance / Independent — AI Automation Specialist',
-      date: '2026 – Present',
-      bullets: [
-        'Designed AI-powered workflow automations using n8n, Make.com, and Zapier.',
-        'Integrated OpenAI and Anthropic models into client operations.',
-        'Built API integrations and custom webhooks with 99% workflow uptime.',
-      ],
+      title: 'Automation Platforms :',
+      items: '● GoHighLevel |n8n |Zapier |Make.com',
     },
     {
-      role: 'Performance Coach — Seidopro Global Inc',
-      date: '2022 to 2026',
-      desc: 'Responsible for monitoring and evaluating employee performance, providing coaching and constructive feedback, identifying performance gaps, creating improvement plans, conducting regular coaching sessions, and supporting team members in achieving their performance and productivity goals.',
+      title: 'AI / LLM / AI Development :',
+      items: '● OpenAI |Claude |Grok |Gemini |Vapi |LangChain |OpenRouter |Lovable',
     },
     {
-      role: 'Assistant Supervisor — Seidopro Global Inc',
-      date: '2020 - 2022',
-      desc: 'Responsible for supporting daily operations, coordinating team activities, monitoring employee performance, assigning tasks, ensuring work quality and productivity, assisting with problem-solving, and providing guidance and support to team members to achieve operational goals.',
+      title: 'Business / CRM / Productivity Tools :',
+      items: '● Stripe |Airtable |Notion |Asana |Apollo.io |Slack |Telegram |WhatsApp',
     },
     {
-      role: 'Documentation Associate — Seidopro Global Inc',
-      date: '2018 – 2020',
-      desc: 'Responsible for preparing and verifying shipping documents, coordinating with freight forwarders, shipping lines, and internal teams, maintaining accurate shipment records, monitoring documentation requirements, and ensuring timely and error-free processing of shipments.',
+      title: 'Google Workspace / Productivity:',
+      items: '● Google Workspace |Gmail |Google Calendar |Google Sheets',
+    },
+    {
+      title: 'Technical / Integration Skills:',
+      items:
+        '● APIs & Webhooks |REST API Integrations |OAuth / Authentication |JSON Data Handling |LLM API Integration |CRM Integrations |Payment API Integration |Workflow Logic & Automation',
     },
   ];
 
-  experiences.forEach((exp) => {
-    checkPageBreak(38);
+  toolCategories.forEach((cat) => {
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9);
-    doc.setTextColor(15, 23, 42);
-    doc.text(exp.role, margin, y);
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8.5);
-    doc.setTextColor(107, 114, 128);
-    doc.text(exp.date, pageWidth - margin, y, { align: 'right' });
-    y += 10.5;
+    doc.setFontSize(10);
+    doc.setTextColor(...accentBlue);
+    doc.text(cat.title, leftMargin, y);
+    y += 13.5;
 
-    if (exp.bullets) {
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(8.5);
-      doc.setTextColor(55, 65, 81);
-      exp.bullets.forEach((b) => {
-        doc.text(`•  ${b}`, margin + 6, y);
-        y += 10;
-      });
-      y += 2;
-    } else if (exp.desc) {
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(8.5);
-      doc.setTextColor(75, 85, 99);
-      const descLines = doc.splitTextToSize(exp.desc, contentWidth);
-      doc.text(descLines, margin, y);
-      y += descLines.length * 10.5 + 4;
-    }
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9.5);
+    doc.setTextColor(...textDark);
+    const itemLines = doc.splitTextToSize(cat.items, contentWidth);
+    doc.text(itemLines, leftMargin + 10, y);
+    y += itemLines.length * 13 + 4;
   });
 
-  // --- TOOLS AND TECHNOLOGIES ---
-  drawSectionHeader('Tools and Technologies');
-  
-  const toolRows = [
-    { label: 'Automation Platforms:', text: 'GoHighLevel | n8n | Zapier | Make.com' },
-    { label: 'AI / LLM / AI Development:', text: 'OpenAI | Claude | Grok | Gemini | Vapi | LangChain | OpenRouter | Lovable' },
-    { label: 'Business / CRM / Productivity:', text: 'Stripe | Airtable | Notion | Asana | Apollo.io | Slack | Telegram | WhatsApp' },
-    { label: 'Google Workspace:', text: 'Google Workspace | Gmail | Google Calendar | Google Sheets' },
-    { label: 'Technical / Integration Skills:', text: 'APIs & Webhooks | REST API Integrations | OAuth / Authentication | JSON Data Handling | LLM API Integration | CRM Integrations | Payment API Integration | Workflow Logic & Automation' },
-  ];
+  // ==========================================
+  // PAGE 4: Education & Language
+  // ==========================================
+  doc.addPage();
+  y = 70;
 
-  toolRows.forEach((row) => {
-    checkPageBreak(22);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(8.5);
-    doc.setTextColor(217, 64, 0);
-    doc.text(row.label, margin, y);
-    
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8.5);
-    doc.setTextColor(31, 41, 55);
-    const textLines = doc.splitTextToSize(row.text, contentWidth);
-    y += 10;
-    doc.text(textLines, margin + 8, y);
-    y += textLines.length * 10.5 + 2;
-  });
-
-  // --- EDUCATION & LANGUAGE ---
-  drawSectionHeader('Education & Language');
-  checkPageBreak(25);
+  // Education
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(8.5);
-  doc.setTextColor(15, 23, 42);
-  doc.text('Bachelor in Business Management', margin, y);
-  doc.setFont('helvetica', 'normal');
-  doc.setTextColor(75, 85, 99);
-  doc.text('Taguig City University (2017)', margin + 160, y);
-  y += 11;
+  doc.setFontSize(14);
+  doc.setTextColor(...primaryNavy);
+  doc.text('Education', leftMargin, y);
+  y += 18;
 
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(15, 23, 42);
-  doc.text('Languages:', margin, y);
   doc.setFont('helvetica', 'normal');
-  doc.setTextColor(75, 85, 99);
-  doc.text('English (Professional Working Proficiency), Filipino (Native)', margin + 60, y);
+  doc.setFontSize(10);
+  doc.setTextColor(...textDark);
+  doc.text('Bachelor in Business Management', leftMargin, y);
+  y += 14;
+  doc.text('Taguig City University (2017)', leftMargin, y);
+  y += 28;
+
+  // Language
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(14);
+  doc.setTextColor(...primaryNavy);
+  doc.text('Language', leftMargin, y);
+  y += 18;
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.setTextColor(...textDark);
+  doc.text('English — Professional Working Proficiency', leftMargin, y);
+  y += 14;
+  doc.text('Filipino — Native', leftMargin, y);
 
   return doc;
 };
