@@ -12,6 +12,7 @@ import { ResumeModal } from './components/ResumeModal';
 import { Footer } from './components/Footer';
 import { ServiceItem } from './types';
 import { X, CheckCircle2, Calendar } from 'lucide-react';
+import { downloadATSResumeFile } from './utils/resumeDownloader';
 
 const defaultHeadshot = "https://i.im.ge/QMc34OT/ERN_1.png";
 
@@ -83,6 +84,13 @@ export default function App() {
     }
   };
 
+  const handleOpenResume = () => {
+    // Automatically trigger instant download of resume file
+    downloadATSResumeFile();
+    // Open resume modal view
+    setIsResumeOpen(true);
+  };
+
   const handleOpenBookingWithSavings = (monthlySavings: number, hoursSaved: number) => {
     setBookingTopic(`Claim Automation Savings: $${monthlySavings.toLocaleString()}/mo (${hoursSaved} hrs saved)`);
     setIsBookingOpen(true);
@@ -105,7 +113,7 @@ export default function App() {
         darkMode={darkMode}
         setDarkMode={setDarkMode}
         onOpenBooking={() => handleOpenBooking('General Inquiry')}
-        onOpenResume={() => setIsResumeOpen(true)}
+        onOpenResume={handleOpenResume}
       />
 
       {/* Main Page Layout Sections */}
@@ -114,7 +122,7 @@ export default function App() {
         <HeroSection
           onOpenBooking={() => handleOpenBooking('Hero Discovery Call')}
           onOpenProjects={handleOpenProjects}
-          onOpenResume={() => setIsResumeOpen(true)}
+          onOpenResume={handleOpenResume}
           headshot={headshot}
           onUploadHeadshot={handleUploadHeadshot}
           onResetHeadshot={handleResetHeadshot}
@@ -140,7 +148,7 @@ export default function App() {
         {/* 5. Contact & Calendly Section */}
         <ContactSection
           onOpenBooking={() => handleOpenBooking('Contact Form Booking')}
-          onOpenResume={() => setIsResumeOpen(true)}
+          onOpenResume={handleOpenResume}
           prefilledMessage={contactMessagePrefill}
         />
       </main>

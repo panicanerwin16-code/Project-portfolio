@@ -75,8 +75,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
       id: 'phone',
       icon: Phone,
       label: 'WHATSAPP / PHONE',
-      text: '+63 915 305 890',
-      href: 'https://wa.me/63915305890',
+      text: '+63 915 300 090',
+      href: 'https://wa.me/63915300090',
       badge: 'Instant Chat',
     },
     {
