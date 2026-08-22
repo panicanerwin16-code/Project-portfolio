@@ -145,7 +145,7 @@ export default function App() {
         {/* 4. Testimonials Section */}
         <TestimonialsSection />
 
-        {/* 5. Contact & Calendly Section */}
+        {/* 5. Contact & Calendly (Work With Me) Section */}
         <ContactSection
           onOpenBooking={() => handleOpenBooking('Contact Form Booking')}
           onOpenResume={handleOpenResume}

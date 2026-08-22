@@ -69,7 +69,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking, onOpenResume }) =
               <li><a href="#experience" className="hover:text-[#ff9000] transition-colors">Experience</a></li>
               <li><a href="#work" className="hover:text-[#ff9000] transition-colors">Portfolio Work</a></li>
               <li><a href="#testimonials" className="hover:text-[#ff9000] transition-colors">Testimonials</a></li>
-              <li><a href="#contact" className="hover:text-[#ff9000] transition-colors">Contact</a></li>
+              <li><a href="#contact" className="hover:text-[#ff9000] transition-colors">Work With Me</a></li>
               {onOpenResume && (
                 <li>
                   <button
