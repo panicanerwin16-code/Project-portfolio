@@ -252,7 +252,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       id: 'ghl-lead-pipeline',
       category: 'gohighlevel',
       platform: 'GO HIGH LEVEL',
-      title: 'GoHighLevel Appointment Funnel & Lead Management Automation',
+      title: 'Solar Panel: GoHighLevel Appointment Funnel & Lead Management Automation',
       description:
         'A complete solar business appointment booking and pipeline automation built in GoHighLevel featuring automated multi-scenario workflows for confirmations, cancellations, reschedules, show-ups, and automated no-show recovery sequences.',
       image: 'https://img.youtube.com/vi/V8dSVjujF1A/maxresdefault.jpg',
@@ -287,23 +287,35 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       ],
     },
     {
-      id: 'ghl-review-nurture',
+      id: 'ghl-dental-clinic',
       category: 'gohighlevel',
       platform: 'GO HIGH LEVEL',
-      title: 'GoHighLevel Omnichannel Nurture & Review Engine',
+      title: 'Dental Clinic: GoHighLevel Appointment Funnel & Lead Management Automation',
       description:
-        'Multi-touch GHL workflow triggering automated post-purchase customer check-ins, automated 5-star Google review request routing, and reactivation email/SMS drips.',
-      image: ghlNurtureImg,
-      tools: ['GoHighLevel', 'Google Reviews', 'WhatsApp API', 'Email Sequences', 'Webhooks'],
-      problem: 'Client had hundreds of past customer records with no structured retention strategy and low Google Business review volume.',
-      solution: 'Engineered a smart GHL workflow with NPS condition branching, sending happy clients straight to Google Reviews while routing issues to support.',
-      result: 'Grew 5-star Google reviews by 210% and reactivated $18,500 in repeat sales within 90 days.',
-      impact: 'Grew 5-star Google reviews by 210% and reactivated $18,500 in repeat sales within 90 days.',
+        'A tailored dental clinic patient acquisition and appointment funnel built in GoHighLevel featuring automated multi-scenario workflows for appointment confirmations, cancellations, reschedules, showed visits, and automated no-show patient recovery with CRM pipeline opportunity tracking.',
+      image: 'https://img.youtube.com/vi/iQw0d296tDM/maxresdefault.jpg',
+      videoUrl: 'https://www.youtube.com/watch?v=iQw0d296tDM',
+      youtubeId: 'iQw0d296tDM',
+      tools: ['GoHighLevel', 'Dental Funnel', 'Automated Workflows', 'CRM Pipeline', 'SMS & Email Automation'],
+      resourceLink: {
+        url: 'https://sites.leadconnectorhq.com/preview/R8kppxdqnUrCeTz227cL?notrack=true',
+        label: 'GoHighLevel Live Dental Clinic Appointment Funnel',
+        badge: 'LIVE FUNNEL DEMO',
+        description: 'Explore the live dental clinic patient booking & appointment funnel in action.',
+      },
+      problem:
+        'The dental clinic needed a better system to manage leads and appointments while reducing missed appointments, manual follow-ups, cancellations, and no-shows.',
+      solution:
+        'I built a GoHighLevel appointment funnel with automated workflows for appointment confirmation, cancellation, rebooking, showed, and no-show follow-ups. I also organized the CRM pipeline and opportunity stages to keep every patient lead properly tracked throughout the appointment journey.',
+      result:
+        'The system streamlined appointment management, reduced manual follow-up, improved lead and opportunity tracking, and helped recover cancelled and missed appointments through automated rebooking and follow-up sequences.',
+      impact:
+        'The system streamlined appointment management, reduced manual follow-up, improved lead and opportunity tracking, and helped recover cancelled and missed appointments through automated rebooking and follow-up sequences.',
       features: [
-        'Conditional NPS review routing',
-        'Automated WhatsApp & SMS follow-ups',
-        'Win-back reactivation sequences',
-        'Multi-location review monitoring',
+        'Dental clinic patient booking funnel & calendar appointment sync',
+        'Multi-scenario workflow triggers (Confirmation, Cancellation, Reschedule, Showed, No-Show)',
+        'Organized CRM opportunity stages for real-time patient journey tracking',
+        'Automated patient rebooking & multi-touch no-show recovery sequences',
       ],
     },
   ];
