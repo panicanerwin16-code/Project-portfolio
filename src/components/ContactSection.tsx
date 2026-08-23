@@ -28,7 +28,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   const [, setScriptLoaded] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
 
-  const calendlyUrl = "https://calendly.com/panicanerwin16/30min?hide_landing_page_details=0&hide_gdpr_banner=1&background_color=0a0103&text_color=ffffff&primary_color=ff4500";
+  const calendlyUrl = "https://calendly.com/panicanerwin16/30min?hide_landing_page_details=0&hide_gdpr_banner=1&background_color=08080a&text_color=ffffff&primary_color=f59e0b";
 
   useEffect(() => {
     // Check if Calendly script is already loaded
@@ -112,8 +112,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
       <div id="book-call" className="absolute -top-24 left-0" />
 
       {/* Atmospheric Ambient Glows */}
-      <div className="absolute top-1/4 -left-20 w-[550px] h-[550px] bg-red-600/15 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-20 w-[600px] h-[600px] bg-orange-600/15 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/4 -left-20 w-[550px] h-[550px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-20 w-[600px] h-[600px] bg-orange-600/10 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
         
@@ -130,8 +130,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           >
             {/* Eyebrow Badge */}
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-500/10 border border-red-500/30 text-[#ff9000] text-xs font-mono font-bold uppercase tracking-widest shadow-[0_0_15px_rgba(255,80,0,0.2)]">
-                <Zap className="w-3.5 h-3.5 text-[#ff9000] animate-pulse" />
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-[#f59e0b] text-xs font-mono font-bold uppercase tracking-widest shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+                <Zap className="w-3.5 h-3.5 text-[#f59e0b] animate-pulse" />
                 <span>WORK WITH ME</span>
               </span>
             </div>
@@ -142,7 +142,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               style={{ color: 'var(--text-primary)' }}
             >
               You've seen what I build. <br />
-              <span className="gradient-fiery-text drop-shadow-[0_0_25px_rgba(255,100,0,0.35)]">
+              <span className="gradient-fiery-text drop-shadow-[0_0_25px_rgba(245,158,11,0.35)]">
                 Let's talk about yours.
               </span>
             </h2>
@@ -163,7 +163,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 borderColor: 'var(--border-color)',
               }}
             >
-              <h3 className="text-xs font-mono uppercase tracking-wider font-bold text-[#ff9000]">
+              <h3 className="text-xs font-mono uppercase tracking-wider font-bold text-[#f59e0b]">
                 What We Will Cover in 30 Minutes:
               </h3>
               
@@ -174,7 +174,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   'Actionable timeline, implementation steps, and estimated hours saved per week.',
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#ff9000] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#f59e0b] shrink-0 mt-0.5" />
                     <span className="text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
                       {item}
                     </span>
@@ -195,7 +195,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   return (
                     <div
                       key={item.id}
-                      className="group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 shadow-md hover:border-[#ff9000]/60 card-crimson-glow"
+                      className="group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 shadow-md hover:border-[#f59e0b]/60 card-crimson-glow"
                       style={{
                         backgroundColor: 'var(--bg-secondary)',
                         borderColor: 'var(--border-color)',
@@ -207,7 +207,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         rel="noreferrer"
                         className="flex items-center gap-3.5 flex-1 min-w-0"
                       >
-                        <div className="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/30 text-[#ff9000] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                        <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-[#f59e0b] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                           <IconComp className="w-4 h-4" />
                         </div>
                         <div className="truncate">
@@ -216,13 +216,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                               {item.label}
                             </span>
                             {item.badge && (
-                              <span className="px-2 py-0.2 rounded-full bg-red-500/15 text-[#ff9000] text-[9px] font-mono font-bold">
+                              <span className="px-2 py-0.2 rounded-full bg-amber-500/15 text-[#f59e0b] text-[9px] font-mono font-bold">
                                 {item.badge}
                               </span>
                             )}
                           </div>
                           <span 
-                            className="text-xs sm:text-sm font-semibold truncate block transition-colors group-hover:text-[#ff9000]"
+                            className="text-xs sm:text-sm font-semibold truncate block transition-colors group-hover:text-[#f59e0b]"
                             style={{ color: 'var(--text-primary)' }}
                           >
                             {item.text}
@@ -235,7 +235,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                           <button
                             onClick={handleCopyEmail}
                             title="Copy email address"
-                            className="p-2 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 text-[#ff9000] transition-colors cursor-pointer"
+                            className="p-2 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-[#f59e0b] transition-colors cursor-pointer"
                           >
                             {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                           </button>
@@ -244,7 +244,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                           href={item.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="p-2 rounded-lg text-[#ff9000] hover:bg-orange-500/10 transition-colors"
+                          className="p-2 rounded-lg text-[#f59e0b] hover:bg-amber-500/10 transition-colors"
                         >
                           <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </a>
@@ -260,9 +260,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               <div className="pt-2">
                 <button
                   onClick={onOpenResume}
-                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl border border-orange-500/40 bg-orange-500/10 hover:bg-orange-500/20 text-[#ff9000] font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md hover:scale-[1.02]"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-[#f59e0b] font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md hover:scale-[1.02]"
                 >
-                  <FileText className="w-4 h-4 text-[#ff9000]" />
+                  <FileText className="w-4 h-4 text-[#f59e0b]" />
                   <span>View & Download Resume (PDF)</span>
                 </button>
               </div>
@@ -300,7 +300,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
                   </div>
                   <div className="flex items-center gap-2 pl-2 border-l border-white/10">
-                    <Calendar className="w-3.5 h-3.5 text-[#ff9000]" />
+                    <Calendar className="w-3.5 h-3.5 text-[#f59e0b]" />
                     <span className="text-xs font-mono font-bold" style={{ color: 'var(--text-primary)' }}>
                       Free 30-Minute Consultation
                     </span>
@@ -308,8 +308,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-[#ff9000] px-2.5 py-1 rounded-full bg-red-500/10 border border-red-500/20">
-                    <span className="w-2 h-2 rounded-full bg-[#ff4500] animate-ping" />
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-mono text-[#f59e0b] px-2.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/20">
+                    <span className="w-2 h-2 rounded-full bg-[#f97316] animate-ping" />
                     Live Sync
                   </span>
 
@@ -317,7 +317,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     href="https://calendly.com/panicanerwin16/30min"
                     target="_blank"
                     rel="noreferrer"
-                    className="px-3 py-1 rounded-xl bg-orange-500/10 hover:bg-orange-500/20 border border-orange-500/30 text-[#ff9000] text-xs font-mono font-semibold transition-all flex items-center gap-1.5"
+                    className="px-3 py-1 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-[#f59e0b] text-xs font-mono font-semibold transition-all flex items-center gap-1.5"
                   >
                     <span>Open Tab</span>
                     <ExternalLink className="w-3 h-3" />
@@ -333,12 +333,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   borderColor: 'var(--border-color)',
                 }}
               >
-                <span className="flex items-center gap-1.5 text-[#ff9000]">
+                <span className="flex items-center gap-1.5 text-[#f59e0b]">
                   <Clock className="w-3.5 h-3.5" />
                   <span>30-Min Call</span>
                 </span>
                 <span className="text-white/20">•</span>
-                <span className="flex items-center gap-1.5 text-orange-400">
+                <span className="flex items-center gap-1.5 text-amber-400">
                   <Video className="w-3.5 h-3.5" />
                   <span>Google Meet / Zoom</span>
                 </span>
@@ -380,12 +380,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 }}
               >
                 <div className="flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
-                  <Zap className="w-3.5 h-3.5 text-[#ff9000] shrink-0" />
+                  <Zap className="w-3.5 h-3.5 text-[#f59e0b] shrink-0" />
                   <span>Prefer sending project specs via email?</span>
                 </div>
                 <a 
                   href="mailto:panicanerwin16@gmail.com" 
-                  className="text-[#ff9000] hover:underline font-bold transition-colors"
+                  className="text-[#f59e0b] hover:underline font-bold transition-colors"
                 >
                   panicanerwin16@gmail.com
                 </a>

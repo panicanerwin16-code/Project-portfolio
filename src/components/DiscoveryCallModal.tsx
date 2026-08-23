@@ -75,7 +75,7 @@ export const DiscoveryCallModal: React.FC<DiscoveryCallModalProps> = ({
 
         {isSuccess ? (
           <div className="text-center py-8 space-y-4">
-            <div className="w-16 h-16 rounded-full bg-red-500/20 border border-red-500/40 text-[#ff9000] flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(255,80,0,0.3)]">
+            <div className="w-16 h-16 rounded-full bg-amber-500/20 border border-amber-500/40 text-[#f59e0b] flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(245,158,11,0.3)]">
               <CheckCircle2 className="w-8 h-8" />
             </div>
             <h3 
@@ -85,7 +85,7 @@ export const DiscoveryCallModal: React.FC<DiscoveryCallModalProps> = ({
               Discovery Call Confirmed!
             </h3>
             <p className="text-xs max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>
-              We have scheduled your 30-minute consultation for <strong className="text-[#ff9000]">{selectedDate} at {selectedTime}</strong>. Calendar invite & Google Meet link sent to <strong className="text-[#ff9000]">{clientEmail}</strong>.
+              We have scheduled your 30-minute consultation for <strong className="text-[#f59e0b]">{selectedDate} at {selectedTime}</strong>. Calendar invite & Google Meet link sent to <strong className="text-[#f59e0b]">{clientEmail}</strong>.
             </p>
             <div 
               className="p-4 rounded-xl border text-xs text-left max-w-md mx-auto space-y-1"
@@ -100,7 +100,7 @@ export const DiscoveryCallModal: React.FC<DiscoveryCallModalProps> = ({
             </div>
             <button
               onClick={onClose}
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#ff9000] to-[#ff3700] hover:brightness-110 text-white text-xs font-bold shadow-[0_0_20px_rgba(255,80,0,0.4)] cursor-pointer"
+              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#f59e0b] to-[#f97316] hover:brightness-110 text-white text-xs font-bold shadow-[0_0_20px_rgba(245,158,11,0.4)] cursor-pointer"
             >
               Done & Close
             </button>
@@ -113,7 +113,7 @@ export const DiscoveryCallModal: React.FC<DiscoveryCallModalProps> = ({
                   href="https://calendly.com/panicanerwin16/30min"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/10 border border-red-500/30 text-[#ff9000] text-xs font-semibold hover:bg-red-500/20 transition-all"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-[#f59e0b] text-xs font-semibold hover:bg-amber-500/20 transition-all"
                 >
                   <CalendarIcon className="w-3.5 h-3.5" />
                   <span>Calendly Direct Booking</span>
@@ -136,21 +136,21 @@ export const DiscoveryCallModal: React.FC<DiscoveryCallModalProps> = ({
               href="https://calendly.com/panicanerwin16/30min"
               target="_blank"
               rel="noreferrer"
-              className="w-full p-3.5 rounded-2xl border-2 border-orange-500/60 hover:border-orange-500 text-[#ff9000] font-bold text-xs transition-all flex items-center justify-between gap-2 shadow-[0_0_20px_rgba(255,80,0,0.15)] group cursor-pointer"
+              className="w-full p-3.5 rounded-2xl border-2 border-amber-500/60 hover:border-amber-500 text-[#f59e0b] font-bold text-xs transition-all flex items-center justify-between gap-2 shadow-[0_0_20px_rgba(245,158,11,0.15)] group cursor-pointer"
               style={{
                 backgroundColor: 'var(--bg-primary)',
               }}
             >
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-r from-[#ff9000] to-[#ff3700] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-md">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-r from-[#f59e0b] to-[#f97316] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-md">
                   <CalendarIcon className="w-4 h-4" />
                 </div>
                 <div className="text-left">
                   <span className="block font-bold text-xs" style={{ color: 'var(--text-primary)' }}>Book Directly on Calendly</span>
-                  <span className="block text-[10px] text-[#ff9000] font-mono">calendly.com/panicanerwin16/30min</span>
+                  <span className="block text-[10px] text-[#f59e0b] font-mono">calendly.com/panicanerwin16/30min</span>
                 </div>
               </div>
-              <span className="px-3 py-1 rounded-lg bg-gradient-to-r from-[#ff9000] to-[#ff3700] text-white text-xs font-extrabold group-hover:scale-105 transition-transform">
+              <span className="px-3 py-1 rounded-lg bg-gradient-to-r from-[#f59e0b] to-[#f97316] text-white text-xs font-extrabold group-hover:scale-105 transition-transform">
                 Open Calendly →
               </span>
             </a>
@@ -168,11 +168,11 @@ export const DiscoveryCallModal: React.FC<DiscoveryCallModalProps> = ({
                     onClick={() => setSelectedFocus(area)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer transition-all border ${
                       selectedFocus === area
-                        ? 'bg-gradient-to-r from-[#ff9000] to-[#ff3700] text-white border-transparent font-bold shadow-[0_0_12px_rgba(255,80,0,0.3)]'
-                        : 'hover:border-orange-500/40'
+                        ? 'bg-gradient-to-r from-[#f59e0b] to-[#f97316] text-white border-transparent font-bold shadow-[0_0_12px_rgba(245,158,11,0.3)]'
+                        : 'hover:border-amber-500/40'
                     }`}
                     style={{
-                      backgroundColor: selectedFocus === area ? '#ff4500' : 'var(--bg-primary)',
+                      backgroundColor: selectedFocus === area ? '#f97316' : 'var(--bg-primary)',
                       borderColor: selectedFocus === area ? 'transparent' : 'var(--border-color)',
                       color: selectedFocus === area ? '#ffffff' : 'var(--text-secondary)',
                     }}
@@ -196,13 +196,13 @@ export const DiscoveryCallModal: React.FC<DiscoveryCallModalProps> = ({
                     onClick={() => setSelectedDate(d)}
                     className={`p-2.5 rounded-xl text-xs font-medium cursor-pointer transition-all border ${
                       selectedDate === d
-                        ? 'bg-red-500/20 text-[#ff9000] border-[#ff4500]'
+                        ? 'bg-amber-500/20 text-[#f59e0b] border-[#f59e0b]'
                         : ''
                     }`}
                     style={{
-                      backgroundColor: selectedDate === d ? 'rgba(255,80,0,0.15)' : 'var(--bg-primary)',
-                      borderColor: selectedDate === d ? '#ff4500' : 'var(--border-color)',
-                      color: selectedDate === d ? '#ff9000' : 'var(--text-secondary)',
+                      backgroundColor: selectedDate === d ? 'rgba(245,158,11,0.15)' : 'var(--bg-primary)',
+                      borderColor: selectedDate === d ? '#f59e0b' : 'var(--border-color)',
+                      color: selectedDate === d ? '#f59e0b' : 'var(--text-secondary)',
                     }}
                   >
                     {d}
@@ -214,7 +214,7 @@ export const DiscoveryCallModal: React.FC<DiscoveryCallModalProps> = ({
             {/* Time Slot Picker */}
             <div>
               <label className="block text-xs font-semibold mb-2 flex items-center gap-1" style={{ color: 'var(--text-primary)' }}>
-                <Clock className="w-3.5 h-3.5 text-[#ff9000]" />
+                <Clock className="w-3.5 h-3.5 text-[#f59e0b]" />
                 <span>Available Time Slots</span>
               </label>
               <div className="flex flex-wrap gap-2">
@@ -225,11 +225,11 @@ export const DiscoveryCallModal: React.FC<DiscoveryCallModalProps> = ({
                     onClick={() => setSelectedTime(t)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-mono cursor-pointer transition-all border ${
                       selectedTime === t
-                        ? 'bg-gradient-to-r from-[#ff9000] to-[#ff3700] text-white border-transparent font-bold'
+                        ? 'bg-gradient-to-r from-[#f59e0b] to-[#f97316] text-white border-transparent font-bold'
                         : ''
                     }`}
                     style={{
-                      backgroundColor: selectedTime === t ? '#ff4500' : 'var(--bg-primary)',
+                      backgroundColor: selectedTime === t ? '#f97316' : 'var(--bg-primary)',
                       borderColor: selectedTime === t ? 'transparent' : 'var(--border-color)',
                       color: selectedTime === t ? '#ffffff' : 'var(--text-secondary)',
                     }}
@@ -252,7 +252,7 @@ export const DiscoveryCallModal: React.FC<DiscoveryCallModalProps> = ({
                   value={clientName}
                   onChange={(e) => setClientName(e.target.value)}
                   placeholder="e.g. Erwin Panican"
-                  className="w-full px-3 py-2 rounded-xl border text-xs focus:outline-none focus:border-[#ff9000]"
+                  className="w-full px-3 py-2 rounded-xl border text-xs focus:outline-none focus:border-[#f59e0b]"
                   style={{
                     backgroundColor: 'var(--bg-primary)',
                     borderColor: 'var(--border-color)',
@@ -271,7 +271,7 @@ export const DiscoveryCallModal: React.FC<DiscoveryCallModalProps> = ({
                   value={clientEmail}
                   onChange={(e) => setClientEmail(e.target.value)}
                   placeholder="you@company.com"
-                  className="w-full px-3 py-2 rounded-xl border text-xs focus:outline-none focus:border-[#ff9000]"
+                  className="w-full px-3 py-2 rounded-xl border text-xs focus:outline-none focus:border-[#f59e0b]"
                   style={{
                     backgroundColor: 'var(--bg-primary)',
                     borderColor: 'var(--border-color)',
@@ -284,7 +284,7 @@ export const DiscoveryCallModal: React.FC<DiscoveryCallModalProps> = ({
             <button
               type="submit"
               disabled={isBooking}
-              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#ff9000] to-[#ff3700] hover:brightness-110 text-white font-extrabold text-xs shadow-[0_0_20px_rgba(255,80,0,0.35)] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#f59e0b] via-[#f97316] to-[#ea580c] hover:brightness-110 text-white font-extrabold text-xs shadow-[0_0_20px_rgba(245,158,11,0.35)] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
             >
               {isBooking ? (
                 <span>Confirming Appointment...</span>

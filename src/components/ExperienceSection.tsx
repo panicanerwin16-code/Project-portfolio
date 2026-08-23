@@ -8,21 +8,34 @@ export const ExperienceSection: React.FC = () => {
       role: 'AI Automation Specialist',
       company: 'Freelance / Independent',
       bullets: [
-        'Built automated workflows in Make, n8n and Zapier connecting CRMs, databases and APIs.',
-        'Integrated OpenAI and Anthropic models for data extraction, content generation and analysis.',
-        'Designed custom webhooks and API connections for complex multi-step data syncing.',
-        'Monitored and optimized active workflows, maintaining 99% system uptime.',
+        'Designed AI-powered workflow automations using n8n, Make.com, and Zapier.',
+        'Integrated OpenAI and Anthropic models.',
+        'Built API integrations and custom webhooks.',
+        'Maintained 99% workflow uptime.',
       ],
     },
     {
-      period: '2018 — 2026',
-      role: 'Documentation Associate',
-      company: 'Seidopro Global Inc.',
+      period: '2022 — 2026',
+      role: 'Performance Coach',
+      company: 'SeidoPro Global Inc.',
       bullets: [
-        'Prepared shipping documents (bill of lading, invoices, packing lists) with high accuracy.',
-        'Verified shipment details and ensured compliance with customs and logistics regulations.',
-        'Coordinated with internal teams, clients and partners for end-to-end document handling.',
-        'Maintained organized records and resolved documentation issues quickly.',
+        'Responsible for monitoring and evaluating employee performance, providing coaching and constructive feedback, identifying performance gaps, creating improvement plans, conducting regular coaching sessions, and supporting team members in achieving their performance and productivity goals.',
+      ],
+    },
+    {
+      period: '2020 — 2022',
+      role: 'Assistant Supervisor',
+      company: 'SeidoPro Global Inc.',
+      bullets: [
+        'Responsible for supporting daily operations, coordinating team activities, monitoring employee performance, assigning tasks, ensuring work quality and productivity, assisting with problem-solving, and providing guidance and support to team members to achieve operational goals.',
+      ],
+    },
+    {
+      period: '2018 — 2020',
+      role: 'Documentation Associate',
+      company: 'SeidoPro Global Inc.',
+      bullets: [
+        'Responsible for preparing and verifying shipping documents, coordinating with freight forwarders, shipping lines, and internal teams, maintaining accurate shipment records, monitoring documentation requirements, and ensuring timely and error-free processing of shipments.',
       ],
     },
   ];
@@ -75,7 +88,7 @@ export const ExperienceSection: React.FC = () => {
         
         {/* Eyebrow & Title */}
         <div className="mb-12 text-left">
-          <span className="text-[#ff9000] text-xs font-bold uppercase tracking-widest block mb-2 font-mono">
+          <span className="text-[#f59e0b] text-xs font-bold uppercase tracking-widest block mb-2 font-mono">
             EXPERIENCE
           </span>
           <h2 
@@ -104,14 +117,14 @@ export const ExperienceSection: React.FC = () => {
             {experiences.map((exp, idx) => (
               <div key={idx} className="relative group">
                 
-                {/* Crimson / Orange Circle Dot Node */}
+                {/* Amber / Golden Sand Dot Node */}
                 <div 
-                  className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full border-2 border-[#ff4500] shadow-[0_0_8px_#ff4500] group-hover:bg-[#ff9000] transition-colors"
+                  className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full border-2 border-[#f97316] shadow-[0_0_8px_#f97316] group-hover:bg-[#f59e0b] transition-colors"
                   style={{ backgroundColor: 'var(--bg-primary)' }}
                 />
 
                 {/* Period Badge */}
-                <span className="text-[#ff9000] text-xs font-semibold font-mono mb-1 block">
+                <span className="text-[#f59e0b] text-xs font-semibold font-mono mb-1 block">
                   {exp.period}
                 </span>
 
@@ -135,7 +148,7 @@ export const ExperienceSection: React.FC = () => {
                 <ul className="space-y-2.5 max-w-2xl">
                   {exp.bullets.map((bullet, i) => (
                     <li key={i} className="flex items-start gap-3 text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                      <span className="text-[#ff4500] font-bold mt-0.5">•</span>
+                      <span className="text-[#f97316] font-bold mt-0.5">•</span>
                       <span>{bullet}</span>
                     </li>
                   ))}
@@ -154,7 +167,7 @@ export const ExperienceSection: React.FC = () => {
           {/* Section Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
             <div>
-              <span className="text-xs sm:text-sm font-mono font-bold uppercase tracking-widest block text-[#ff9000]">
+              <span className="text-xs sm:text-sm font-mono font-bold uppercase tracking-widest block text-[#f59e0b]">
                 TOOLBOX & TECH STACK
               </span>
               <p className="text-xs sm:text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>

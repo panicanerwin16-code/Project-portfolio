@@ -74,7 +74,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
         
         {/* Eyebrow and Header */}
         <div className="mb-10 text-left">
-          <span className="text-[#ff9000] text-xs font-bold uppercase tracking-widest block mb-2 font-mono">
+          <span className="text-[#f59e0b] text-xs font-bold uppercase tracking-widest block mb-2 font-mono">
             SERVICES
           </span>
           <h2 
@@ -112,13 +112,13 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
               >
                 <div>
                   {/* Icon Box */}
-                  <div className="w-11 h-11 rounded-2xl bg-orange-500/10 border border-orange-500/40 text-[#ff9000] flex items-center justify-center mb-6 group-hover:scale-110 group-hover:border-[#ff4500] transition-all shadow-[0_0_15px_rgba(255,100,0,0.2)]">
+                  <div className="w-11 h-11 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-[#f59e0b] flex items-center justify-center mb-6 group-hover:scale-110 group-hover:border-[#f97316] transition-all shadow-[0_0_15px_rgba(245,158,11,0.2)]">
                     <IconComponent className="w-5 h-5" />
                   </div>
 
                   {/* Title */}
                   <h3 
-                    className="text-xl font-bold mb-3 tracking-tight group-hover:text-[#ff9000] transition-colors"
+                    className="text-xl font-bold mb-3 tracking-tight group-hover:text-[#f59e0b] transition-colors"
                     style={{ color: 'var(--text-primary)' }}
                   >
                     {item.title}
@@ -137,7 +137,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onSelectServic
                 <div className="space-y-2.5 pt-4 border-dotted-crimson">
                   {item.checklist.map((point, i) => (
                     <div key={i} className="flex items-center gap-2.5 text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>
-                      <CheckCircle2 className="w-4 h-4 text-[#ff9000] shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-[#f59e0b] shrink-0" />
                       <span>{point}</span>
                     </div>
                   ))}

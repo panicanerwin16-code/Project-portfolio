@@ -221,27 +221,27 @@ export const generateATSPdfDocument = (): jsPDF => {
   });
   y += 6;
 
-  // Documentation Associate
+  // Performance Coach
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(10.5);
   doc.setTextColor(...accentBlue);
-  doc.text('Documentation Associate — Seidopro Global Inc (2018–2020)', leftMargin, y);
+  doc.text('Performance Coach — SeidoPro Global Inc (2022 to 2026)', leftMargin, y);
   y += 15;
 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9.5);
   doc.setTextColor(...textDark);
-  const docText =
-    '● Responsible for preparing and verifying shipping documents, coordinating with freight forwarders, shipping lines, and internal teams, maintaining accurate shipment records, monitoring documentation requirements, and ensuring timely and error-free processing of shipments.';
-  const docLines = doc.splitTextToSize(docText, contentWidth);
-  doc.text(docLines, leftMargin, y);
-  y += docLines.length * 13 + 6;
+  const coachText =
+    '● Responsible for monitoring and evaluating employee performance, providing coaching and constructive feedback, identifying performance gaps, creating improvement plans, conducting regular coaching sessions, and supporting team members in achieving their performance and productivity goals.';
+  const coachLines = doc.splitTextToSize(coachText, contentWidth);
+  doc.text(coachLines, leftMargin, y);
+  y += coachLines.length * 13 + 6;
 
   // Assistant Supervisor
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(10.5);
   doc.setTextColor(...accentBlue);
-  doc.text('Assistant Supervisor - Seidopro Global Inc (2020 - 2022)', leftMargin, y);
+  doc.text('Assistant Supervisor — SeidoPro Global Inc (2020 - 2022)', leftMargin, y);
   y += 15;
 
   doc.setFont('helvetica', 'normal');
@@ -253,21 +253,21 @@ export const generateATSPdfDocument = (): jsPDF => {
   doc.text(supLines, leftMargin, y);
   y += supLines.length * 13 + 6;
 
-  // Performance Coach
+  // Documentation Associate
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(10.5);
   doc.setTextColor(...accentBlue);
-  doc.text('Performance Coach - Seidorpo Global Inc (2022 to 2026)', leftMargin, y);
+  doc.text('Documentation Associate — SeidoPro Global Inc (2018–2020)', leftMargin, y);
   y += 15;
 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9.5);
   doc.setTextColor(...textDark);
-  const coachText =
-    '● Responsible for monitoring and evaluating employee performance, providing coaching and constructive feedback, identifying performance gaps, creating improvement plans, conducting regular coaching sessions, and supporting team members in achieving their performance and productivity goals.';
-  const coachLines = doc.splitTextToSize(coachText, contentWidth);
-  doc.text(coachLines, leftMargin, y);
-  y += coachLines.length * 13 + 14;
+  const docText =
+    '● Responsible for preparing and verifying shipping documents, coordinating with freight forwarders, shipping lines, and internal teams, maintaining accurate shipment records, monitoring documentation requirements, and ensuring timely and error-free processing of shipments.';
+  const docLines = doc.splitTextToSize(docText, contentWidth);
+  doc.text(docLines, leftMargin, y);
+  y += docLines.length * 13 + 14;
 
   // Tools and Technologies
   doc.setFont('helvetica', 'bold');

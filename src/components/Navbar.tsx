@@ -72,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'py-3 backdrop-blur-xl bg-[#0a0103]/85 border-b border-red-500/20 shadow-lg shadow-black/40'
+          ? 'py-3 backdrop-blur-xl bg-[#08080a]/90 border-b border-amber-500/20 shadow-lg shadow-black/60'
           : 'py-5 bg-transparent'
       }`}
       style={{
@@ -90,16 +90,16 @@ export const Navbar: React.FC<NavbarProps> = ({
           }}
           className="flex items-center gap-2.5 group cursor-pointer"
         >
-          <div className="relative w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm bg-[#1a0407] text-[#ff9000] border border-orange-500/40 shadow-[0_0_12px_rgba(255,100,0,0.25)]">
+          <div className="relative w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm bg-[#14100c] text-[#f59e0b] border border-amber-500/40 shadow-[0_0_12px_rgba(245,158,11,0.25)]">
             E
-            <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#ff4500] shadow-[0_0_6px_#ff4500]" />
+            <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#f97316] shadow-[0_0_6px_#f97316]" />
           </div>
           <span className="font-extrabold text-base tracking-tight" style={{ color: 'var(--text-primary)' }}>
-            Erwin<span className="text-[#ff5500]">.</span>Panican
+            Erwin<span className="text-[#f59e0b]">.</span>Panican
           </span>
         </a>
 
-        {/* Desktop Links with Reference-Style Uppercase & Crimson Active Indicator */}
+        {/* Desktop Links with Reference-Style Uppercase & Amber Active Indicator */}
         <nav className="hidden lg:flex items-center gap-7 font-bold text-xs tracking-widest">
           {navLinks.map((link) => {
             const isActive = activeNav === link.id;
@@ -107,18 +107,18 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={link.label}
                 onClick={() => handleNavClick(link.href, link.id)}
-                className={`relative py-1 transition-all cursor-pointer select-none hover:text-[#ff9000] ${
+                className={`relative py-1 transition-all cursor-pointer select-none hover:text-[#f59e0b] ${
                   isActive
-                    ? 'text-[#ff3700] drop-shadow-[0_0_10px_rgba(255,55,0,0.5)] font-black'
+                    ? 'text-[#f59e0b] drop-shadow-[0_0_10px_rgba(245,158,11,0.5)] font-black'
                     : ''
                 }`}
                 style={{
-                  color: isActive ? '#ff3700' : 'var(--text-secondary)',
+                  color: isActive ? '#f59e0b' : 'var(--text-secondary)',
                 }}
               >
                 <span>{link.label}</span>
                 {isActive && (
-                  <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-0.5 bg-[#ff3700] rounded-full shadow-[0_0_8px_#ff3700]" />
+                  <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-0.5 bg-[#f59e0b] rounded-full shadow-[0_0_8px_#f59e0b]" />
                 )}
               </button>
             );
@@ -130,7 +130,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Dark / Light Mode Toggle */}
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className="p-2 rounded-xl transition-all cursor-pointer border"
+            className="p-2 rounded-xl transition-all cursor-pointer border hover:border-amber-500/50"
             style={{
               backgroundColor: 'var(--bg-secondary)',
               borderColor: 'var(--border-color)',
@@ -138,27 +138,27 @@ export const Navbar: React.FC<NavbarProps> = ({
             }}
             title={darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
           >
-            {darkMode ? <Sun className="w-4 h-4 text-[#ff9000]" /> : <Moon className="w-4 h-4 text-orange-600" />}
+            {darkMode ? <Sun className="w-4 h-4 text-[#f59e0b]" /> : <Moon className="w-4 h-4 text-amber-600" />}
           </button>
 
           {/* Resume Modal Trigger */}
           <button
             onClick={onOpenResume}
-            className="hidden md:flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-full border transition-all cursor-pointer hover:border-orange-500/50"
+            className="hidden md:flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-full border transition-all cursor-pointer hover:border-amber-500/50"
             style={{
               backgroundColor: 'var(--bg-secondary)',
               borderColor: 'var(--border-color)',
               color: 'var(--text-primary)',
             }}
           >
-            <FileText className="w-3.5 h-3.5 text-[#ff9000]" />
+            <FileText className="w-3.5 h-3.5 text-[#f59e0b]" />
             <span>Resume</span>
           </button>
 
-          {/* Book Call CTA - Fiery Gradient */}
+          {/* Book Call CTA - Amber Gold Gradient */}
           <button
             onClick={onOpenBooking}
-            className="px-5 py-2.5 bg-gradient-to-r from-[#ff9000] via-[#ff4500] to-[#ff2244] hover:brightness-110 text-white font-extrabold text-xs rounded-xl shadow-[0_0_20px_rgba(255,80,0,0.35)] transition-all flex items-center gap-1.5 cursor-pointer hover:scale-105"
+            className="px-5 py-2.5 bg-gradient-to-r from-[#f59e0b] via-[#f97316] to-[#ea580c] hover:brightness-110 text-white font-extrabold text-xs rounded-xl shadow-[0_0_20px_rgba(245,158,11,0.35)] transition-all flex items-center gap-1.5 cursor-pointer hover:scale-105"
           >
             <span>Let's talk</span>
             <span className="text-sm font-bold">→</span>
@@ -176,7 +176,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               color: 'var(--text-primary)',
             }}
           >
-            {darkMode ? <Sun className="w-4 h-4 text-[#ff9000]" /> : <Moon className="w-4 h-4 text-orange-600" />}
+            {darkMode ? <Sun className="w-4 h-4 text-[#f59e0b]" /> : <Moon className="w-4 h-4 text-amber-600" />}
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -210,7 +210,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 style={{ color: 'var(--text-primary)' }}
               >
                 <span>{link.label}</span>
-                <ChevronRight className="w-4 h-4 text-[#ff9000]" />
+                <ChevronRight className="w-4 h-4 text-[#f59e0b]" />
               </button>
             ))}
 
@@ -227,7 +227,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   color: 'var(--text-primary)',
                 }}
               >
-                <FileText className="w-4 h-4 text-[#ff9000]" />
+                <FileText className="w-4 h-4 text-[#f59e0b]" />
                 <span>View Resume</span>
               </button>
 
@@ -236,7 +236,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   setMobileMenuOpen(false);
                   onOpenBooking();
                 }}
-                className="flex items-center justify-center gap-2 p-3.5 rounded-xl bg-gradient-to-r from-[#ff9000] to-[#ff3700] text-white font-extrabold text-sm shadow-[0_0_20px_rgba(255,80,0,0.35)]"
+                className="flex items-center justify-center gap-2 p-3.5 rounded-xl bg-gradient-to-r from-[#f59e0b] to-[#f97316] text-white font-extrabold text-sm shadow-[0_0_20px_rgba(245,158,11,0.35)]"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book a Discovery Call</span>

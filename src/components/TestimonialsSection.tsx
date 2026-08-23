@@ -35,7 +35,7 @@ export const TestimonialsSection: React.FC = () => {
         
         {/* Eyebrow & Title */}
         <div className="mb-12 text-left">
-          <span className="text-[#ff9000] text-xs font-bold uppercase tracking-widest block mb-2 font-mono">
+          <span className="text-[#f59e0b] text-xs font-bold uppercase tracking-widest block mb-2 font-mono">
             TESTIMONIALS
           </span>
           <h2 
@@ -51,14 +51,14 @@ export const TestimonialsSection: React.FC = () => {
           {testimonials.map((item) => (
             <div
               key={item.id}
-              className="card-crimson-glow p-8 rounded-3xl flex flex-col justify-between hover:border-orange-500/60 transition-all duration-300 shadow-xl"
+              className="card-crimson-glow p-8 rounded-3xl flex flex-col justify-between hover:border-amber-500/60 transition-all duration-300 shadow-xl"
               style={{
                 backgroundColor: 'var(--bg-card)',
               }}
             >
               <div>
-                {/* Neon Orange Quote Icon */}
-                <div className="text-[#ff9000] font-serif text-4xl font-bold mb-4 leading-none">
+                {/* Glowing Amber Quote Icon */}
+                <div className="text-[#f59e0b] font-serif text-4xl font-bold mb-4 leading-none">
                   “
                 </div>
 
