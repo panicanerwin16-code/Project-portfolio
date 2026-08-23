@@ -26,6 +26,12 @@ export interface ProjectItem {
   gallery?: { url: string; title: string }[];
   videoUrl?: string;
   youtubeId?: string;
+  resourceLink?: {
+    url: string;
+    label: string;
+    badge?: string;
+    description?: string;
+  };
   tools: string[];
   problem: string;
   solution: string;

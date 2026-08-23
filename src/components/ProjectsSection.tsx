@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle2, Sparkles, Layers, ArrowUpRight, X, ZoomIn, ZoomOut, Maximize2, RotateCcw, Eye, Play } from 'lucide-react';
+import { CheckCircle2, Sparkles, Layers, ArrowUpRight, X, ZoomIn, ZoomOut, Maximize2, RotateCcw, Eye, Play, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ProjectItem } from '../types';
 
@@ -75,6 +75,12 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     gallery?: { url: string; title: string }[];
     videoUrl?: string;
     youtubeId?: string;
+    resourceLink?: {
+      url: string;
+      label: string;
+      badge?: string;
+      description?: string;
+    };
     tools: string[];
     problem: string;
     solution: string;
@@ -263,6 +269,12 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         { url: 'https://i.im.ge/QMnOb29/WF4.png', title: 'Workflow 4: Showed & No-Show Recovery Sequence' },
       ],
       tools: ['GoHighLevel', 'Sales Pipelines', 'Appointment Workflows', 'SMS & Email', 'Calendar Funnel'],
+      resourceLink: {
+        url: 'https://sites.leadconnectorhq.com/preview/VD6VVNMUuA1JXCVlUjH7?notrack=true',
+        label: 'GoHighLevel Live Solar Appointment Funnel',
+        badge: 'LIVE FUNNEL DEMO',
+        description: 'Explore the live solar lead booking & appointment funnel page in action.',
+      },
       problem: 'The solar business needed a more organized way to manage appointment leads, track opportunities through the sales pipeline, and handle confirmations, cancellations, rescheduling, and no-shows without relying on manual follow-ups.',
       solution: 'I built a complete appointment funnel in GoHighLevel with a structured sales pipeline and automated workflows for appointment confirmation, cancellation, rebooking, showed, and no-show scenarios. The system automatically updates opportunities and triggers the appropriate follow-up communication based on each appointment status.',
       result: 'The automation creates a more organized appointment management process, reduces manual follow-up, keeps the sales pipeline updated, and helps recover missed or cancelled appointments through automated rebooking and follow-up sequences.',
@@ -413,6 +425,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     gallery: proj.gallery,
                     videoUrl: proj.videoUrl,
                     youtubeId: proj.youtubeId,
+                    resourceLink: proj.resourceLink,
                     tools: proj.tools,
                     problem: proj.problem,
                     solution: proj.solution,
@@ -469,8 +482,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                                 title: proj.title,
                                 category: proj.platform,
                                 image: proj.image,
+                                gallery: proj.gallery,
                                 videoUrl: proj.videoUrl,
                                 youtubeId: proj.youtubeId,
+                                resourceLink: proj.resourceLink,
                                 tools: proj.tools,
                                 problem: proj.problem,
                                 solution: proj.solution,
@@ -523,8 +538,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                             title: proj.title,
                             category: proj.platform,
                             image: proj.image,
+                            gallery: proj.gallery,
                             videoUrl: proj.videoUrl,
                             youtubeId: proj.youtubeId,
+                            resourceLink: proj.resourceLink,
                             tools: proj.tools,
                             problem: proj.problem,
                             solution: proj.solution,
@@ -586,6 +603,43 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     >
                       {proj.description}
                     </p>
+
+                    {/* Highlighted Live Project Resource Link (if present) */}
+                    {proj.resourceLink && (
+                      <div className="mb-4">
+                        <a
+                          href={proj.resourceLink.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="group/link flex items-center justify-between gap-3 p-3 rounded-2xl border-2 border-amber-500/70 bg-gradient-to-r from-amber-500/20 via-orange-500/15 to-amber-500/10 hover:from-amber-500/30 hover:to-orange-500/25 hover:border-amber-400 text-amber-400 font-mono text-xs transition-all shadow-[0_0_20px_rgba(245,158,11,0.25)] hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] cursor-pointer"
+                          title="Open Live Funnel Project Preview in New Tab"
+                        >
+                          <div className="flex items-center gap-2.5 min-w-0">
+                            <span className="w-8 h-8 rounded-xl bg-amber-500/20 text-[#f59e0b] border border-amber-500/40 flex items-center justify-center shrink-0 shadow-sm group-hover/link:scale-110 transition-transform">
+                              <ExternalLink className="w-4 h-4" />
+                            </span>
+                            <div className="text-left min-w-0">
+                              <div className="flex items-center gap-1.5 mb-0.5">
+                                <span className="font-bold text-[11px] text-[#f59e0b] tracking-wider uppercase">
+                                  {proj.resourceLink.badge || 'LIVE FUNNEL RESOURCE'}
+                                </span>
+                                <span className="px-1.5 py-0.2 rounded bg-amber-400 text-black text-[9px] font-black uppercase tracking-wider">
+                                  Live Demo
+                                </span>
+                              </div>
+                              <span className="text-[11px] text-zinc-100 group-hover/link:text-white truncate block font-sans font-medium">
+                                {proj.resourceLink.label}
+                              </span>
+                            </div>
+                          </div>
+                          <span className="shrink-0 text-[11px] font-bold px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#f59e0b] to-[#f97316] text-white group-hover/link:brightness-110 shadow-md transition-all flex items-center gap-1">
+                            <span>Open Funnel</span>
+                            <ArrowUpRight className="w-3.5 h-3.5" />
+                          </span>
+                        </a>
+                      </div>
+                    )}
 
                     {/* Problem, Solution & Result Overview */}
                     <div className="space-y-2.5 mb-4 text-xs">
@@ -833,6 +887,45 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                         <Maximize2 className="w-3.5 h-3.5 text-[#f59e0b] group-hover:text-white" />
                         <span>Click to Enlarge / Full View</span>
                       </div>
+                    </div>
+                  )}
+
+                  {/* Highlighted Live Funnel / Resource Link Banner in Modal */}
+                  {activeModal.resourceLink && (
+                    <div 
+                      className="p-4 sm:p-5 border-2 border-amber-500/70 rounded-2xl bg-gradient-to-r from-amber-500/20 via-orange-500/15 to-amber-500/10 shadow-[0_0_30px_rgba(245,158,11,0.25)] flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                    >
+                      <div className="flex items-start sm:items-center gap-3.5">
+                        <div className="w-11 h-11 rounded-2xl bg-amber-500/20 text-[#f59e0b] border border-amber-500/40 flex items-center justify-center shrink-0 shadow-md">
+                          <ExternalLink className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-mono text-xs font-bold text-[#f59e0b] uppercase tracking-wider">
+                              {activeModal.resourceLink.badge || 'LIVE FUNNEL RESOURCE'}
+                            </span>
+                            <span className="px-2 py-0.5 rounded bg-amber-400 text-black text-[10px] font-black uppercase tracking-wider">
+                              Live Interactive Demo
+                            </span>
+                          </div>
+                          <h4 className="text-sm font-bold text-white mb-0.5">
+                            {activeModal.resourceLink.label}
+                          </h4>
+                          <p className="text-xs text-zinc-300">
+                            {activeModal.resourceLink.description || 'Test and explore the live GoHighLevel booking and appointment funnel page.'}
+                          </p>
+                        </div>
+                      </div>
+
+                      <a
+                        href={activeModal.resourceLink.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-5 py-3 rounded-xl bg-gradient-to-r from-[#f59e0b] via-[#f97316] to-[#ea580c] hover:brightness-110 text-white font-mono font-bold text-xs flex items-center justify-center gap-2 shadow-lg transition-all hover:scale-105 shrink-0 cursor-pointer"
+                      >
+                        <span>Launch Live Funnel</span>
+                        <ArrowUpRight className="w-4 h-4" />
+                      </a>
                     </div>
                   )}
 
