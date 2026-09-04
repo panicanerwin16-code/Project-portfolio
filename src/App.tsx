@@ -5,6 +5,7 @@ import { HeroSection } from './components/HeroSection';
 import { ServicesSection } from './components/ServicesSection';
 import { ExperienceSection } from './components/ExperienceSection';
 import { ProjectsSection } from './components/ProjectsSection';
+import { FunnelsSection } from './components/FunnelsSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
 import { ContactSection } from './components/ContactSection';
 import { DiscoveryCallModal } from './components/DiscoveryCallModal';
@@ -142,10 +143,15 @@ export default function App() {
           onOpenBookingForProject={(title) => handleOpenBooking(`Project Request: ${title}`)}
         />
 
-        {/* 4. Testimonials Section */}
+        {/* 4. Funnels & Landing Pages Section */}
+        <FunnelsSection
+          onOpenBookingForProject={(title) => handleOpenBooking(`Funnel Build Request: ${title}`)}
+        />
+
+        {/* 5. Testimonials Section */}
         <TestimonialsSection />
 
-        {/* 5. Contact & Calendly (Work With Me) Section */}
+        {/* 6. Contact & Calendly (Work With Me) Section */}
         <ContactSection
           onOpenBooking={() => handleOpenBooking('Contact Form Booking')}
           onOpenResume={handleOpenResume}

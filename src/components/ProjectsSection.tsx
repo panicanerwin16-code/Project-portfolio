@@ -18,7 +18,7 @@ interface ProjectsSectionProps {
   onOpenBookingForProject: (projectTitle: string) => void;
 }
 
-type FilterCategory = 'n8n' | 'zapier' | 'make' | 'gohighlevel';
+type FilterCategory = 'gohighlevel' | 'n8n' | 'zapier' | 'make' | 'funnels';
 
 interface FilterOption {
   id: FilterCategory;
@@ -28,7 +28,7 @@ interface FilterOption {
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   onOpenBookingForProject,
 }) => {
-  const [activeCategory, setActiveCategory] = useState<FilterCategory>('n8n');
+  const [activeCategory, setActiveCategory] = useState<FilterCategory>('gohighlevel');
   const [activeModal, setActiveModal] = useState<ProjectItem | null>(null);
   const [zoomedImage, setZoomedImage] = useState<{
     src: string;
@@ -59,10 +59,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   }, [activeModal, zoomedImage]);
 
   const filterButtons: FilterOption[] = [
+    { id: 'gohighlevel', label: 'Go High Level' },
     { id: 'n8n', label: 'n8n' },
     { id: 'zapier', label: 'Zapier' },
     { id: 'make', label: 'Make' },
-    { id: 'gohighlevel', label: 'Go High Level' },
+    { id: 'funnels', label: 'Funnels' },
   ];
 
   const projects: Array<{
@@ -88,6 +89,66 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     result?: string;
     features: string[];
   }> = [
+    {
+      id: 'ghl-lead-pipeline',
+      category: 'gohighlevel',
+      platform: 'GO HIGH LEVEL',
+      title: 'Solar Panel: GoHighLevel Appointment Funnel & Lead Management Automation',
+      description:
+        'A complete solar business appointment booking and pipeline automation built in GoHighLevel featuring automated multi-scenario workflows for confirmations, cancellations, reschedules, show-ups, and automated no-show recovery sequences.',
+      image: 'https://img.youtube.com/vi/V8dSVjujF1A/maxresdefault.jpg',
+      videoUrl: 'https://www.youtube.com/watch?v=V8dSVjujF1A',
+      youtubeId: 'V8dSVjujF1A',
+      tools: ['GoHighLevel', 'Sales Pipelines', 'Appointment Workflows', 'SMS & Email', 'Calendar Funnel'],
+      resourceLink: {
+        url: 'https://sites.leadconnectorhq.com/preview/VD6VVNMUuA1JXCVlUjH7?notrack=true',
+        label: 'GoHighLevel Live Solar Appointment Funnel',
+        badge: 'LIVE FUNNEL DEMO',
+        description: 'Explore the live solar lead booking & appointment funnel page in action.',
+      },
+      problem: 'The solar business needed a more organized way to manage appointment leads, track opportunities through the sales pipeline, and handle confirmations, cancellations, rescheduling, and no-shows without relying on manual follow-ups.',
+      solution: 'I built a complete appointment funnel in GoHighLevel with a structured sales pipeline and automated workflows for appointment confirmation, cancellation, rebooking, showed, and no-show scenarios. The system automatically updates opportunities and triggers the appropriate follow-up communication based on each appointment status.',
+      result: 'The automation creates a more organized appointment management process, reduces manual follow-up, keeps the sales pipeline updated, and helps recover missed or cancelled appointments through automated rebooking and follow-up sequences.',
+      impact: 'The automation creates a more organized appointment management process, reduces manual follow-up, keeps the sales pipeline updated, and helps recover missed or cancelled appointments through automated rebooking and follow-up sequences.',
+      features: [
+        'End-to-end solar appointment booking funnel & calendar sync',
+        'Multi-scenario workflow triggers (Confirmed, Cancelled, Rescheduled, Showed, No-Show)',
+        'Real-time automated opportunity pipeline stage updates',
+        'Automated rebooking & multi-touch no-show recovery sequences',
+      ],
+    },
+    {
+      id: 'ghl-dental-clinic',
+      category: 'gohighlevel',
+      platform: 'GO HIGH LEVEL',
+      title: 'Dental Clinic: GoHighLevel Appointment Funnel & Lead Management Automation',
+      description:
+        'A tailored dental clinic patient acquisition and appointment funnel built in GoHighLevel featuring automated multi-scenario workflows for appointment confirmations, cancellations, reschedules, showed visits, and automated no-show patient recovery with CRM pipeline opportunity tracking.',
+      image: 'https://img.youtube.com/vi/iQw0d296tDM/maxresdefault.jpg',
+      videoUrl: 'https://www.youtube.com/watch?v=iQw0d296tDM',
+      youtubeId: 'iQw0d296tDM',
+      tools: ['GoHighLevel', 'Dental Funnel', 'Automated Workflows', 'CRM Pipeline', 'SMS & Email Automation'],
+      resourceLink: {
+        url: 'https://sites.leadconnectorhq.com/preview/R8kppxdqnUrCeTz227cL?notrack=true',
+        label: 'GoHighLevel Live Dental Clinic Appointment Funnel',
+        badge: 'LIVE FUNNEL DEMO',
+        description: 'Explore the live dental clinic patient booking & appointment funnel in action.',
+      },
+      problem:
+        'The dental clinic needed a better system to manage leads and appointments while reducing missed appointments, manual follow-ups, cancellations, and no-shows.',
+      solution:
+        'I built a GoHighLevel appointment funnel with automated workflows for appointment confirmation, cancellation, rebooking, showed, and no-show follow-ups. I also organized the CRM pipeline and opportunity stages to keep every patient lead properly tracked throughout the appointment journey.',
+      result:
+        'The system streamlined appointment management, reduced manual follow-up, improved lead and opportunity tracking, and helped recover cancelled and missed appointments through automated rebooking and follow-up sequences.',
+      impact:
+        'The system streamlined appointment management, reduced manual follow-up, improved lead and opportunity tracking, and helped recover cancelled and missed appointments through automated rebooking and follow-up sequences.',
+      features: [
+        'Dental clinic patient booking funnel & calendar appointment sync',
+        'Multi-scenario workflow triggers (Confirmation, Cancellation, Reschedule, Showed, No-Show)',
+        'Organized CRM opportunity stages for real-time patient journey tracking',
+        'Automated patient rebooking & multi-touch no-show recovery sequences',
+      ],
+    },
     {
       id: 'ai-agent-facebook',
       category: 'n8n',
@@ -249,73 +310,42 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       ],
     },
     {
-      id: 'ghl-lead-pipeline',
-      category: 'gohighlevel',
-      platform: 'GO HIGH LEVEL',
-      title: 'Solar Panel: GoHighLevel Appointment Funnel & Lead Management Automation',
+      id: 'ghl-solar-funnel-landing-page',
+      category: 'funnels',
+      platform: 'GOHIGHLEVEL FUNNEL',
+      title: 'Solar Panel: High-Converting GoHighLevel Landing Page & Appointment Funnel',
       description:
-        'A complete solar business appointment booking and pipeline automation built in GoHighLevel featuring automated multi-scenario workflows for confirmations, cancellations, reschedules, show-ups, and automated no-show recovery sequences.',
-      image: 'https://img.youtube.com/vi/V8dSVjujF1A/maxresdefault.jpg',
-      videoUrl: 'https://www.youtube.com/watch?v=V8dSVjujF1A',
-      youtubeId: 'V8dSVjujF1A',
-      gallery: [
-        { url: 'https://i.im.ge/QMnOycS/1.png', title: 'Solar Funnel Overview & Appointment Calendar' },
-        { url: 'https://i.im.ge/QMnOAGz/2.png', title: 'Solar Lead Booking Page & Funnel Steps' },
-        { url: 'https://i.im.ge/QMnOE76/3.png', title: 'Pipeline Stage & Opportunity Manager' },
-        { url: 'https://i.im.ge/QMnOxCF/4.png', title: 'Solar Lead Pipeline Opportunities View' },
-        { url: 'https://i.im.ge/QMnOW0M/WF1.png', title: 'Workflow 1: Appointment Confirmation & Reminder Sequence' },
-        { url: 'https://i.im.ge/QMnOKeD/WF2.png', title: 'Workflow 2: Appointment Cancellation Flow' },
-        { url: 'https://i.im.ge/QMnOkCC/WF3.png', title: 'Workflow 3: Appointment Rescheduling Sequence' },
-        { url: 'https://i.im.ge/QMnOb29/WF4.png', title: 'Workflow 4: Showed & No-Show Recovery Sequence' },
+        'A conversion-engineered GoHighLevel landing page and appointment funnel custom-built for residential and commercial solar panel installation businesses. It transforms cold ad traffic from Facebook, Google Ads, and organic search into high-intent, pre-qualified appointments directly synced with the GoHighLevel CRM calendar.',
+      image: 'https://i.im.ge/QQQ4FiW/fullpage_snapshot_sites_leadconnectorhq_com_2026-09-04-15-00-53_1_.png',
+      tools: [
+        'GoHighLevel',
+        'Funnel Architecture',
+        'Landing Page Design',
+        'Calendar Booking',
+        'Lead Pre-Qualification',
+        'CRM Pipeline Sync',
+        'SMS & Email Automations',
       ],
-      tools: ['GoHighLevel', 'Sales Pipelines', 'Appointment Workflows', 'SMS & Email', 'Calendar Funnel'],
       resourceLink: {
-        url: 'https://sites.leadconnectorhq.com/preview/VD6VVNMUuA1JXCVlUjH7?notrack=true',
+        url: 'https://sites.leadconnectorhq.com/preview/FEorbibNCh0iAD3k1WxJ?notrack=true',
         label: 'GoHighLevel Live Solar Appointment Funnel',
         badge: 'LIVE FUNNEL DEMO',
-        description: 'Explore the live solar lead booking & appointment funnel page in action.',
-      },
-      problem: 'The solar business needed a more organized way to manage appointment leads, track opportunities through the sales pipeline, and handle confirmations, cancellations, rescheduling, and no-shows without relying on manual follow-ups.',
-      solution: 'I built a complete appointment funnel in GoHighLevel with a structured sales pipeline and automated workflows for appointment confirmation, cancellation, rebooking, showed, and no-show scenarios. The system automatically updates opportunities and triggers the appropriate follow-up communication based on each appointment status.',
-      result: 'The automation creates a more organized appointment management process, reduces manual follow-up, keeps the sales pipeline updated, and helps recover missed or cancelled appointments through automated rebooking and follow-up sequences.',
-      impact: 'The automation creates a more organized appointment management process, reduces manual follow-up, keeps the sales pipeline updated, and helps recover missed or cancelled appointments through automated rebooking and follow-up sequences.',
-      features: [
-        'End-to-end solar appointment booking funnel & calendar sync',
-        'Multi-scenario workflow triggers (Confirmed, Cancelled, Rescheduled, Showed, No-Show)',
-        'Real-time automated opportunity pipeline stage updates',
-        'Automated rebooking & multi-touch no-show recovery sequences',
-      ],
-    },
-    {
-      id: 'ghl-dental-clinic',
-      category: 'gohighlevel',
-      platform: 'GO HIGH LEVEL',
-      title: 'Dental Clinic: GoHighLevel Appointment Funnel & Lead Management Automation',
-      description:
-        'A tailored dental clinic patient acquisition and appointment funnel built in GoHighLevel featuring automated multi-scenario workflows for appointment confirmations, cancellations, reschedules, showed visits, and automated no-show patient recovery with CRM pipeline opportunity tracking.',
-      image: 'https://img.youtube.com/vi/iQw0d296tDM/maxresdefault.jpg',
-      videoUrl: 'https://www.youtube.com/watch?v=iQw0d296tDM',
-      youtubeId: 'iQw0d296tDM',
-      tools: ['GoHighLevel', 'Dental Funnel', 'Automated Workflows', 'CRM Pipeline', 'SMS & Email Automation'],
-      resourceLink: {
-        url: 'https://sites.leadconnectorhq.com/preview/R8kppxdqnUrCeTz227cL?notrack=true',
-        label: 'GoHighLevel Live Dental Clinic Appointment Funnel',
-        badge: 'LIVE FUNNEL DEMO',
-        description: 'Explore the live dental clinic patient booking & appointment funnel in action.',
+        description: 'Explore the live solar lead booking landing page & interactive funnel in action.',
       },
       problem:
-        'The dental clinic needed a better system to manage leads and appointments while reducing missed appointments, manual follow-ups, cancellations, and no-shows.',
+        'Solar companies waste thousands on ad campaigns when directing traffic to cluttered generic websites. Homeowners bounce due to information overload, lack of clear financing options, or slow manual follow-up from sales reps.',
       solution:
-        'I built a GoHighLevel appointment funnel with automated workflows for appointment confirmation, cancellation, rebooking, showed, and no-show follow-ups. I also organized the CRM pipeline and opportunity stages to keep every patient lead properly tracked throughout the appointment journey.',
+        'Designed a high-converting GoHighLevel solar landing page featuring a streamlined single-action layout: clear value proposition ($0 down solar savings, utility bill offset, federal tax incentives), pre-qualification questions (electric bill range, roof status), social proof, and direct calendar appointment booking.',
       result:
-        'The system streamlined appointment management, reduced manual follow-up, improved lead and opportunity tracking, and helped recover cancelled and missed appointments through automated rebooking and follow-up sequences.',
+        'Transforms cold visitor traffic into pre-qualified, scheduled appointments, eliminates phone tag, and automatically populates the GoHighLevel CRM opportunity pipeline with instant SMS & email confirmation workflows.',
       impact:
-        'The system streamlined appointment management, reduced manual follow-up, improved lead and opportunity tracking, and helped recover cancelled and missed appointments through automated rebooking and follow-up sequences.',
+        'Helps solar businesses scale customer acquisition efficiently by transforming cold ad clicks into verified appointments, pre-qualifying prospects before sales reps get on the phone, and automatically triggering instant SMS/email reminders to eliminate no-shows.',
       features: [
-        'Dental clinic patient booking funnel & calendar appointment sync',
-        'Multi-scenario workflow triggers (Confirmation, Cancellation, Reschedule, Showed, No-Show)',
-        'Organized CRM opportunity stages for real-time patient journey tracking',
-        'Automated patient rebooking & multi-touch no-show recovery sequences',
+        'Dedicated conversion layout: zero distracting links, direct focus on booking consultations',
+        'Homeowner pre-qualification flow (roof suitability, electric bill range, ownership)',
+        'Strategic conversion elements: $0 down financing highlights, utility savings estimates, warranty trust badges',
+        'Seamless GoHighLevel calendar synchronization for instant consultation bookings',
+        'Direct CRM integration triggering automated appointment confirmations and reminder sequences',
       ],
     },
   ];
@@ -413,6 +443,26 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             })}
           </div>
         </div>
+
+        {/* Category Description Banner for Funnels */}
+        {activeCategory === 'funnels' && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-10 text-center max-w-3xl mx-auto px-6 py-6 rounded-2xl border border-amber-500/30 bg-amber-500/5 backdrop-blur-sm shadow-xl"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-[#f59e0b] text-xs font-mono font-semibold uppercase tracking-widest mb-3 shadow-[0_0_12px_rgba(245,158,11,0.2)]">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>HIGH-CONVERTING LANDING PAGES</span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-black tracking-tight mb-2 text-white">
+              Funnels & Designs Landing Pages That Convert
+            </h3>
+            <p className="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              GoHighLevel landing pages designed to turn visitors into booked calls and qualified leads.
+            </p>
+          </motion.div>
+        )}
 
         {/* Animated Projects Grid */}
         <motion.div 
