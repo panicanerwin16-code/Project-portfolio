@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { CheckCircle2, Sparkles, Layers, ArrowUpRight, X, ZoomIn, ZoomOut, Maximize2, RotateCcw, Eye, Play, ExternalLink } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { CheckCircle2, Sparkles, Layers, ArrowUpRight, X, ZoomIn, ZoomOut, Maximize2, RotateCcw, Eye, Play, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ProjectItem } from '../types';
 
@@ -34,8 +34,19 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     src: string;
     title: string;
     category?: string;
+    link?: string;
+    images?: { url: string; title: string; link?: string }[];
+    currentIndex?: number;
   } | null>(null);
   const [zoomScale, setZoomScale] = useState<number>(1);
+  const galleryScrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollGallery = (direction: 'left' | 'right') => {
+    if (galleryScrollRef.current) {
+      const scrollAmount = direction === 'left' ? -360 : 360;
+      galleryScrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -45,6 +56,30 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
           setZoomScale(1);
         } else if (activeModal) {
           setActiveModal(null);
+        }
+      } else if (zoomedImage?.images && zoomedImage.images.length > 1 && zoomedImage.currentIndex !== undefined) {
+        if (e.key === 'ArrowLeft') {
+          const prevIdx = (zoomedImage.currentIndex - 1 + zoomedImage.images.length) % zoomedImage.images.length;
+          const prevItem = zoomedImage.images[prevIdx];
+          setZoomedImage({
+            ...zoomedImage,
+            src: prevItem.url,
+            title: prevItem.title,
+            link: prevItem.link,
+            currentIndex: prevIdx,
+          });
+          setZoomScale(1);
+        } else if (e.key === 'ArrowRight') {
+          const nextIdx = (zoomedImage.currentIndex + 1) % zoomedImage.images.length;
+          const nextItem = zoomedImage.images[nextIdx];
+          setZoomedImage({
+            ...zoomedImage,
+            src: nextItem.url,
+            title: nextItem.title,
+            link: nextItem.link,
+            currentIndex: nextIdx,
+          });
+          setZoomScale(1);
         }
       }
     };
@@ -73,7 +108,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     title: string;
     description: string;
     image: string;
-    gallery?: { url: string; title: string }[];
+    gallery?: { url: string; title: string; link?: string }[];
     videoUrl?: string;
     youtubeId?: string;
     resourceLink?: {
@@ -100,8 +135,25 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       videoUrl: 'https://www.youtube.com/watch?v=V8dSVjujF1A',
       youtubeId: 'V8dSVjujF1A',
       tools: ['GoHighLevel', 'Sales Pipelines', 'Appointment Workflows', 'SMS & Email', 'Calendar Funnel'],
+      gallery: [
+        {
+          url: 'https://i.im.ge/QQQ4AgD/fullpage_snapshot_app_crm_taraai_ph_2026-09-04-15-23-52.png',
+          link: 'https://im.ge/i/QQQ4AgD',
+          title: 'Fullpage Snapshot App Crm Taraai Ph 2026 09 04 15 23 52',
+        },
+        {
+          url: 'https://i.im.ge/QQQ4trM/fullpage_snapshot_app_crm_taraai_ph_2026-09-04-15-22-35.png',
+          link: 'https://im.ge/i/QQQ4trM',
+          title: 'Fullpage Snapshot App Crm Taraai Ph 2026 09 04 15 22 35',
+        },
+        {
+          url: 'https://i.im.ge/QQQ4y0Y/fullpage_snapshot_app_crm_taraai_ph_2026-09-04-15-21-59.png',
+          link: 'https://im.ge/i/QQQ4y0Y',
+          title: 'Fullpage Snapshot App Crm Taraai Ph 2026 09 04 15 21 59',
+        },
+      ],
       resourceLink: {
-        url: 'https://sites.leadconnectorhq.com/preview/VD6VVNMUuA1JXCVlUjH7?notrack=true',
+        url: 'https://sites.leadconnectorhq.com/preview/FEorbibNCh0iAD3k1WxJ?notrack=true',
         label: 'GoHighLevel Live Solar Appointment Funnel',
         badge: 'LIVE FUNNEL DEMO',
         description: 'Explore the live solar lead booking & appointment funnel page in action.',
@@ -858,7 +910,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 exit={{ opacity: 0, scale: 0.95, y: 15 }}
                 transition={{ duration: 0.22, ease: 'easeOut' }}
                 onClick={(e) => e.stopPropagation()}
-                className="relative w-full max-w-2xl max-h-[calc(100vh-5.5rem)] sm:max-h-[calc(100vh-6.5rem)] flex flex-col border rounded-3xl shadow-2xl card-crimson-glow overflow-hidden my-auto"
+                className="relative w-full max-w-4xl max-h-[calc(100vh-5.5rem)] sm:max-h-[calc(100vh-6.5rem)] flex flex-col border rounded-3xl shadow-2xl card-crimson-glow overflow-hidden my-auto"
                 style={{
                   backgroundColor: 'var(--bg-secondary)',
                   color: 'var(--text-primary)',
@@ -952,6 +1004,148 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     </div>
                   )}
 
+                  {/* Interactive Workflow & CRM Snapshots Carousel (Visible right when video is open) */}
+                  {activeModal.gallery && activeModal.gallery.length > 0 && (
+                    <div 
+                      className="p-4 sm:p-5 border rounded-2xl space-y-3.5"
+                      style={{
+                        backgroundColor: 'var(--bg-primary)',
+                        borderColor: 'var(--border-color)',
+                      }}
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                        <div className="flex items-center gap-2">
+                          <Layers className="w-4 h-4 text-[#f59e0b]" />
+                          <span className="text-[#f59e0b] text-xs font-bold font-mono tracking-wider uppercase">
+                            SYSTEM WORKFLOW & CRM SNAPSHOTS ({activeModal.gallery.length})
+                          </span>
+                        </div>
+
+                        <div className="flex items-center justify-between sm:justify-end gap-3">
+                          <span className="text-[11px] font-mono text-zinc-400">
+                            Scroll left / right • Click image to zoom in/out
+                          </span>
+
+                          {/* Left / Right Scroll Buttons */}
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            <button
+                              type="button"
+                              onClick={() => scrollGallery('left')}
+                              className="p-1.5 rounded-lg border border-white/10 hover:border-amber-500 hover:bg-amber-500/10 text-[#f59e0b] transition-all cursor-pointer shadow-sm"
+                              style={{
+                                backgroundColor: 'var(--bg-secondary)',
+                              }}
+                              title="Scroll Left"
+                            >
+                              <ChevronLeft className="w-4 h-4" />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => scrollGallery('right')}
+                              className="p-1.5 rounded-lg border border-white/10 hover:border-amber-500 hover:bg-amber-500/10 text-[#f59e0b] transition-all cursor-pointer shadow-sm"
+                              style={{
+                                backgroundColor: 'var(--bg-secondary)',
+                              }}
+                              title="Scroll Right"
+                            >
+                              <ChevronRight className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Horizontal Scrollable Carousel Strip */}
+                      <div 
+                        ref={galleryScrollRef}
+                        className="flex gap-3.5 overflow-x-auto pb-2 pt-1 scroll-smooth snap-x snap-mandatory select-none"
+                        style={{
+                          scrollbarWidth: 'thin',
+                        }}
+                      >
+                        {activeModal.gallery.map((item, idx) => (
+                          <div
+                            key={idx}
+                            className="snap-start shrink-0 w-[260px] sm:w-[320px] md:w-[360px] rounded-xl overflow-hidden border border-white/10 bg-[#090807] transition-all hover:border-[#f59e0b]/70 shadow-lg flex flex-col group/item"
+                          >
+                            <div 
+                              onClick={() => {
+                                setZoomedImage({
+                                  src: item.url,
+                                  title: item.title,
+                                  category: activeModal.category,
+                                  link: item.link,
+                                  images: activeModal.gallery,
+                                  currentIndex: idx,
+                                });
+                                setZoomScale(1);
+                              }}
+                              className="relative h-44 sm:h-52 w-full overflow-hidden flex items-center justify-center p-2.5 bg-black/60 cursor-zoom-in"
+                            >
+                              <img
+                                src={item.url}
+                                alt={item.title}
+                                referrerPolicy="no-referrer"
+                                className="w-full h-full object-contain group-hover/item:scale-[1.03] transition-transform duration-300"
+                              />
+
+                              {/* Hover Zoom Overlay */}
+                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/item:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                <span className="px-3 py-1.5 rounded-xl bg-amber-500 text-black text-xs font-mono font-bold flex items-center gap-1.5 shadow-xl">
+                                  <ZoomIn className="w-3.5 h-3.5" />
+                                  <span>Zoom In / Out</span>
+                                </span>
+                              </div>
+
+                              {/* Snapshot badge */}
+                              <div className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-black/80 border border-white/10 text-[#f59e0b] font-mono text-[10px] font-bold">
+                                Snapshot {idx + 1} of {activeModal.gallery.length}
+                              </div>
+                            </div>
+
+                            {/* Card Footer Bar */}
+                            <div className="p-2.5 bg-black/80 border-t border-white/5 flex items-center justify-between gap-2">
+                              <span className="text-[11px] font-medium text-zinc-300 truncate" title={item.title}>
+                                {item.title}
+                              </span>
+                              <div className="flex items-center gap-1 shrink-0">
+                                {item.link && (
+                                  <a
+                                    href={item.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="p-1 rounded-md text-zinc-400 hover:text-[#f59e0b] hover:bg-white/5 transition-colors"
+                                    title="Open original host link"
+                                  >
+                                    <ExternalLink className="w-3.5 h-3.5" />
+                                  </a>
+                                )}
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setZoomedImage({
+                                      src: item.url,
+                                      title: item.title,
+                                      category: activeModal.category,
+                                      link: item.link,
+                                      images: activeModal.gallery,
+                                      currentIndex: idx,
+                                    });
+                                    setZoomScale(1.25);
+                                  }}
+                                  className="p-1 rounded-md text-[#f59e0b] hover:bg-amber-500/20 transition-colors cursor-pointer"
+                                  title="Zoom In"
+                                >
+                                  <Maximize2 className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Highlighted Live Funnel / Resource Link Banner in Modal */}
                   {activeModal.resourceLink && (
                     <div 
@@ -1013,59 +1207,6 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       <p style={{ color: 'var(--text-secondary)' }} className="leading-relaxed">{activeModal.solution}</p>
                     </div>
                   </div>
-
-                  {/* Workflow Screenshots & Funnel Diagrams Gallery (if available) */}
-                  {activeModal.gallery && activeModal.gallery.length > 0 && (
-                    <div 
-                      className="p-5 border rounded-2xl space-y-4"
-                      style={{
-                        backgroundColor: 'var(--bg-primary)',
-                        borderColor: 'var(--border-color)',
-                      }}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <Layers className="w-4 h-4 text-[#f59e0b]" />
-                          <span className="text-[#f59e0b] text-xs font-bold font-mono tracking-wider uppercase">
-                            SYSTEM SCREENSHOTS & WORKFLOW BLUEPRINTS ({activeModal.gallery.length})
-                          </span>
-                        </div>
-                        <span className="text-[11px] font-mono text-zinc-400">Click any image to enlarge</span>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                        {activeModal.gallery.map((item, idx) => (
-                          <div
-                            key={idx}
-                            onClick={() => {
-                              setZoomedImage({
-                                src: item.url,
-                                title: `${activeModal.title} - ${item.title}`,
-                                category: activeModal.category,
-                              });
-                              setZoomScale(1.2);
-                            }}
-                            className="group/gal relative rounded-xl overflow-hidden border border-white/10 bg-[#090807] cursor-zoom-in hover:border-[#f59e0b]/60 transition-all shadow-md flex flex-col"
-                          >
-                            <div className="h-32 w-full overflow-hidden flex items-center justify-center p-1.5 bg-black/50">
-                              <img
-                                src={item.url}
-                                alt={item.title}
-                                referrerPolicy="no-referrer"
-                                className="w-full h-full object-contain group-hover/gal:scale-105 transition-transform duration-200"
-                              />
-                            </div>
-                            <div className="p-2 bg-black/80 border-t border-white/5 flex items-center justify-between gap-1">
-                              <span className="text-[11px] font-medium text-zinc-300 truncate" title={item.title}>
-                                {item.title}
-                              </span>
-                              <Maximize2 className="w-3 h-3 text-[#f59e0b] shrink-0 opacity-70 group-hover/gal:opacity-100" />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
 
                   {activeModal.result ? (
                     <div 
@@ -1170,10 +1311,15 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   borderColor: 'var(--border-color)',
                 }}
               >
-                <div className="flex items-center gap-3 overflow-hidden">
+                <div className="flex items-center gap-2.5 overflow-hidden">
                   {zoomedImage.category && (
                     <span className="text-[10px] sm:text-xs font-mono font-bold text-[#f59e0b] px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/20 shrink-0 uppercase">
                       {zoomedImage.category}
+                    </span>
+                  )}
+                  {zoomedImage.images && zoomedImage.images.length > 1 && zoomedImage.currentIndex !== undefined && (
+                    <span className="text-[10px] sm:text-xs font-mono font-bold text-zinc-300 px-2 py-0.5 rounded-md bg-white/10 shrink-0">
+                      {zoomedImage.currentIndex + 1} / {zoomedImage.images.length}
                     </span>
                   )}
                   <h4 className="text-xs sm:text-sm font-bold truncate text-white">
@@ -1181,8 +1327,78 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                   </h4>
                 </div>
 
-                {/* Zoom & Close Toolbar */}
+                {/* Zoom, Navigation & Close Toolbar */}
                 <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                  {/* Left / Right image switch buttons if part of a gallery */}
+                  {zoomedImage.images && zoomedImage.images.length > 1 && (
+                    <div className="flex items-center gap-1 mr-1 border-r border-white/10 pr-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (zoomedImage.images && zoomedImage.currentIndex !== undefined) {
+                            const prevIdx = (zoomedImage.currentIndex - 1 + zoomedImage.images.length) % zoomedImage.images.length;
+                            const prevItem = zoomedImage.images[prevIdx];
+                            setZoomedImage({
+                              ...zoomedImage,
+                              src: prevItem.url,
+                              title: prevItem.title,
+                              link: prevItem.link,
+                              currentIndex: prevIdx,
+                            });
+                            setZoomScale(1);
+                          }
+                        }}
+                        className="p-1.5 sm:p-2 rounded-xl border border-white/10 hover:border-amber-500 hover:text-[#f59e0b] transition-colors cursor-pointer text-white"
+                        style={{
+                          backgroundColor: 'var(--bg-primary)',
+                        }}
+                        title="Previous image (Left Arrow)"
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (zoomedImage.images && zoomedImage.currentIndex !== undefined) {
+                            const nextIdx = (zoomedImage.currentIndex + 1) % zoomedImage.images.length;
+                            const nextItem = zoomedImage.images[nextIdx];
+                            setZoomedImage({
+                              ...zoomedImage,
+                              src: nextItem.url,
+                              title: nextItem.title,
+                              link: nextItem.link,
+                              currentIndex: nextIdx,
+                            });
+                            setZoomScale(1);
+                          }
+                        }}
+                        className="p-1.5 sm:p-2 rounded-xl border border-white/10 hover:border-amber-500 hover:text-[#f59e0b] transition-colors cursor-pointer text-white"
+                        style={{
+                          backgroundColor: 'var(--bg-primary)',
+                        }}
+                        title="Next image (Right Arrow)"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                      </button>
+                    </div>
+                  )}
+
+                  {zoomedImage.link && (
+                    <a
+                      href={zoomedImage.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl border border-white/10 hover:border-amber-500 text-xs font-mono text-zinc-300 hover:text-[#f59e0b] flex items-center gap-1.5 transition-colors"
+                      style={{
+                        backgroundColor: 'var(--bg-primary)',
+                      }}
+                      title="Open full upload link on im.ge"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span className="hidden md:inline">Open Link</span>
+                    </a>
+                  )}
+
                   <button
                     type="button"
                     onClick={() => setZoomScale((s) => Math.max(s - 0.25, 0.5))}
@@ -1192,7 +1408,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       borderColor: 'var(--border-color)',
                       color: 'var(--text-primary)',
                     }}
-                    title="Zoom Out"
+                    title="Zoom Out (-)"
                   >
                     <ZoomOut className="w-4 h-4 text-[#f59e0b]" />
                     <span className="hidden sm:inline">Zoom Out</span>
@@ -1221,7 +1437,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                       borderColor: 'var(--border-color)',
                       color: 'var(--text-primary)',
                     }}
-                    title="Zoom In"
+                    title="Zoom In (+)"
                   >
                     <ZoomIn className="w-4 h-4 text-[#f59e0b]" />
                     <span className="hidden sm:inline">Zoom In</span>
@@ -1249,6 +1465,58 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
+                {/* Floating Previous Image Button */}
+                {zoomedImage.images && zoomedImage.images.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (zoomedImage.images && zoomedImage.currentIndex !== undefined) {
+                        const prevIdx = (zoomedImage.currentIndex - 1 + zoomedImage.images.length) % zoomedImage.images.length;
+                        const prevItem = zoomedImage.images[prevIdx];
+                        setZoomedImage({
+                          ...zoomedImage,
+                          src: prevItem.url,
+                          title: prevItem.title,
+                          link: prevItem.link,
+                          currentIndex: prevIdx,
+                        });
+                        setZoomScale(1);
+                      }
+                    }}
+                    className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-30 p-3 sm:p-3.5 rounded-full bg-black/80 hover:bg-amber-500 hover:text-black text-white border border-white/20 transition-all shadow-2xl cursor-pointer hover:scale-110 backdrop-blur-md"
+                    title="Previous Image (Left Arrow)"
+                  >
+                    <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </button>
+                )}
+
+                {/* Floating Next Image Button */}
+                {zoomedImage.images && zoomedImage.images.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (zoomedImage.images && zoomedImage.currentIndex !== undefined) {
+                        const nextIdx = (zoomedImage.currentIndex + 1) % zoomedImage.images.length;
+                        const nextItem = zoomedImage.images[nextIdx];
+                        setZoomedImage({
+                          ...zoomedImage,
+                          src: nextItem.url,
+                          title: nextItem.title,
+                          link: nextItem.link,
+                          currentIndex: nextIdx,
+                        });
+                        setZoomScale(1);
+                      }
+                    }}
+                    className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-30 p-3 sm:p-3.5 rounded-full bg-black/80 hover:bg-amber-500 hover:text-black text-white border border-white/20 transition-all shadow-2xl cursor-pointer hover:scale-110 backdrop-blur-md"
+                    title="Next Image (Right Arrow)"
+                  >
+                    <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </button>
+                )}
+
                 <div 
                   className="transition-transform duration-200 ease-out origin-center flex items-center justify-center max-w-full max-h-full"
                   style={{
@@ -1259,7 +1527,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                     src={zoomedImage.src}
                     alt={zoomedImage.title}
                     referrerPolicy="no-referrer"
-                    onClick={() => setZoomScale((prev) => (prev > 1.2 ? 1 : 1.6))}
+                    onClick={() => setZoomScale((prev) => (prev > 1.2 ? 1 : 1.75))}
                     className={`max-w-full max-h-[75vh] object-contain rounded-2xl shadow-2xl select-none ${
                       zoomScale > 1.2 ? 'cursor-zoom-out' : 'cursor-zoom-in'
                     }`}
@@ -1267,8 +1535,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 </div>
 
                 {/* Bottom hint pill */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/70 border border-white/10 px-4 py-1.5 rounded-full text-[11px] font-mono text-white/70 backdrop-blur-md pointer-events-none text-center">
-                  Click image to toggle zoom • Drag / scroll to pan • Press <kbd className="text-[#f59e0b] font-bold">ESC</kbd> to exit
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/80 border border-white/10 px-4 py-1.5 rounded-full text-[11px] font-mono text-white/80 backdrop-blur-md pointer-events-none text-center shadow-lg">
+                  Use <kbd className="text-[#f59e0b] font-bold">◄</kbd> / <kbd className="text-[#f59e0b] font-bold">►</kbd> arrows to scroll • Click to zoom • Drag / scroll to pan • Press <kbd className="text-[#f59e0b] font-bold">ESC</kbd> to exit
                 </div>
               </div>
             </motion.div>

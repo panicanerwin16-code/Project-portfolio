@@ -118,7 +118,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
         
         {/* Unified 2-Column Grid: Left Side (Work With Me Details) & Right Side (Calendar Consultation) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
           
           {/* ================= LEFT SIDE: WORK WITH ME DETAILS ================= */}
           <motion.div 
@@ -126,147 +126,159 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-5 flex flex-col justify-start text-left space-y-7"
+            className="lg:col-span-5 flex flex-col justify-between h-full text-left"
           >
-            {/* Eyebrow Badge */}
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-[#f59e0b] text-xs font-mono font-bold uppercase tracking-widest shadow-[0_0_15px_rgba(245,158,11,0.2)]">
-                <Zap className="w-3.5 h-3.5 text-[#f59e0b] animate-pulse" />
-                <span>WORK WITH ME</span>
-              </span>
-            </div>
+            {/* Top Section */}
+            <div className="space-y-6">
+              {/* Eyebrow Badge */}
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-[#f59e0b] text-xs font-mono font-bold uppercase tracking-widest shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+                  <Zap className="w-3.5 h-3.5 text-[#f59e0b] animate-pulse" />
+                  <span>WORK WITH ME</span>
+                </span>
+              </div>
 
-            {/* Headline */}
-            <h2 
-              className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.12]"
-              style={{ color: 'var(--text-primary)' }}
-            >
-              You've seen what I build. <br />
-              <span className="gradient-fiery-text drop-shadow-[0_0_25px_rgba(245,158,11,0.35)]">
-                Let's talk about yours.
-              </span>
-            </h2>
+              {/* Headline */}
+              <h2 
+                className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.12]"
+                style={{ color: 'var(--text-primary)' }}
+              >
+                You've seen what I build. <br />
+                <span className="gradient-fiery-text drop-shadow-[0_0_25px_rgba(245,158,11,0.35)]">
+                  Let's talk about yours.
+                </span>
+              </h2>
 
-            {/* Description */}
-            <p 
-              className="text-sm sm:text-base leading-relaxed"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              30 minutes. You walk me through your current stack, your operations, and where things are slipping — leads going cold, sequences not firing, or manual tasks your team shouldn't be touching. I'll tell you exactly what I'd build, in what order, and what it would actually change for your business.
-            </p>
+              {/* Description */}
+              <p 
+                className="text-sm sm:text-base leading-relaxed"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                30 minutes. You walk me through your current stack, your operations, and where things are slipping — leads going cold, sequences not firing, or manual tasks your team shouldn't be touching. I'll tell you exactly what I'd build, in what order, and what it would actually change for your business.
+              </p>
 
-            {/* Strategic Value Points */}
-            <div 
-              className="p-5 sm:p-6 rounded-2xl border space-y-3.5 backdrop-blur-md shadow-lg"
-              style={{
-                backgroundColor: 'var(--bg-card)',
-                borderColor: 'var(--border-color)',
-              }}
-            >
-              <h3 className="text-xs font-mono uppercase tracking-wider font-bold text-[#f59e0b]">
-                What We Will Cover in 30 Minutes:
-              </h3>
-              
-              <div className="space-y-2.5">
-                {[
-                  'Live audit of your existing bottlenecks in GoHighLevel, CRM, or spreadsheets.',
-                  'Recommended automation architecture (n8n, Make, Zapier, Webhooks & AI).',
-                  'Actionable timeline, implementation steps, and estimated hours saved per week.',
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#f59e0b] shrink-0 mt-0.5" />
-                    <span className="text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
-                      {item}
-                    </span>
-                  </div>
-                ))}
+              {/* Strategic Value Points */}
+              <div 
+                className="p-4 sm:p-5 rounded-2xl border space-y-3 backdrop-blur-md shadow-lg"
+                style={{
+                  backgroundColor: 'var(--bg-card)',
+                  borderColor: 'var(--border-color)',
+                }}
+              >
+                <h3 className="text-xs font-mono uppercase tracking-wider font-bold text-[#f59e0b]">
+                  What We Will Cover in 30 Minutes:
+                </h3>
+                
+                <div className="space-y-2">
+                  {[
+                    'Live audit of your existing bottlenecks in GoHighLevel, CRM, or spreadsheets.',
+                    'Recommended automation architecture (n8n, Make, Zapier, Webhooks & AI).',
+                    'Actionable timeline, implementation steps, and estimated hours saved per week.',
+                  ].map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 text-[#f59e0b] shrink-0 mt-0.5" />
+                      <span className="text-xs sm:text-sm leading-relaxed" style={{ color: 'var(--text-primary)' }}>
+                        {item}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Direct Contact Channels */}
-            <div className="space-y-3 pt-2">
-              <span className="text-xs font-mono uppercase tracking-wider font-bold block" style={{ color: 'var(--text-secondary)' }}>
-                Direct Communication Channels:
-              </span>
+            {/* Bottom Section: Direct Communication Channels & Resume - Aligned with the bottom of the calendar */}
+            <div className="pt-6 mt-6 lg:mt-auto flex flex-col justify-end space-y-3">
+              {/* Direct Contact Channels - Smaller and Sleeker */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[11px] font-mono uppercase tracking-wider font-bold" style={{ color: 'var(--text-secondary)' }}>
+                    Direct Communication Channels:
+                  </span>
+                  <span className="text-[10px] font-mono text-emerald-400 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    Available Now
+                  </span>
+                </div>
 
-              <div className="space-y-2.5">
-                {contactChannels.map((item) => {
-                  const IconComp = item.icon;
-                  return (
-                    <div
-                      key={item.id}
-                      className="group flex items-center justify-between p-3.5 sm:p-4 rounded-2xl border transition-all duration-200 shadow-md hover:border-[#f59e0b]/60 card-crimson-glow"
-                      style={{
-                        backgroundColor: 'var(--bg-secondary)',
-                        borderColor: 'var(--border-color)',
-                      }}
-                    >
-                      <a
-                        href={item.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex items-center gap-3.5 flex-1 min-w-0"
+                <div className="space-y-1.5">
+                  {contactChannels.map((item) => {
+                    const IconComp = item.icon;
+                    return (
+                      <div
+                        key={item.id}
+                        className="group flex items-center justify-between py-2 px-3 sm:py-2.5 sm:px-3.5 rounded-xl border transition-all duration-200 shadow-sm hover:border-[#f59e0b]/60 card-crimson-glow"
+                        style={{
+                          backgroundColor: 'var(--bg-secondary)',
+                          borderColor: 'var(--border-color)',
+                        }}
                       >
-                        <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 text-[#f59e0b] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                          <IconComp className="w-4 h-4" />
-                        </div>
-                        <div className="truncate">
-                          <div className="flex items-center gap-2">
-                            <span className="text-[10px] font-mono uppercase font-bold tracking-wider" style={{ color: 'var(--text-secondary)' }}>
-                              {item.label}
-                            </span>
-                            {item.badge && (
-                              <span className="px-2 py-0.2 rounded-full bg-amber-500/15 text-[#f59e0b] text-[9px] font-mono font-bold">
-                                {item.badge}
-                              </span>
-                            )}
-                          </div>
-                          <span 
-                            className="text-xs sm:text-sm font-semibold truncate block transition-colors group-hover:text-[#f59e0b]"
-                            style={{ color: 'var(--text-primary)' }}
-                          >
-                            {item.text}
-                          </span>
-                        </div>
-                      </a>
-
-                      <div className="flex items-center gap-2 shrink-0 ml-2">
-                        {item.action === 'copy' && (
-                          <button
-                            onClick={handleCopyEmail}
-                            title="Copy email address"
-                            className="p-2 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-[#f59e0b] transition-colors cursor-pointer"
-                          >
-                            {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                          </button>
-                        )}
                         <a
                           href={item.href}
                           target="_blank"
                           rel="noreferrer"
-                          className="p-2 rounded-lg text-[#f59e0b] hover:bg-amber-500/10 transition-colors"
+                          className="flex items-center gap-2.5 flex-1 min-w-0"
                         >
-                          <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-amber-500/10 border border-amber-500/30 text-[#f59e0b] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                            <IconComp className="w-3.5 h-3.5" />
+                          </div>
+                          <div className="truncate">
+                            <div className="flex items-center gap-1.5">
+                              <span className="text-[9px] font-mono uppercase font-bold tracking-wider" style={{ color: 'var(--text-secondary)' }}>
+                                {item.label}
+                              </span>
+                              {item.badge && (
+                                <span className="px-1.5 py-0.2 rounded-full bg-amber-500/15 text-[#f59e0b] text-[8px] font-mono font-bold">
+                                  {item.badge}
+                                </span>
+                              )}
+                            </div>
+                            <span 
+                              className="text-xs font-semibold truncate block transition-colors group-hover:text-[#f59e0b]"
+                              style={{ color: 'var(--text-primary)' }}
+                            >
+                              {item.text}
+                            </span>
+                          </div>
                         </a>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
 
-            {/* Resume Button */}
-            {onOpenResume && (
-              <div className="pt-2">
-                <button
-                  onClick={onOpenResume}
-                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-[#f59e0b] font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md hover:scale-[1.02]"
-                >
-                  <FileText className="w-4 h-4 text-[#f59e0b]" />
-                  <span>View & Download Resume (PDF)</span>
-                </button>
+                        <div className="flex items-center gap-1 shrink-0 ml-2">
+                          {item.action === 'copy' && (
+                            <button
+                              onClick={handleCopyEmail}
+                              title="Copy email address"
+                              className="p-1.5 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-[#f59e0b] transition-colors cursor-pointer"
+                            >
+                              {copiedEmail ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                            </button>
+                          )}
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="p-1.5 rounded-md text-[#f59e0b] hover:bg-amber-500/10 transition-colors"
+                          >
+                            <ExternalLink className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                          </a>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            )}
+
+              {/* Resume Button */}
+              {onOpenResume && (
+                <div className="pt-1">
+                  <button
+                    onClick={onOpenResume}
+                    className="w-full py-2.5 sm:py-3 px-5 rounded-xl border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-[#f59e0b] font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md hover:scale-[1.01]"
+                  >
+                    <FileText className="w-4 h-4 text-[#f59e0b]" />
+                    <span>View & Download Resume (PDF)</span>
+                  </button>
+                </div>
+              )}
+            </div>
           </motion.div>
 
           {/* ================= RIGHT SIDE: CALENDLY FREE 30-MIN CONSULTATION ================= */}
@@ -275,11 +287,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="lg:col-span-7 flex flex-col justify-start"
+            className="lg:col-span-7 flex flex-col justify-start h-full"
           >
             {/* Calendly Outer Frame Card */}
             <div 
-              className="relative rounded-3xl border-2 card-crimson-glow shadow-2xl overflow-hidden backdrop-blur-xl transition-all"
+              className="relative rounded-3xl border-2 card-crimson-glow shadow-2xl overflow-hidden backdrop-blur-xl transition-all h-full flex flex-col justify-between"
               style={{
                 backgroundColor: 'var(--bg-secondary)',
                 borderColor: 'var(--border-color)',

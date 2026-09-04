@@ -23,7 +23,7 @@ export interface ProjectItem {
   title: string;
   category: string;
   image: string;
-  gallery?: { url: string; title: string }[];
+  gallery?: { url: string; title: string; link?: string }[];
   videoUrl?: string;
   youtubeId?: string;
   resourceLink?: {
