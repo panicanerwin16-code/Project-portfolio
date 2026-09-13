@@ -130,9 +130,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       title: 'Solar Panel: GoHighLevel Appointment Funnel & Lead Management Automation',
       description:
         'A complete solar business appointment booking and pipeline automation built in GoHighLevel featuring automated multi-scenario workflows for confirmations, cancellations, reschedules, show-ups, and automated no-show recovery sequences.',
-      image: 'https://img.youtube.com/vi/V8dSVjujF1A/maxresdefault.jpg',
-      videoUrl: 'https://www.youtube.com/watch?v=V8dSVjujF1A',
-      youtubeId: 'V8dSVjujF1A',
+      image: 'https://img.youtube.com/vi/euAJ_zJZyY8/maxresdefault.jpg',
+      videoUrl: 'https://www.youtube.com/watch?v=euAJ_zJZyY8',
+      youtubeId: 'euAJ_zJZyY8',
       tools: ['GoHighLevel', 'Sales Pipelines', 'Appointment Workflows', 'SMS & Email', 'Calendar Funnel'],
       gallery: [
         {
