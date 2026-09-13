@@ -76,10 +76,12 @@ const funnelProjects: FunnelProject[] = [
       'A conversion-engineered GoHighLevel landing page and automated appointment booking funnel designed specifically for heating, ventilation, and air conditioning (HVAC) service contractors. It captures urgent repair leads and seasonal tune-up requests, automates lead pre-qualification, and books appointments directly onto dispatch calendars with instant SMS workflows.',
     snapshotUrl:
       'https://i.im.ge/QQljqIp/fullpage_snapshot_sites_leadconnectorhq_com_2026-09-13-07-05-12.png',
+    liveDemoUrl:
+      'https://sites.leadconnectorhq.com/preview/r2Km5TLfGbL6GBAM4S1l?notrack=true',
     imageHostUrl: 'https://im.ge/i/QQljqIp',
-    linkLabel: 'Full-Page Landing Page Snapshot Link',
-    linkBadge: 'LIVE SNAPSHOT',
-    linkButtonText: 'Open Snapshot',
+    linkLabel: 'Live Funnel Link',
+    linkBadge: 'ACTIVE DEMO',
+    linkButtonText: 'Open Funnel',
     tags: [
       'GoHighLevel',
       'HVAC Service Funnel',
