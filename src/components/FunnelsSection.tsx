@@ -10,32 +10,124 @@ import {
   Calendar,
   ArrowUpRight,
   Sun,
+  Wind,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 
 interface FunnelsSectionProps {
   onOpenBookingForProject: (projectTitle: string) => void;
 }
 
+interface FunnelProject {
+  id: string;
+  badge: string;
+  badgeType: 'solar' | 'hvac';
+  title: string;
+  description: string;
+  snapshotUrl: string;
+  imageHostUrl?: string;
+  liveDemoUrl?: string;
+  linkLabel: string;
+  linkBadge: string;
+  linkButtonText: string;
+  tags: string[];
+  bookingTitle: string;
+  problem: string;
+  solution: string;
+}
+
+const funnelProjects: FunnelProject[] = [
+  {
+    id: 'solar-panel-funnel',
+    badge: 'Solar Panel Funnel',
+    badgeType: 'solar',
+    title: 'Solar Panel: High-Converting GoHighLevel Landing Page & Appointment Funnel',
+    description:
+      'A conversion-engineered GoHighLevel landing page and appointment funnel custom-built for residential and commercial solar panel installation businesses. It transforms cold ad traffic from Facebook, Google Ads, and organic search into high-intent, pre-qualified appointments directly synced with the GoHighLevel CRM calendar.',
+    snapshotUrl:
+      'https://i.im.ge/QQQ4FiW/fullpage_snapshot_sites_leadconnectorhq_com_2026-09-04-15-00-53_1_.png',
+    liveDemoUrl:
+      'https://sites.leadconnectorhq.com/preview/FEorbibNCh0iAD3k1WxJ?notrack=true',
+    linkLabel: 'Live Funnel Link',
+    linkBadge: 'ACTIVE DEMO',
+    linkButtonText: 'Open Funnel',
+    tags: [
+      'GoHighLevel',
+      'Funnel Architecture',
+      'Landing Page Design',
+      'Calendar Booking',
+      'Lead Pre-Qualification',
+      'CRM Pipeline Sync',
+      'SMS & Email Automations',
+    ],
+    bookingTitle: 'Solar Panel GoHighLevel Funnel Build',
+    problem:
+      'Solar companies lose expensive ad traffic when prospects hit generic websites without clear savings calculators or instant consultation booking.',
+    solution:
+      'Engineered a focused landing page with $0 down incentives, homeowner qualification steps, and direct GoHighLevel calendar integration with automated SMS reminders.',
+  },
+  {
+    id: 'hvac-funnel',
+    badge: 'HVAC Funnel',
+    badgeType: 'hvac',
+    title: 'HVAC: High-Converting GoHighLevel Lead & Appointment Funnel',
+    description:
+      'A conversion-engineered GoHighLevel landing page and automated appointment booking funnel designed specifically for heating, ventilation, and air conditioning (HVAC) service contractors. It captures urgent repair leads and seasonal tune-up requests, automates lead pre-qualification, and books appointments directly onto dispatch calendars with instant SMS workflows.',
+    snapshotUrl:
+      'https://i.im.ge/QQljqIp/fullpage_snapshot_sites_leadconnectorhq_com_2026-09-13-07-05-12.png',
+    imageHostUrl: 'https://im.ge/i/QQljqIp',
+    linkLabel: 'Full-Page Landing Page Snapshot Link',
+    linkBadge: 'LIVE SNAPSHOT',
+    linkButtonText: 'Open Snapshot',
+    tags: [
+      'GoHighLevel',
+      'HVAC Service Funnel',
+      'Landing Page Design',
+      'Emergency Dispatch',
+      'Lead Pre-Qualification',
+      'CRM Pipeline Sync',
+      'Instant SMS Confirmations',
+    ],
+    bookingTitle: 'HVAC GoHighLevel Funnel Build',
+    problem:
+      'HVAC companies lose urgent repair inquiries when phone lines are busy or forms do not allow immediate time slot selection.',
+    solution:
+      'Created a mobile-responsive GoHighLevel funnel with upfront emergency repair dispatch options, pre-qualification questions, and instant calendar booking.',
+  },
+];
+
 export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
   onOpenBookingForProject,
 }) => {
-  const [isZoomOpen, setIsZoomOpen] = useState(false);
+  const [activeZoomProject, setActiveZoomProject] = useState<FunnelProject | null>(null);
   const [zoomScale, setZoomScale] = useState(1);
   const [viewMode, setViewMode] = useState<'fit' | 'full'>('full');
+  const [selectedSlide, setSelectedSlide] = useState<'both' | 'solar-panel-funnel' | 'hvac-funnel'>('both');
 
-  const snapshotUrl =
-    'https://i.im.ge/QQQ4FiW/fullpage_snapshot_sites_leadconnectorhq_com_2026-09-04-15-00-53_1_.png';
-  const liveDemoUrl =
-    'https://sites.leadconnectorhq.com/preview/FEorbibNCh0iAD3k1WxJ?notrack=true';
+  const visibleProjects =
+    selectedSlide === 'both'
+      ? funnelProjects
+      : funnelProjects.filter((p) => p.id === selectedSlide);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isZoomOpen) {
-        setIsZoomOpen(false);
+      if (e.key === 'Escape' && activeZoomProject) {
+        setActiveZoomProject(null);
         setZoomScale(1);
+      } else if (activeZoomProject && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+        const currentIdx = funnelProjects.findIndex((p) => p.id === activeZoomProject.id);
+        if (currentIdx !== -1) {
+          const nextIdx =
+            e.key === 'ArrowLeft'
+              ? (currentIdx - 1 + funnelProjects.length) % funnelProjects.length
+              : (currentIdx + 1) % funnelProjects.length;
+          setActiveZoomProject(funnelProjects[nextIdx]);
+          setZoomScale(1);
+        }
       }
     };
-    if (isZoomOpen) {
+    if (activeZoomProject) {
       window.addEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'hidden';
     }
@@ -43,12 +135,12 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'unset';
     };
-  }, [isZoomOpen]);
+  }, [activeZoomProject]);
 
   return (
     <section
       id="funnels"
-      className="py-20 sm:py-24 md:py-32 relative overflow-hidden border-t"
+      className="py-16 sm:py-20 lg:py-24 relative overflow-hidden border-t"
       style={{
         backgroundColor: 'var(--bg-primary)',
         borderColor: 'var(--border-color)',
@@ -59,265 +151,317 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-[#f59e0b] text-xs font-mono font-semibold uppercase tracking-widest mb-4 shadow-[0_0_14px_rgba(245,158,11,0.2)]">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-[#f59e0b] text-xs font-mono font-semibold uppercase tracking-widest mb-3.5 shadow-[0_0_14px_rgba(245,158,11,0.2)]">
             <Layers className="w-3.5 h-3.5" />
             <span>FUNNELS & LANDING PAGES</span>
           </div>
 
           <h2
-            className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-4"
+            className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight mb-3"
             style={{ color: 'var(--text-primary)' }}
           >
             Funnels & Designs Landing Pages That Convert
           </h2>
 
           <p
-            className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-sm sm:text-base max-w-2xl mx-auto leading-relaxed"
             style={{ color: 'var(--text-secondary)' }}
           >
-            GoHighLevel landing pages designed to turn visitors into booked calls and qualified leads.
+            High-converting GoHighLevel landing pages and automated appointment funnels designed to turn cold traffic into pre-qualified, scheduled bookings.
           </p>
+
+          {/* Slide & View Controls Pill */}
+          <div className="mt-6 inline-flex items-center p-1.5 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md shadow-xl gap-1">
+            <button
+              type="button"
+              onClick={() => setSelectedSlide('both')}
+              className={`px-3.5 py-1.5 rounded-xl font-mono text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedSlide === 'both'
+                  ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md'
+                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <span>Side-by-Side (Both)</span>
+              <span className="text-[10px] px-1.5 py-0.2 rounded bg-black/40 font-mono">2</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setSelectedSlide('solar-panel-funnel')}
+              className={`px-3.5 py-1.5 rounded-xl font-mono text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedSlide === 'solar-panel-funnel'
+                  ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md'
+                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <Sun className="w-3.5 h-3.5 text-amber-400" />
+              <span>Solar Panel</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setSelectedSlide('hvac-funnel')}
+              className={`px-3.5 py-1.5 rounded-xl font-mono text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedSlide === 'hvac-funnel'
+                  ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md'
+                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <Wind className="w-3.5 h-3.5 text-amber-400" />
+              <span>HVAC Service</span>
+            </button>
+          </div>
         </div>
 
-        {/* Featured Project Funnel Card */}
+        {/* Project Funnel Tables / Cards Displayed Equally in One Slide */}
         <div
-          className="rounded-3xl border overflow-hidden shadow-2xl transition-all duration-300 card-crimson-glow"
-          style={{
-            backgroundColor: 'var(--bg-secondary)',
-            borderColor: 'var(--border-color)',
-          }}
+          className={`grid gap-6 lg:gap-8 items-stretch ${
+            selectedSlide === 'both'
+              ? 'grid-cols-1 lg:grid-cols-2'
+              : 'grid-cols-1 max-w-4xl mx-auto'
+          }`}
         >
-          {/* Single Unified Table / Card */}
-          <div className="flex flex-col">
-            {/* Top: Funnel Visual Snapshot Showcase */}
-            <div
-              className="relative border-b overflow-hidden flex flex-col justify-between bg-[#080706]"
-              style={{ borderColor: 'var(--border-color)' }}
-            >
-              {/* Snapshot Preview Window */}
+          {visibleProjects.map((project, index) => {
+            const projectLink = project.liveDemoUrl || project.imageHostUrl || project.snapshotUrl;
+            return (
               <div
-                className="relative h-[400px] sm:h-[480px] md:h-[560px] lg:h-[640px] overflow-hidden group/preview cursor-pointer"
-                onClick={() => {
-                  setIsZoomOpen(true);
-                  setZoomScale(1);
-                  setViewMode('full');
+                key={project.id}
+                className="rounded-3xl border overflow-hidden shadow-2xl transition-all duration-300 card-crimson-glow flex flex-col h-full justify-between"
+                style={{
+                  backgroundColor: 'var(--bg-secondary)',
+                  borderColor: 'var(--border-color)',
                 }}
               >
-                {/* Visual Snapshot Image */}
-                <img
-                  src={snapshotUrl}
-                  alt="Solar Panel Business GoHighLevel Landing Page Snapshot"
-                  referrerPolicy="no-referrer"
-                  className="w-full object-cover object-top transition-transform duration-700 group-hover/preview:scale-[1.01]"
-                />
-
-                {/* Top Overlay Badge */}
-                <div className="absolute top-4 left-4 flex items-center gap-2 z-10 pointer-events-none">
-                  <span className="px-3 py-1 rounded-full bg-black/80 border border-amber-500/40 text-amber-300 text-xs font-mono font-bold uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5 shadow-lg">
-                    <Sun className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Solar Panel Funnel</span>
-                  </span>
-                  <span className="px-2.5 py-1 rounded-full bg-amber-500/20 text-[#f59e0b] border border-amber-500/30 text-[11px] font-mono font-semibold backdrop-blur-md">
-                    Full-Page Design
-                  </span>
-                </div>
-
-                {/* Bottom Gradient Fade */}
-                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#080706] via-[#080706]/70 to-transparent pointer-events-none" />
-
-                {/* Hover Action Overlay */}
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/preview:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-3 p-4">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setIsZoomOpen(true);
-                      setZoomScale(1);
-                      setViewMode('full');
-                    }}
-                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#f59e0b] to-[#f97316] text-white font-mono text-xs sm:text-sm font-bold flex items-center gap-2 shadow-xl hover:scale-105 transition-all cursor-pointer"
+                {/* Unified Card Container */}
+                <div className="flex flex-col h-full justify-between">
+                  {/* Top: Funnel Visual Snapshot Window */}
+                  <div
+                    className="relative border-b overflow-hidden flex flex-col justify-between bg-[#080706]"
+                    style={{ borderColor: 'var(--border-color)' }}
                   >
-                    <Maximize2 className="w-4 h-4" />
-                    <span>Inspect Full Landing Page</span>
-                  </button>
-                  <p className="text-xs font-mono text-zinc-300">Click anywhere to view full vertical page</p>
-                </div>
+                    {/* Snapshot Preview Window (Adjusted height to fit cleanly in one view) */}
+                    <div
+                      className="relative h-[240px] sm:h-[280px] md:h-[300px] overflow-hidden group/preview cursor-pointer"
+                      onClick={() => {
+                        setActiveZoomProject(project);
+                        setZoomScale(1);
+                        setViewMode('full');
+                      }}
+                    >
+                      {/* Visual Snapshot Image */}
+                      <img
+                        src={project.snapshotUrl}
+                        alt={`${project.title} Snapshot`}
+                        referrerPolicy="no-referrer"
+                        className="w-full object-cover object-top transition-transform duration-700 group-hover/preview:scale-[1.02]"
+                      />
 
-                {/* Corner Enlarge Button */}
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsZoomOpen(true);
-                    setZoomScale(1);
-                    setViewMode('full');
-                  }}
-                  title="Enlarge & Scroll Landing Page"
-                  className="absolute bottom-4 right-4 bg-black/80 hover:bg-amber-600 text-white border border-white/20 p-2.5 rounded-xl backdrop-blur-md shadow-lg transition-all hover:scale-110 cursor-pointer z-10"
-                >
-                  <ZoomIn className="w-4 h-4 text-[#f59e0b] group-hover:text-white" />
-                </button>
-              </div>
-
-              {/* Action Bar Below Image */}
-              <div
-                className="p-4 sm:p-5 border-t flex flex-wrap items-center justify-between gap-3 bg-[#0d0a07]"
-                style={{ borderColor: 'var(--border-color)' }}
-              >
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-xs font-mono text-zinc-400">Production-Ready GoHighLevel Asset</span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsZoomOpen(true);
-                      setZoomScale(1);
-                      setViewMode('full');
-                    }}
-                    className="px-3 py-1.5 rounded-xl border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-[#f59e0b] font-mono text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
-                  >
-                    <Maximize2 className="w-3.5 h-3.5" />
-                    <span>Full Snapshot</span>
-                  </button>
-
-                  <a
-                    href={liveDemoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:brightness-110 text-white font-mono text-xs font-bold flex items-center gap-1.5 transition-all shadow-md cursor-pointer"
-                  >
-                    <span>Live Preview</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Content: Link, Title, Description, and Tags */}
-            <div className="p-6 sm:p-8 lg:p-10">
-              {/* The Link: Prominently featured link banner */}
-              <div className="mb-6">
-                <a
-                  href={liveDemoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group/link flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 p-4 sm:p-5 rounded-2xl border-2 border-amber-500/70 bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-amber-500/5 hover:from-amber-500/25 hover:to-orange-500/20 hover:border-amber-400 text-amber-400 font-mono text-xs transition-all shadow-[0_0_24px_rgba(245,158,11,0.2)] hover:shadow-[0_0_34px_rgba(245,158,11,0.35)] cursor-pointer"
-                >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-[#f59e0b] border border-amber-500/40 flex items-center justify-center shrink-0 shadow-sm group-hover/link:scale-105 transition-transform">
-                      <ExternalLink className="w-5 h-5" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <span className="font-bold text-white text-xs sm:text-sm tracking-wide">
-                          Live Funnel Link
+                      {/* Top Overlay Badge */}
+                      <div className="absolute top-3.5 left-3.5 flex items-center gap-2 z-10 pointer-events-none">
+                        <span className="px-2.5 py-1 rounded-full bg-black/80 border border-amber-500/40 text-amber-300 text-[11px] font-mono font-bold uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+                          {project.badgeType === 'solar' ? (
+                            <Sun className="w-3.5 h-3.5 text-amber-400" />
+                          ) : (
+                            <Wind className="w-3.5 h-3.5 text-amber-400" />
+                          )}
+                          <span>{project.badge}</span>
                         </span>
-                        <span className="px-1.5 py-0.5 rounded bg-amber-400 text-black text-[9px] font-black uppercase tracking-wider shrink-0">
-                          ACTIVE DEMO
+                        <span className="px-2 py-0.5 rounded-full bg-amber-500/20 text-[#f59e0b] border border-amber-500/30 text-[10px] font-mono font-semibold backdrop-blur-md">
+                          Full-Page Design
                         </span>
                       </div>
-                      <p className="text-xs sm:text-sm font-mono text-zinc-300 truncate">
-                        {liveDemoUrl}
-                      </p>
+
+                      {/* Project Index Indicator */}
+                      <div className="absolute top-3.5 right-3.5 z-10 pointer-events-none">
+                        <span className="px-2 py-0.5 rounded-full bg-black/80 border border-white/10 text-zinc-300 text-[10px] font-mono font-semibold backdrop-blur-md">
+                          {index + 1} of {funnelProjects.length}
+                        </span>
+                      </div>
+
+                      {/* Bottom Gradient Fade */}
+                      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#080706] via-[#080706]/70 to-transparent pointer-events-none" />
+
+                      {/* Hover Action Overlay */}
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/preview:opacity-100 transition-opacity duration-200 flex flex-col items-center justify-center gap-2.5 p-4">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setActiveZoomProject(project);
+                            setZoomScale(1);
+                            setViewMode('full');
+                          }}
+                          className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#f59e0b] to-[#f97316] text-white font-mono text-xs font-bold flex items-center gap-1.5 shadow-xl hover:scale-105 transition-all cursor-pointer"
+                        >
+                          <Maximize2 className="w-3.5 h-3.5" />
+                          <span>Inspect Full Landing Page</span>
+                        </button>
+                        <p className="text-[11px] font-mono text-zinc-300">Click to view vertical scrollable preview</p>
+                      </div>
+
+                      {/* Corner Enlarge Button */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setActiveZoomProject(project);
+                          setZoomScale(1);
+                          setViewMode('full');
+                        }}
+                        title="Enlarge & Scroll Landing Page"
+                        className="absolute bottom-3 right-3 bg-black/80 hover:bg-amber-600 text-white border border-white/20 p-2 rounded-xl backdrop-blur-md shadow-lg transition-all hover:scale-110 cursor-pointer z-10"
+                      >
+                        <ZoomIn className="w-3.5 h-3.5 text-[#f59e0b] group-hover:text-white" />
+                      </button>
+                    </div>
+
+                    {/* Action Bar Below Image */}
+                    <div
+                      className="px-4 py-3 border-t flex items-center justify-between gap-2 bg-[#0d0a07]"
+                      style={{ borderColor: 'var(--border-color)' }}
+                    >
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="text-[11px] font-mono text-zinc-400">GoHighLevel Asset</span>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setActiveZoomProject(project);
+                            setZoomScale(1);
+                            setViewMode('full');
+                          }}
+                          className="px-2.5 py-1 rounded-lg border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 text-[#f59e0b] font-mono text-[11px] font-bold flex items-center gap-1 transition-colors cursor-pointer"
+                        >
+                          <Maximize2 className="w-3 h-3" />
+                          <span>Full Page</span>
+                        </button>
+
+                        <a
+                          href={projectLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-2.5 py-1 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 hover:brightness-110 text-white font-mono text-[11px] font-bold flex items-center gap-1 transition-all shadow-sm cursor-pointer"
+                        >
+                          <span>{project.liveDemoUrl ? 'Live Funnel' : 'Open Link'}</span>
+                          <ArrowUpRight className="w-3 h-3" />
+                        </a>
+                      </div>
                     </div>
                   </div>
-                  <span className="inline-flex items-center justify-center gap-1.5 font-bold text-amber-300 bg-black/50 px-4 py-2 rounded-xl border border-amber-500/30 shrink-0 group-hover/link:bg-amber-500 group-hover/link:text-black transition-colors w-full sm:w-auto">
-                    <span>Open Funnel</span>
-                    <ArrowUpRight className="w-4 h-4" />
-                  </span>
-                </a>
-              </div>
 
-              {/* Title */}
-              <h3
-                className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight mb-4"
-                style={{ color: 'var(--text-primary)' }}
-              >
-                Solar Panel: High-Converting GoHighLevel Landing Page & Appointment Funnel
-              </h3>
+                  {/* Card Body: Content, Link, Tags, CTA */}
+                  <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between">
+                    <div>
+                      {/* Featured Link Banner (Compact & Sleek) */}
+                      <a
+                        href={projectLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group/link flex items-center justify-between gap-2.5 p-3 rounded-xl border border-amber-500/50 bg-amber-500/10 hover:bg-amber-500/20 hover:border-amber-400 text-amber-400 font-mono text-xs transition-all shadow-sm mb-4 cursor-pointer"
+                      >
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <div className="w-7 h-7 rounded-lg bg-amber-500/20 text-[#f59e0b] border border-amber-500/40 flex items-center justify-center shrink-0">
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </div>
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-1.5">
+                              <span className="font-bold text-white text-xs truncate">
+                                {project.linkLabel}
+                              </span>
+                              <span className="px-1 py-0.2 rounded bg-amber-400 text-black text-[8px] font-black uppercase tracking-wider shrink-0">
+                                {project.linkBadge}
+                              </span>
+                            </div>
+                            <p className="text-[11px] font-mono text-zinc-300 truncate max-w-[200px] sm:max-w-[280px]">
+                              {projectLink}
+                            </p>
+                          </div>
+                        </div>
+                        <span className="inline-flex items-center gap-1 font-bold text-amber-300 bg-black/50 px-2.5 py-1 rounded-lg border border-amber-500/30 shrink-0 text-[11px] group-hover/link:bg-amber-500 group-hover/link:text-black transition-colors">
+                          <span>{project.linkButtonText}</span>
+                          <ArrowUpRight className="w-3 h-3" />
+                        </span>
+                      </a>
 
-              {/* Description */}
-              <p
-                className="text-base sm:text-lg leading-relaxed mb-6"
-                style={{ color: 'var(--text-secondary)' }}
-              >
-                A conversion-engineered GoHighLevel landing page and appointment funnel custom-built for residential and commercial solar panel installation businesses. It transforms cold ad traffic from Facebook, Google Ads, and organic search into high-intent, pre-qualified appointments directly synced with the GoHighLevel CRM calendar.
-              </p>
+                      {/* Title with Balanced Height */}
+                      <h3
+                        className="text-lg sm:text-xl font-black tracking-tight mb-2.5 leading-snug min-h-[48px] flex items-center"
+                        style={{ color: 'var(--text-primary)' }}
+                      >
+                        {project.title}
+                      </h3>
 
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 sm:gap-2.5 mb-8">
-                {[
-                  'GoHighLevel',
-                  'Funnel Architecture',
-                  'Landing Page Design',
-                  'Calendar Booking',
-                  'Lead Pre-Qualification',
-                  'CRM Pipeline Sync',
-                  'SMS & Email Automations',
-                ].map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3.5 py-1.5 rounded-full text-xs font-mono font-medium border"
-                    style={{
-                      backgroundColor: 'var(--bg-primary)',
-                      borderColor: 'var(--border-color)',
-                      color: 'var(--text-secondary)',
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+                      {/* Description */}
+                      <p
+                        className="text-xs sm:text-sm leading-relaxed mb-4 line-clamp-4 min-h-[72px]"
+                        style={{ color: 'var(--text-secondary)' }}
+                      >
+                        {project.description}
+                      </p>
 
-              {/* Bottom CTA Row */}
-              <div
-                className="pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4"
-                style={{ borderColor: 'var(--border-color)' }}
-              >
-                <div>
-                  <p className="text-xs font-mono text-zinc-400">Looking for a high-converting funnel for your business?</p>
-                  <p className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Custom GoHighLevel funnels tailored to your offer.</p>
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-1.5 mb-5">
+                        {project.tags.slice(0, 5).map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2.5 py-1 rounded-lg text-[10px] sm:text-[11px] font-mono font-medium border"
+                            style={{
+                              backgroundColor: 'var(--bg-primary)',
+                              borderColor: 'var(--border-color)',
+                              color: 'var(--text-secondary)',
+                            }}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Bottom CTA Row (Equalized at bottom of card) */}
+                    <div
+                      className="pt-4 border-t flex flex-wrap items-center justify-between gap-2.5 mt-auto"
+                      style={{ borderColor: 'var(--border-color)' }}
+                    >
+                      <a
+                        href={projectLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3.5 py-2 rounded-xl border border-amber-500/40 hover:bg-amber-500/10 text-[#f59e0b] font-mono text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>{project.liveDemoUrl ? 'Open Funnel' : 'View Snapshot'}</span>
+                      </a>
+
+                      <button
+                        type="button"
+                        onClick={() => onOpenBookingForProject(project.bookingTitle)}
+                        className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#f59e0b] to-[#f97316] hover:brightness-110 text-white font-mono text-xs font-bold flex items-center gap-1.5 shadow-md transition-all cursor-pointer"
+                      >
+                        <Calendar className="w-3.5 h-3.5" />
+                        <span>Build Similar Funnel</span>
+                      </button>
+                    </div>
+                  </div>
                 </div>
-
-                <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto">
-                  <a
-                    href={liveDemoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-amber-500/40 hover:bg-amber-500/10 text-[#f59e0b] font-mono text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    <span>Open Live Funnel</span>
-                  </a>
-
-                  <button
-                    type="button"
-                    onClick={() => onOpenBookingForProject('Solar Panel GoHighLevel Funnel Build')}
-                    className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#f59e0b] to-[#f97316] hover:brightness-110 text-white font-mono text-xs font-bold flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer"
-                  >
-                    <Calendar className="w-4 h-4" />
-                    <span>Request a Custom Funnel</span>
-                  </button>
-                </div>
               </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
 
       {/* Full-Page Interactive Snapshot Modal */}
       <AnimatePresence>
-        {isZoomOpen && (
+        {activeZoomProject && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            onClick={() => setIsZoomOpen(false)}
+            onClick={() => setActiveZoomProject(null)}
             className="fixed inset-0 z-50 flex flex-col bg-black/90 backdrop-blur-xl p-3 sm:p-6"
           >
             {/* Top Toolbar */}
@@ -335,12 +479,44 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
                   className="font-mono text-xs sm:text-sm font-bold truncate"
                   style={{ color: 'var(--text-primary)' }}
                 >
-                  Solar Panel Funnel • Full Landing Page Snapshot
+                  {activeZoomProject.badge} • Full Landing Page Snapshot
                 </h4>
               </div>
 
               {/* View Controls & Close */}
               <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                {/* Previous / Next Funnel Switch */}
+                <div className="hidden sm:flex items-center gap-1 mr-1 border-r border-white/10 pr-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const currentIdx = funnelProjects.findIndex((p) => p.id === activeZoomProject.id);
+                      const prevIdx = (currentIdx - 1 + funnelProjects.length) % funnelProjects.length;
+                      setActiveZoomProject(funnelProjects[prevIdx]);
+                      setZoomScale(1);
+                    }}
+                    className="p-1.5 rounded-lg border border-white/10 hover:border-amber-500 hover:text-[#f59e0b] transition-colors cursor-pointer text-white"
+                    style={{ backgroundColor: 'var(--bg-primary)' }}
+                    title="Previous Funnel (Left Arrow)"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const currentIdx = funnelProjects.findIndex((p) => p.id === activeZoomProject.id);
+                      const nextIdx = (currentIdx + 1) % funnelProjects.length;
+                      setActiveZoomProject(funnelProjects[nextIdx]);
+                      setZoomScale(1);
+                    }}
+                    className="p-1.5 rounded-lg border border-white/10 hover:border-amber-500 hover:text-[#f59e0b] transition-colors cursor-pointer text-white"
+                    style={{ backgroundColor: 'var(--bg-primary)' }}
+                    title="Next Funnel (Right Arrow)"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+
                 {/* View Mode: Fit vs Full Scroll */}
                 <button
                   type="button"
@@ -407,19 +583,19 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
                 </button>
 
                 <a
-                  href={liveDemoUrl}
+                  href={activeZoomProject.liveDemoUrl || activeZoomProject.imageHostUrl || activeZoomProject.snapshotUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:brightness-110 text-white font-mono text-xs font-bold flex items-center gap-1.5 shadow-md ml-1 cursor-pointer"
                 >
-                  <span>Open Live Funnel</span>
+                  <span>{activeZoomProject.liveDemoUrl ? 'Open Live Funnel' : 'Open Link'}</span>
                   <ExternalLink className="w-3.5 h-3.5" />
                 </a>
 
                 <button
                   type="button"
                   onClick={() => {
-                    setIsZoomOpen(false);
+                    setActiveZoomProject(null);
                     setZoomScale(1);
                   }}
                   className="p-2 sm:px-3.5 sm:py-1.5 rounded-xl bg-amber-500/20 border border-amber-500/40 hover:bg-amber-500 hover:text-black text-amber-200 font-mono text-xs font-bold flex items-center gap-1 transition-all cursor-pointer shadow-md ml-1"
@@ -444,8 +620,8 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
                 }}
               >
                 <img
-                  src={snapshotUrl}
-                  alt="Solar Panel Business Full Page Landing Page Snapshot"
+                  src={activeZoomProject.snapshotUrl}
+                  alt={`${activeZoomProject.title} Full Page Snapshot`}
                   referrerPolicy="no-referrer"
                   className={`rounded-2xl shadow-2xl transition-all select-none ${
                     viewMode === 'full'
@@ -466,3 +642,4 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
     </section>
   );
 };
+

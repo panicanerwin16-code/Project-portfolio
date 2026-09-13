@@ -18,7 +18,7 @@ interface ProjectsSectionProps {
   onOpenBookingForProject: (projectTitle: string) => void;
 }
 
-type FilterCategory = 'gohighlevel' | 'n8n' | 'zapier' | 'make' | 'funnels';
+type FilterCategory = 'gohighlevel' | 'n8n' | 'zapier' | 'make';
 
 interface FilterOption {
   id: FilterCategory;
@@ -98,7 +98,6 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     { id: 'n8n', label: 'n8n' },
     { id: 'zapier', label: 'Zapier' },
     { id: 'make', label: 'Make' },
-    { id: 'funnels', label: 'Funnels' },
   ];
 
   const projects: Array<{
@@ -361,45 +360,6 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         'Automated CSV transaction file upload directly to Asana task',
       ],
     },
-    {
-      id: 'ghl-solar-funnel-landing-page',
-      category: 'funnels',
-      platform: 'GOHIGHLEVEL FUNNEL',
-      title: 'Solar Panel: High-Converting GoHighLevel Landing Page & Appointment Funnel',
-      description:
-        'A conversion-engineered GoHighLevel landing page and appointment funnel custom-built for residential and commercial solar panel installation businesses. It transforms cold ad traffic from Facebook, Google Ads, and organic search into high-intent, pre-qualified appointments directly synced with the GoHighLevel CRM calendar.',
-      image: 'https://i.im.ge/QQQ4FiW/fullpage_snapshot_sites_leadconnectorhq_com_2026-09-04-15-00-53_1_.png',
-      tools: [
-        'GoHighLevel',
-        'Funnel Architecture',
-        'Landing Page Design',
-        'Calendar Booking',
-        'Lead Pre-Qualification',
-        'CRM Pipeline Sync',
-        'SMS & Email Automations',
-      ],
-      resourceLink: {
-        url: 'https://sites.leadconnectorhq.com/preview/FEorbibNCh0iAD3k1WxJ?notrack=true',
-        label: 'GoHighLevel Live Solar Appointment Funnel',
-        badge: 'LIVE FUNNEL DEMO',
-        description: 'Explore the live solar lead booking landing page & interactive funnel in action.',
-      },
-      problem:
-        'Solar companies waste thousands on ad campaigns when directing traffic to cluttered generic websites. Homeowners bounce due to information overload, lack of clear financing options, or slow manual follow-up from sales reps.',
-      solution:
-        'Designed a high-converting GoHighLevel solar landing page featuring a streamlined single-action layout: clear value proposition ($0 down solar savings, utility bill offset, federal tax incentives), pre-qualification questions (electric bill range, roof status), social proof, and direct calendar appointment booking.',
-      result:
-        'Transforms cold visitor traffic into pre-qualified, scheduled appointments, eliminates phone tag, and automatically populates the GoHighLevel CRM opportunity pipeline with instant SMS & email confirmation workflows.',
-      impact:
-        'Helps solar businesses scale customer acquisition efficiently by transforming cold ad clicks into verified appointments, pre-qualifying prospects before sales reps get on the phone, and automatically triggering instant SMS/email reminders to eliminate no-shows.',
-      features: [
-        'Dedicated conversion layout: zero distracting links, direct focus on booking consultations',
-        'Homeowner pre-qualification flow (roof suitability, electric bill range, ownership)',
-        'Strategic conversion elements: $0 down financing highlights, utility savings estimates, warranty trust badges',
-        'Seamless GoHighLevel calendar synchronization for instant consultation bookings',
-        'Direct CRM integration triggering automated appointment confirmations and reminder sequences',
-      ],
-    },
   ];
 
   const filteredProjects = projects.filter((p) => p.category === activeCategory);
@@ -495,26 +455,6 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             })}
           </div>
         </div>
-
-        {/* Category Description Banner for Funnels */}
-        {activeCategory === 'funnels' && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-10 text-center max-w-3xl mx-auto px-6 py-6 rounded-2xl border border-amber-500/30 bg-amber-500/5 backdrop-blur-sm shadow-xl"
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-[#f59e0b] text-xs font-mono font-semibold uppercase tracking-widest mb-3 shadow-[0_0_12px_rgba(245,158,11,0.2)]">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>HIGH-CONVERTING LANDING PAGES</span>
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-black tracking-tight mb-2 text-white">
-              Funnels & Designs Landing Pages That Convert
-            </h3>
-            <p className="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto leading-relaxed">
-              GoHighLevel landing pages designed to turn visitors into booked calls and qualified leads.
-            </p>
-          </motion.div>
-        )}
 
         {/* Animated Projects Grid */}
         <motion.div 
