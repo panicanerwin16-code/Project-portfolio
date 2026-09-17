@@ -48,25 +48,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <span>Available for new automation projects</span>
             </div>
 
-            {/* Main Headline matching the requested image */}
+            {/* Main Headline */}
             <h1 
-              className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] mb-6"
+              className="text-3xl sm:text-5xl lg:text-[42px] xl:text-5xl font-black tracking-tight leading-[1.14] mb-6"
               style={{ color: 'var(--text-primary)' }}
             >
-              I build AI <br />
-              Automations <br />
-              <span className="text-[#f59e0b] drop-shadow-[0_0_25px_rgba(245,158,11,0.35)]">Workflow</span> that <br />
-              quietly run your <br />
-              business.
+              <span>Your business shouldn't lose leads because of manual work.</span>{' '}
+              <span className="text-[#f59e0b] drop-shadow-[0_0_25px_rgba(245,158,11,0.35)] block mt-2">
+                I build systems that keep your business moving.
+              </span>
             </h1>
 
-            {/* Subheadline Description matching the requested image */}
-            <p 
-              className="text-sm sm:text-base max-w-xl leading-relaxed mb-8"
+            {/* Subheadline & Description */}
+            <div 
+              className="space-y-4 text-sm sm:text-base max-w-xl leading-relaxed mb-8"
               style={{ color: 'var(--text-secondary)' }}
             >
-              I'm Erwin Panican — a Workflow Automation Specialist connecting CRMs, spreadsheets, APIs and AI models into systems that save teams hours every single week.
-            </p>
+              <p>
+                I'm Erwin Panican — a <strong style={{ color: 'var(--text-primary)' }}>GoHighLevel CRM & AI Automation Specialist</strong>. I help businesses solve real operational challenges by connecting their CRM, lead management, and everyday tools through intelligent automation using GoHighLevel, n8n, Zapier, and Make.com.
+              </p>
+              <p>
+                From capturing leads and automating follow-ups to managing appointments and organizing customer pipelines, I build practical systems that reduce repetitive work, improve visibility, and help businesses turn more opportunities into customers.
+              </p>
+            </div>
 
             {/* CTA Buttons & Swipe Indicator */}
             <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-6">
@@ -81,7 +85,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 }}
                 className="w-full sm:w-auto px-7 py-3.5 bg-gradient-to-r from-[#f59e0b] via-[#f97316] to-[#ea580c] hover:brightness-110 text-white font-extrabold text-xs rounded-xl shadow-[0_0_25px_rgba(245,158,11,0.35)] hover:scale-105 transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>See selected work</span>
+                <span>View My Projects</span>
                 <span className="text-base font-bold">→</span>
               </button>
 
@@ -94,7 +98,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   color: 'var(--text-primary)',
                 }}
               >
-                Book a discovery call
+                Let's Work Together
               </button>
 
               {onOpenResume && (
