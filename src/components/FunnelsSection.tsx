@@ -11,6 +11,7 @@ import {
   ArrowUpRight,
   Sun,
   Wind,
+  Smile,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
@@ -22,7 +23,7 @@ interface FunnelsSectionProps {
 interface FunnelProject {
   id: string;
   badge: string;
-  badgeType: 'solar' | 'hvac';
+  badgeType: 'solar' | 'hvac' | 'dental';
   title: string;
   description: string;
   snapshotUrl: string;
@@ -97,6 +98,36 @@ const funnelProjects: FunnelProject[] = [
     solution:
       'Created a mobile-responsive GoHighLevel funnel with upfront emergency repair dispatch options, pre-qualification questions, and instant calendar booking.',
   },
+  {
+    id: 'dental-clinic-funnel',
+    badge: 'Dental Clinic Funnel',
+    badgeType: 'dental',
+    title: 'DENTAL: High-Converting GoHighLevel Lead & Appointment Funnel',
+    description:
+      'A conversion-engineered GoHighLevel landing page and appointment booking funnel custom-built for modern dental clinics and practices. It captures high-intent patient inquiries for cleanings, whitening, and cosmetic procedures, automates lead pre-qualification, and books appointments directly into the clinic calendar with instant SMS and email reminders.',
+    snapshotUrl:
+      'https://i.im.ge/QQrZegT/fullpage_snapshot_sites_leadconnectorhq_com_2026-09-17-12-55-26.png',
+    liveDemoUrl:
+      'https://sites.leadconnectorhq.com/preview/R8kppxdqnUrCeTz227cL?notrack=true',
+    imageHostUrl: 'https://im.ge/i/QQrZegT',
+    linkLabel: 'Live Funnel Link',
+    linkBadge: 'ACTIVE DEMO',
+    linkButtonText: 'Open Funnel',
+    tags: [
+      'GoHighLevel',
+      'Dental Clinic Funnel',
+      'Landing Page Design',
+      'Patient Booking',
+      'Lead Pre-Qualification',
+      'CRM Pipeline Sync',
+      'SMS & Email Automations',
+    ],
+    bookingTitle: 'Dental Clinic GoHighLevel Funnel Build',
+    problem:
+      'Dental clinics lose prospective patients when ad traffic lands on cluttered sites lacking instant online appointment scheduling and automated reminders.',
+    solution:
+      'Engineered a modern, trust-building dental landing page featuring streamlined treatment packages, new patient specials, and direct calendar appointment booking with automated multi-touch reminder sequences.',
+  },
 ];
 
 export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
@@ -105,10 +136,10 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
   const [activeZoomProject, setActiveZoomProject] = useState<FunnelProject | null>(null);
   const [zoomScale, setZoomScale] = useState(1);
   const [viewMode, setViewMode] = useState<'fit' | 'full'>('full');
-  const [selectedSlide, setSelectedSlide] = useState<'both' | 'solar-panel-funnel' | 'hvac-funnel'>('both');
+  const [selectedSlide, setSelectedSlide] = useState<'all' | 'solar-panel-funnel' | 'hvac-funnel' | 'dental-clinic-funnel'>('all');
 
   const visibleProjects =
-    selectedSlide === 'both'
+    selectedSlide === 'all'
       ? funnelProjects
       : funnelProjects.filter((p) => p.id === selectedSlide);
 
@@ -174,18 +205,18 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
           </p>
 
           {/* Slide & View Controls Pill */}
-          <div className="mt-6 inline-flex items-center p-1.5 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md shadow-xl gap-1">
+          <div className="mt-6 inline-flex flex-wrap items-center justify-center p-1.5 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md shadow-xl gap-1">
             <button
               type="button"
-              onClick={() => setSelectedSlide('both')}
+              onClick={() => setSelectedSlide('all')}
               className={`px-3.5 py-1.5 rounded-xl font-mono text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                selectedSlide === 'both'
+                selectedSlide === 'all'
                   ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md'
                   : 'text-zinc-400 hover:text-white hover:bg-white/5'
               }`}
             >
-              <span>Side-by-Side (Both)</span>
-              <span className="text-[10px] px-1.5 py-0.2 rounded bg-black/40 font-mono">2</span>
+              <span>All Funnels</span>
+              <span className="text-[10px] px-1.5 py-0.2 rounded bg-black/40 font-mono">{funnelProjects.length}</span>
             </button>
 
             <button
@@ -213,15 +244,28 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
               <Wind className="w-3.5 h-3.5 text-amber-400" />
               <span>HVAC Service</span>
             </button>
+
+            <button
+              type="button"
+              onClick={() => setSelectedSlide('dental-clinic-funnel')}
+              className={`px-3.5 py-1.5 rounded-xl font-mono text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedSlide === 'dental-clinic-funnel'
+                  ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md'
+                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <Smile className="w-3.5 h-3.5 text-amber-400" />
+              <span>Dental Clinic</span>
+            </button>
           </div>
         </div>
 
-        {/* Project Funnel Tables / Cards Displayed Equally in One Slide */}
+        {/* Project Funnel Tables / Cards Displayed in Responsive Grid */}
         <div
           className={`grid gap-6 lg:gap-8 items-stretch ${
-            selectedSlide === 'both'
-              ? 'grid-cols-1 lg:grid-cols-2'
-              : 'grid-cols-1 max-w-4xl mx-auto'
+            selectedSlide === 'all'
+              ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+              : 'grid-cols-1 max-w-2xl mx-auto'
           }`}
         >
           {visibleProjects.map((project, index) => {
@@ -244,7 +288,7 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
                   >
                     {/* Snapshot Preview Window (Adjusted height to fit cleanly in one view) */}
                     <div
-                      className="relative h-[240px] sm:h-[280px] md:h-[300px] overflow-hidden group/preview cursor-pointer"
+                      className="relative h-[240px] sm:h-[270px] overflow-hidden group/preview cursor-pointer"
                       onClick={() => {
                         setActiveZoomProject(project);
                         setZoomScale(1);
@@ -264,8 +308,10 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
                         <span className="px-2.5 py-1 rounded-full bg-black/80 border border-amber-500/40 text-amber-300 text-[11px] font-mono font-bold uppercase tracking-wider backdrop-blur-md flex items-center gap-1.5 shadow-lg">
                           {project.badgeType === 'solar' ? (
                             <Sun className="w-3.5 h-3.5 text-amber-400" />
-                          ) : (
+                          ) : project.badgeType === 'hvac' ? (
                             <Wind className="w-3.5 h-3.5 text-amber-400" />
+                          ) : (
+                            <Smile className="w-3.5 h-3.5 text-amber-400" />
                           )}
                           <span>{project.badge}</span>
                         </span>
@@ -378,7 +424,7 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
                                 {project.linkBadge}
                               </span>
                             </div>
-                            <p className="text-[11px] font-mono text-zinc-300 truncate max-w-[200px] sm:max-w-[280px]">
+                            <p className="text-[11px] font-mono text-zinc-300 truncate max-w-[170px] sm:max-w-[220px]">
                               {projectLink}
                             </p>
                           </div>
@@ -391,7 +437,7 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
 
                       {/* Title with Balanced Height */}
                       <h3
-                        className="text-lg sm:text-xl font-black tracking-tight mb-2.5 leading-snug min-h-[48px] flex items-center"
+                        className="text-lg font-black tracking-tight mb-2.5 leading-snug min-h-[52px] flex items-center"
                         style={{ color: 'var(--text-primary)' }}
                       >
                         {project.title}
@@ -519,27 +565,37 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
                   </button>
                 </div>
 
-                {/* View Mode: Fit vs Full Scroll */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    setViewMode((m) => (m === 'full' ? 'fit' : 'full'));
-                    setZoomScale(1);
-                  }}
-                  className="px-2.5 sm:px-3 py-1.5 rounded-xl border text-xs font-mono font-bold hover:border-amber-500 transition-colors cursor-pointer"
-                  style={{
-                    backgroundColor: 'var(--bg-primary)',
-                    borderColor: 'var(--border-color)',
-                    color: 'var(--text-primary)',
-                  }}
-                  title="Toggle Full Scroll vs Fit Screen"
-                >
-                  <span className="text-[#f59e0b]">
-                    {viewMode === 'full' ? 'Full Page Scroll' : 'Fit to Screen'}
-                  </span>
-                </button>
+                <div className="flex items-center rounded-xl p-1 border" style={{ borderColor: 'var(--border-color)' }}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setViewMode('fit');
+                      setZoomScale(1);
+                    }}
+                    className={`px-2.5 sm:px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+                      viewMode === 'fit'
+                        ? 'bg-[#f59e0b] text-black shadow-sm'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    Fit View
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setViewMode('full');
+                      setZoomScale(1);
+                    }}
+                    className={`px-2.5 sm:px-3 py-1 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
+                      viewMode === 'full'
+                        ? 'bg-[#f59e0b] text-black shadow-sm'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    Scroll View
+                  </button>
+                </div>
 
-                {/* Zoom Controls */}
                 <button
                   type="button"
                   onClick={() => setZoomScale((s) => Math.max(s - 0.25, 0.5))}
@@ -644,4 +700,3 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
     </section>
   );
 };
-

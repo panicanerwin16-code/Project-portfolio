@@ -17,11 +17,9 @@ import {
   Globe,
   Sparkles,
   Camera,
-  Upload,
   Printer,
   FileCheck,
   Eye,
-  Info,
 } from 'lucide-react';
 import { downloadATSResumeFile, generateATSPdfDocument } from '../utils/resumeDownloader';
 
@@ -41,10 +39,9 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({
   onUploadHeadshot,
 }) => {
   const [copied, setCopied] = useState(false);
-  const [activeTab, setActiveTab] = useState<'ats' | 'pdf' | 'upload'>('ats');
+  const [activeTab, setActiveTab] = useState<'ats' | 'pdf'>('ats');
   const [pdfDataUrl, setPdfDataUrl] = useState<string | null>(null);
-  const [pdfFileName, setPdfFileName] = useState<string>('Erwin_Panican_resume (1).pdf');
-  const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [pdfFileName, setPdfFileName] = useState<string>('Erwin_Panican_resume.pdf');
 
   // Load saved PDF from localStorage on mount or generate initial PDF Data URI
   useEffect(() => {
@@ -170,30 +167,6 @@ Languages:
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const result = event.target?.result as string;
-        setPdfDataUrl(result);
-        setPdfFileName(file.name);
-        setUploadSuccess(true);
-        try {
-          localStorage.setItem('erwin_resume_pdf_data', result);
-          localStorage.setItem('erwin_resume_filename', file.name);
-        } catch {
-          // localStorage size limit fallback
-        }
-        setTimeout(() => {
-          setUploadSuccess(false);
-          setActiveTab('pdf');
-        }, 1200);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   const handlePrint = () => {
     window.print();
   };
@@ -267,18 +240,6 @@ Languages:
             >
               <Eye className="w-3.5 h-3.5" />
               <span>PDF Preview</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab('upload')}
-              className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                activeTab === 'upload'
-                  ? 'bg-gradient-to-r from-[#f59e0b] to-[#f97316] text-white shadow-md'
-                  : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              <Upload className="w-3.5 h-3.5" />
-              <span>Upload PDF</span>
             </button>
           </div>
 
@@ -748,110 +709,27 @@ Languages:
             ) : (
               <div className="max-w-md text-center space-y-4 p-8 rounded-3xl border card-crimson-glow" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-color)' }}>
                 <div className="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-[#f59e0b] flex items-center justify-center mx-auto shadow-lg">
-                  <Upload className="w-8 h-8" />
+                  <FileText className="w-8 h-8" />
                 </div>
                 <div>
                   <h3 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
-                    Upload Your PDF Resume
+                    Generating PDF Preview...
                   </h3>
                   <p className="text-xs mt-1" style={{ color: 'var(--text-secondary)' }}>
-                    Attach <code className="text-[#f59e0b] bg-black/40 px-1.5 py-0.5 rounded">Erwin_Panican_resume (1).pdf</code> to enable interactive PDF document preview and 1-click downloads.
+                    Loading formatted resume document preview for Erwin Panican.
                   </p>
                 </div>
-
-                <label
-                  htmlFor="pdf-file-picker-tab"
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#f59e0b] to-[#f97316] text-white font-bold text-xs font-mono shadow-[0_0_20px_rgba(245,158,11,0.35)] inline-flex items-center gap-2 cursor-pointer hover:scale-105 transition-all"
-                >
-                  <Upload className="w-4 h-4" />
-                  <span>Choose PDF File from Downloads</span>
-                  <input
-                    id="pdf-file-picker-tab"
-                    type="file"
-                    accept=".pdf,application/pdf"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                  />
-                </label>
 
                 <div className="pt-2">
                   <button
                     onClick={() => setActiveTab('ats')}
-                    className="text-xs font-mono text-gray-400 hover:text-white underline cursor-pointer"
+                    className="text-xs font-mono text-[#f59e0b] hover:underline cursor-pointer"
                   >
-                    Or view full ATS document text & sections
+                    View ATS document text & sections →
                   </button>
                 </div>
               </div>
             )}
-          </div>
-        )}
-
-        {/* ================= TAB 3: UPLOAD RESUME PDF ================= */}
-        {activeTab === 'upload' && (
-          <div className="p-8 overflow-y-auto flex flex-col items-center justify-center text-center space-y-6 min-h-[480px]" style={{ backgroundColor: 'var(--bg-primary)' }}>
-            <div className="max-w-lg w-full space-y-6">
-              
-              {/* Notice Box */}
-              <div className="p-4 rounded-2xl border flex items-start gap-3 text-left" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-color)' }}>
-                <Info className="w-5 h-5 text-[#f59e0b] shrink-0 mt-0.5" />
-                <div className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                  <p className="font-bold text-white mb-0.5">Resume File Attachment:</p>
-                  To attach your local file <code className="text-[#f59e0b] bg-black/40 px-1 py-0.5 rounded">Erwin_Panican_resume (1).pdf</code> from your Downloads folder, simply select it below. It will be stored and linked directly to every "View Resume" & "Download Resume" button on your portfolio!
-                </div>
-              </div>
-
-              {/* Upload Drop Zone */}
-              <label
-                htmlFor="pdf-file-dropzone"
-                className={`p-10 border-2 border-dashed rounded-3xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 group ${
-                  uploadSuccess
-                    ? 'border-emerald-500 bg-emerald-500/10'
-                    : 'border-amber-500/40 hover:border-amber-500 bg-black/30 hover:bg-black/50'
-                }`}
-              >
-                <div className="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-[#f59e0b] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  {uploadSuccess ? <Check className="w-8 h-8 text-emerald-400" /> : <Upload className="w-8 h-8 text-[#f59e0b]" />}
-                </div>
-
-                <h4 className="text-base font-bold mb-1" style={{ color: 'var(--text-primary)' }}>
-                  {uploadSuccess ? 'Resume Attached Successfully!' : 'Click to Browse or Drag & Drop'}
-                </h4>
-                <p className="text-xs mb-4" style={{ color: 'var(--text-secondary)' }}>
-                  Select <strong className="text-[#f59e0b]">Erwin_Panican_resume (1).pdf</strong>
-                </p>
-
-                <span className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#f59e0b] to-[#f97316] text-white font-bold text-xs font-mono shadow-md">
-                  Select File (.pdf)
-                </span>
-
-                <input
-                  id="pdf-file-dropzone"
-                  type="file"
-                  accept=".pdf,application/pdf"
-                  onChange={handleFileUpload}
-                  className="hidden"
-                />
-              </label>
-
-              {pdfDataUrl && (
-                <div className="p-4 rounded-xl border flex items-center justify-between" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-color)' }}>
-                  <div className="flex items-center gap-2.5">
-                    <FileCheck className="w-4 h-4 text-emerald-400" />
-                    <span className="text-xs font-mono font-bold text-emerald-400 truncate">
-                      Active: {pdfFileName}
-                    </span>
-                  </div>
-                  <button
-                    onClick={() => setActiveTab('pdf')}
-                    className="text-xs font-mono text-[#f59e0b] hover:underline cursor-pointer"
-                  >
-                    View Document →
-                  </button>
-                </div>
-              )}
-
-            </div>
           </div>
         )}
 
