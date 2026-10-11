@@ -1,10 +1,12 @@
 import { jsPDF } from 'jspdf';
 
 /**
- * Erwin Panican ATS Resume PDF Generator & Instant Downloader
- * Accurately reproduces the exact 4-page PDF document attached by the user.
- * Generates and triggers instant browser download of 'Erwin_Panican_ATS_Resume.pdf'
+ * Erwin Panican Official Resume PDF Generator & Permanent Downloader
+ * Faithful reproduction of 'ERN_Panican.pdf'
+ * Generates an immutable, print-perfect, ATS-compliant 4-page PDF document.
  */
+
+export const RESUME_FILE_NAME = 'ERN_Panican.pdf';
 
 export const generateATSPdfDocument = (): jsPDF => {
   const doc = new jsPDF({
@@ -14,382 +16,409 @@ export const generateATSPdfDocument = (): jsPDF => {
   });
 
   const pageWidth = doc.internal.pageSize.getWidth();
-  const leftMargin = 65;
-  const rightMargin = 65;
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const leftMargin = 56;
+  const rightMargin = 56;
   const contentWidth = pageWidth - leftMargin - rightMargin;
 
-  // Colors based on the attached document
-  const primaryNavy = [30, 58, 95] as const; // #1e3a5f
-  const accentBlue = [45, 104, 196] as const; // #2d68c4
-  const textDark = [17, 24, 39] as const; // #111827
-  const textMuted = [55, 65, 81] as const; // #374151
-  const linkBlue = [37, 99, 235] as const; // #2563eb
+  // Professional typography palette
+  const primaryNavy = [24, 43, 73] as const;    // #182b49
+  const accentAmber = [217, 119, 6] as const;   // #d97706
+  const textDark = [17, 24, 39] as const;       // #111827
+  const textMuted = [55, 65, 81] as const;      // #374151
+  const textSubtle = [107, 114, 128] as const;  // #6b7280
+  const linkBlue = [29, 78, 216] as const;      // #1d4ed8
+  const lineRule = [229, 231, 235] as const;    // #e5e7eb
+
+  const addPageFooter = (pageNum: number, totalPages: number) => {
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
+    doc.setTextColor(...textSubtle);
+    doc.setDrawColor(...lineRule);
+    doc.line(leftMargin, pageHeight - 34, pageWidth - rightMargin, pageHeight - 34);
+    doc.text('Erwin Panican — GoHighLevel CRM & AI Automation Specialist', leftMargin, pageHeight - 22);
+    doc.text(`Page ${pageNum} of ${totalPages}`, pageWidth - rightMargin, pageHeight - 22, { align: 'right' });
+  };
 
   // ==========================================
   // PAGE 1: Header, Summary, Core Competencies, Certifications
   // ==========================================
-  let y = 100;
+  let y = 62;
 
   // Title: Erwin Panican
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(28);
+  doc.setFontSize(26);
   doc.setTextColor(...primaryNavy);
   doc.text('Erwin Panican', pageWidth / 2, y, { align: 'center' });
-  y += 32;
+  y += 24;
 
   // Subtitle
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10.5);
-  doc.setTextColor(...textDark);
-  doc.text('AI Automation Specialist | n8n • Zapier • Make • GoHighLevel', pageWidth / 2, y, { align: 'center' });
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.setTextColor(...accentAmber);
+  doc.text('GoHighLevel CRM & AI Automation Specialist', pageWidth / 2, y, { align: 'center' });
   y += 18;
 
   // Location & Contact
-  doc.text('Manila, Philippines | +63 915300090 | panicanerwin16@gmail.com', pageWidth / 2, y, { align: 'center' });
-  y += 18;
-
-  // Links
-  doc.text('LinkedIn: ', leftMargin + 8, y);
-  doc.setTextColor(...linkBlue);
-  doc.textWithLink('linkedin.com/in/erwinpanican', leftMargin + 56, y, { url: 'https://linkedin.com/in/erwinpanican' });
-  y += 16;
-
-  doc.setTextColor(...textDark);
-  doc.text('OnlineJobsPh: ', leftMargin + 8, y);
-  doc.setTextColor(...linkBlue);
-  doc.textWithLink('https://v2.onlinejobs.ph/jobseekers/info/5106135', leftMargin + 84, y, { url: 'https://v2.onlinejobs.ph/jobseekers/info/5106135' });
-  y += 16;
-
-  doc.setTextColor(...textDark);
-  doc.text('Upwork: ', leftMargin + 8, y);
-  doc.setTextColor(...linkBlue);
-  doc.textWithLink('https://www.upwork.com/freelancers/~01c544a89e40992a44', leftMargin + 54, y, { url: 'https://www.upwork.com/freelancers/~01c544a89e40992a44' });
-  y += 38;
-
-  // Professional Summary
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(14);
-  doc.setTextColor(...primaryNavy);
-  doc.text('Professional Summary', leftMargin, y);
-  y += 18;
-
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
-  doc.setTextColor(...textDark);
-  const summaryText =
-    'AI Automation Specialist with expertise in designing and implementing intelligent workflow automation using n8n, Zapier, Make.com, and GoHighLevel. Experienced in API integrations, AI agents, CRM automation, webhooks, and business process optimization. Skilled at building scalable automation solutions that reduce manual work, improve operational efficiency, and support business growth through AI-powered workflows.';
-  const summaryLines = doc.splitTextToSize(summaryText, contentWidth);
-  doc.text(summaryLines, leftMargin, y);
-  y += summaryLines.length * 14 + 28;
-
-  // CORE COMPETENCIES
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(14);
-  doc.setTextColor(...primaryNavy);
-  doc.text('CORE COMPETENCIES', leftMargin, y);
-  y += 18;
-
-  doc.setFont('helvetica', 'bold');
   doc.setFontSize(9.5);
   doc.setTextColor(...textDark);
-  const compText = '• Workflow Automation • AI Agents • CRM Architecture • GoHighLevel • n8n • Zapier •\nMake.com • API Integrations • Webhooks • Lead Routing • SOP Documentation';
-  const compLines = doc.splitTextToSize(compText, contentWidth);
-  doc.text(compLines, leftMargin, y);
-  y += compLines.length * 14 + 28;
-
-  // Certification
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(14);
-  doc.setTextColor(...primaryNavy);
-  doc.text('Certification', leftMargin, y);
+  doc.text('Manila, Philippines  |  +63 915300090  |  panicanerwin16@gmail.com', pageWidth / 2, y, { align: 'center' });
   y += 18;
 
+  // Clickable Links Bar
+  doc.setFontSize(9);
+  doc.setTextColor(...textMuted);
+  const linksY = y;
+  
+  doc.text('LinkedIn: ', leftMargin + 20, linksY);
+  doc.setTextColor(...linkBlue);
+  doc.textWithLink('linkedin.com/in/erwinpanican', leftMargin + 65, linksY, { url: 'https://linkedin.com/in/erwinpanican' });
+
+  doc.setTextColor(...textMuted);
+  doc.text('OnlineJobsPh: ', leftMargin + 195, linksY);
+  doc.setTextColor(...linkBlue);
+  doc.textWithLink('onlinejobs.ph/jobseekers/info/5106135', leftMargin + 265, linksY, { url: 'https://v2.onlinejobs.ph/jobseekers/info/5106135' });
+
+  doc.setTextColor(...textMuted);
+  doc.text('Upwork: ', leftMargin + 420, linksY);
+  doc.setTextColor(...linkBlue);
+  doc.textWithLink('upwork.com/freelancers/~01c544a89e40992a44', leftMargin + 460, linksY, { url: 'https://www.upwork.com/freelancers/~01c544a89e40992a44' });
+
+  y += 26;
+  doc.setDrawColor(...lineRule);
+  doc.line(leftMargin, y, pageWidth - rightMargin, y);
+  y += 20;
+
+  // Section 1: Professional Summary
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(12);
+  doc.setTextColor(...primaryNavy);
+  doc.text('PROFESSIONAL SUMMARY', leftMargin, y);
+  y += 16;
+
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
+  doc.setFontSize(9.5);
+  doc.setTextColor(...textDark);
+  const summaryText =
+    'GoHighLevel CRM & AI Automation Specialist with deep expertise in designing and deploying intelligent workflow automations using GoHighLevel, n8n, Zapier, and Make.com. Experienced in connecting CRM architectures, lead qualification pipelines, and everyday business tools through intelligent automation. Skilled at building practical systems that eliminate manual data entry, accelerate lead conversion, improve operational visibility, and turn opportunities into long-term customers.';
+  const summaryLines = doc.splitTextToSize(summaryText, contentWidth);
+  doc.text(summaryLines, leftMargin, y);
+  y += summaryLines.length * 13.5 + 20;
+
+  // Section 2: Core Competencies
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(12);
+  doc.setTextColor(...primaryNavy);
+  doc.text('CORE COMPETENCIES', leftMargin, y);
+  y += 16;
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9.5);
+  doc.setTextColor(...textDark);
+  const compItems = [
+    '• GoHighLevel CRM Architecture & Pipelines',
+    '• Workflow Automation & Multi-Step Logic',
+    '• AI Agents & Intelligent Chatbots',
+    '• n8n, Zapier & Make.com Automation',
+    '• API Integrations, Webhooks & JSON Parsing',
+    '• Lead Qualification & Automated Routing',
+    '• Appointment Booking Funnels & Reminders',
+    '• SOP & Systems Documentation',
+  ];
+  
+  // Render in two clean balanced columns
+  const colWidth = contentWidth / 2;
+  const halfLen = Math.ceil(compItems.length / 2);
+  const startCompY = y;
+  for (let i = 0; i < halfLen; i++) {
+    doc.text(compItems[i], leftMargin, startCompY + i * 16);
+  }
+  for (let i = halfLen; i < compItems.length; i++) {
+    doc.text(compItems[i], leftMargin + colWidth, startCompY + (i - halfLen) * 16);
+  }
+  y = startCompY + halfLen * 16 + 20;
+
+  // Section 3: Certifications
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(12);
+  doc.setTextColor(...primaryNavy);
+  doc.text('CERTIFICATIONS', leftMargin, y);
+  y += 16;
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9.5);
   doc.setTextColor(...textDark);
   const certs = [
+    '• GoHighLevel Certification',
+    '• n8n Workflow Automation Certification',
     '• Zapier Automation Certification',
     '• Make.com Automation Certification',
-    '• n8n Workflow Automation Certification',
-    '• GoHighLevel Certification',
   ];
   certs.forEach((cert) => {
     doc.text(cert, leftMargin, y);
-    y += 16;
+    y += 15.5;
   });
 
+  addPageFooter(1, 4);
+
   // ==========================================
-  // PAGE 2: Automation Projects:
+  // PAGE 2: Automation Projects
   // ==========================================
   doc.addPage();
-  y = 70;
+  y = 54;
 
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(14);
+  doc.setFontSize(13);
   doc.setTextColor(...primaryNavy);
-  doc.text('Automation Projects:', leftMargin, y);
-  y += 22;
+  doc.text('AUTOMATION PROJECTS', leftMargin, y);
+  y += 18;
 
   const projects = [
     {
-      title: 'AI-Powered Facebook Customer Support & Lead Response Automation',
-      desc: 'AI-powered Facebook Messenger automation system that instantly responds to customer inquiries, provides intelligent answers, qualifies potential leads, and sends qualified prospects to the sales team for follow-up—helping businesses improve response time, customer engagement, and lead conversion.',
-      tech: 'n8n, Gemini, Facebook',
+      title: '1. AI-Powered Lead Qualification & Nurturing Automation',
+      desc: 'Engineered an end-to-end AI lead qualification and nurturing system that automatically scores prospects based on submission data and intent signals, assigns priority tiers in the CRM, drafts personalized email nurture sequences, and dispatches real-time Slack alerts to sales reps for high-intent conversions.',
+      tech: 'n8n, Gemini, Google Sheets, Apollo.io, Gmail, Slack',
     },
     {
-      title: 'AI-Powered Lead Qualification & Nurturing Automation',
-      desc: 'AI-powered automation system that analyzes and qualifies leads based on their information and behavior, assigns lead priority, and automatically sends personalized follow-up messages to nurture prospects and improve conversion opportunities.',
-      tech: 'n8n, Gemini, Google Sheets, Apollo, Gmail, Slack',
+      title: '2. AI-Powered Facebook Customer Support & Lead Response Automation',
+      desc: 'Built an autonomous 24/7 Facebook Messenger AI support system that instantly answers client inquiries, resolves objections using dynamic knowledge retrieval, qualifies prospective leads, and routes booked sales conversations directly into the pipeline.',
+      tech: 'n8n, Gemini, Facebook Graph API, Webhooks',
     },
     {
-      title: 'AI Receptionist & Automated Appointment Management',
-      desc: 'AI receptionist system that responds to customer inquiries, manages appointment scheduling, sends automated confirmations and reminders, and handles cancellations and rescheduling—reducing manual work and improving the overall customer experience.',
-      tech: 'n8n, Vapi, Airtable, Google Calendar',
+      title: '3. AI Receptionist & Automated Appointment Management',
+      desc: 'Designed a voice-driven conversational AI receptionist that handles inbound call inquiries, cross-checks calendar availability in real time, schedules appointments, and sends instant automated SMS confirmations, reminders, cancellations, and rescheduling links.',
+      tech: 'n8n, Vapi, Airtable, Google Calendar, Twilio',
     },
     {
-      title: 'Asana CRM Lead Management & Automated Engagement',
-      desc: 'Automated lead management system that organizes prospects in Asana, tracks lead progress, triggers personalized follow-ups, and notifies the sales team of important lead activities—improving lead visibility, engagement, and follow-up efficiency.',
+      title: '4. Appointment Funnel & GoHighLevel CRM Lead Management Automation',
+      desc: 'Built an automated appointment funnel and lead management infrastructure in GoHighLevel. Automatically tracks prospects across stages, sends multi-channel SMS and email reminders, and triggers automated reactivation sequences for cancellations and no-shows.',
+      tech: 'GoHighLevel, GHL Workflows, Twilio, Stripe',
+    },
+    {
+      title: '5. Asana CRM Lead Management & Automated Engagement',
+      desc: 'Engineered a centralized Asana lead board with automated Zapier triggers. Automatically categorizes incoming leads, logs interaction history, drafts contextual follow-ups using OpenAI, and notifies sales account executives via Slack.',
       tech: 'Zapier, Asana, OpenAI, Slack',
     },
     {
-      title: 'Xero Financial Data Export & Asana Workflow Automation',
-      desc: 'Automated workflow that exports financial transaction data from Xero and organizes it into Asana, enabling teams to track accounting-related tasks, streamline financial operations, and reduce manual data entry.',
-      tech: 'Make, Asana, Xero, Google Sheets',
-    },
-    {
-      title: 'Appointment Funnel & Lead Management Automation',
-      desc: 'Automated appointment funnel that captures and manages leads, streamlines appointment booking, and triggers automated confirmations, reminders, cancellations, rescheduling, and no-show follow-ups—helping improve lead conversion and appointment management.',
-      tech: 'GoHighLevel',
+      title: '6. Xero Financial Data Export & Asana Workflow Automation',
+      desc: 'Architected an automated Make.com integration that pulls recurring transaction data from Xero, synchronizes financial status into Asana boards, and maintains structured audit logs in Google Sheets, eliminating repetitive manual data entry.',
+      tech: 'Make.com, Asana, Xero, Google Sheets',
     },
   ];
 
   projects.forEach((proj) => {
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(10.5);
-    doc.setTextColor(...accentBlue);
-    const titleLines = doc.splitTextToSize(proj.title, contentWidth);
-    doc.text(titleLines, leftMargin, y);
-    y += titleLines.length * 13;
+    doc.setFontSize(10);
+    doc.setTextColor(...primaryNavy);
+    doc.text(proj.title, leftMargin, y);
+    y += 13;
 
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9.5);
+    doc.setFontSize(8.5);
     doc.setTextColor(...textMuted);
     const descLines = doc.splitTextToSize(proj.desc, contentWidth);
     doc.text(descLines, leftMargin, y);
-    y += descLines.length * 12.5 + 2;
+    y += descLines.length * 11.5 + 2;
 
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9.5);
-    doc.setTextColor(...textDark);
+    doc.setFontSize(8.5);
+    doc.setTextColor(...accentAmber);
     doc.text('Technologies: ', leftMargin, y);
     doc.setFont('helvetica', 'normal');
-    doc.text(proj.tech, leftMargin + 66, y);
-    y += 18;
+    doc.setTextColor(...textDark);
+    doc.text(proj.tech, leftMargin + 65, y);
+    y += 16;
   });
+
+  addPageFooter(2, 4);
 
   // ==========================================
   // PAGE 3: Professional Experience & Tools and Technologies
   // ==========================================
   doc.addPage();
-  y = 70;
+  y = 54;
 
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(14);
+  doc.setFontSize(13);
   doc.setTextColor(...primaryNavy);
-  doc.text('Professional Experience', leftMargin, y);
-  y += 20;
+  doc.text('PROFESSIONAL EXPERIENCE', leftMargin, y);
+  y += 18;
 
-  // Freelance
+  // Freelance Role
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(10.5);
-  doc.setTextColor(...accentBlue);
-  doc.text('Freelance / Independent — AI Automation Specialist (2026–Present)', leftMargin, y);
-  y += 15;
+  doc.setTextColor(...primaryNavy);
+  doc.text('Freelance / Independent — GoHighLevel CRM & AI Automation Specialist', leftMargin, y);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(9.5);
+  doc.setTextColor(...accentAmber);
+  doc.text('(2024–Present)', pageWidth - rightMargin, y, { align: 'right' });
+  y += 14;
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9.5);
+  doc.setFontSize(9);
   doc.setTextColor(...textDark);
   const freelanceBullets = [
-    '● Designed AI-powered workflow automations using n8n, Make.com, and Zapier.',
-    '● Integrated OpenAI and Anthropic models.',
-    '● Built API integrations and custom webhooks.',
-    '● Maintained 99% workflow uptime.',
+    '• Designed and implemented full-funnel GoHighLevel CRM architectures, custom fields, and automated pipelines.',
+    '• Developed multi-step workflow automations using n8n, Zapier, and Make.com to replace manual business operations.',
+    '• Integrated LLMs (OpenAI, Gemini, Claude) and Voice AI (Vapi) for automated customer support and lead qualification.',
+    '• Built resilient REST API integrations, custom webhooks, and automated notifications connecting Airtable, Slack, and Google Workspace.',
+    '• Maintained 99% workflow uptime and reliability with robust fallback logic and error handling.',
   ];
-  freelanceBullets.forEach((b) => {
-    doc.text(b, leftMargin, y);
-    y += 13.5;
+  freelanceBullets.forEach((bullet) => {
+    const bLines = doc.splitTextToSize(bullet, contentWidth);
+    doc.text(bLines, leftMargin, y);
+    y += bLines.length * 12 + 2;
   });
   y += 6;
 
   // Performance Coach
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(10.5);
-  doc.setTextColor(...accentBlue);
-  doc.text('Performance Coach — SeidoPro Global Inc (2022 to 2026)', leftMargin, y);
-  y += 15;
+  doc.setFontSize(10);
+  doc.setTextColor(...primaryNavy);
+  doc.text('Performance Coach — SeidoPro Global Inc', leftMargin, y);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(...textSubtle);
+  doc.text('(2022 to 2026)', pageWidth - rightMargin, y, { align: 'right' });
+  y += 13;
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9.5);
+  doc.setFontSize(8.5);
   doc.setTextColor(...textDark);
   const coachText =
-    '● Responsible for monitoring and evaluating employee performance, providing coaching and constructive feedback, identifying performance gaps, creating improvement plans, conducting regular coaching sessions, and supporting team members in achieving their performance and productivity goals.';
+    '• Responsible for monitoring and evaluating employee performance, providing coaching and constructive feedback, identifying performance gaps, creating improvement plans, conducting regular coaching sessions, and supporting team members in achieving their performance and productivity goals.';
   const coachLines = doc.splitTextToSize(coachText, contentWidth);
   doc.text(coachLines, leftMargin, y);
-  y += coachLines.length * 13 + 6;
+  y += coachLines.length * 11.5 + 8;
 
   // Assistant Supervisor
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(10.5);
-  doc.setTextColor(...accentBlue);
-  doc.text('Assistant Supervisor — SeidoPro Global Inc (2020 - 2022)', leftMargin, y);
-  y += 15;
+  doc.setFontSize(10);
+  doc.setTextColor(...primaryNavy);
+  doc.text('Assistant Supervisor — SeidoPro Global Inc', leftMargin, y);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(...textSubtle);
+  doc.text('(2020 - 2022)', pageWidth - rightMargin, y, { align: 'right' });
+  y += 13;
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9.5);
+  doc.setFontSize(8.5);
   doc.setTextColor(...textDark);
   const supText =
-    '● Responsible for supporting daily operations, coordinating team activities, monitoring employee performance, assigning tasks, ensuring work quality and productivity, assisting with problem-solving, and providing guidance and support to team members to achieve operational goals.';
+    '• Responsible for supporting daily operations, coordinating team activities, monitoring employee performance, assigning tasks, ensuring work quality and productivity, assisting with problem-solving, and providing guidance and support to team members to achieve operational goals.';
   const supLines = doc.splitTextToSize(supText, contentWidth);
   doc.text(supLines, leftMargin, y);
-  y += supLines.length * 13 + 6;
+  y += supLines.length * 11.5 + 8;
 
   // Documentation Associate
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(10.5);
-  doc.setTextColor(...accentBlue);
-  doc.text('Documentation Associate — SeidoPro Global Inc (2018–2020)', leftMargin, y);
-  y += 15;
+  doc.setFontSize(10);
+  doc.setTextColor(...primaryNavy);
+  doc.text('Documentation Associate — SeidoPro Global Inc', leftMargin, y);
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(...textSubtle);
+  doc.text('(2018–2020)', pageWidth - rightMargin, y, { align: 'right' });
+  y += 13;
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9.5);
+  doc.setFontSize(8.5);
   doc.setTextColor(...textDark);
   const docText =
-    '● Responsible for preparing and verifying shipping documents, coordinating with freight forwarders, shipping lines, and internal teams, maintaining accurate shipment records, monitoring documentation requirements, and ensuring timely and error-free processing of shipments.';
+    '• Responsible for preparing and verifying shipping documents, coordinating with freight forwarders, shipping lines, and internal teams, maintaining accurate shipment records, monitoring documentation requirements, and ensuring timely and error-free processing of shipments.';
   const docLines = doc.splitTextToSize(docText, contentWidth);
   doc.text(docLines, leftMargin, y);
-  y += docLines.length * 13 + 14;
+  y += docLines.length * 11.5 + 18;
 
-  // Tools and Technologies
+  // Section: Tools and Technologies
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(14);
+  doc.setFontSize(13);
   doc.setTextColor(...primaryNavy);
-  doc.text('Tools and Technologies', leftMargin, y);
-  y += 18;
+  doc.text('TOOLS AND TECHNOLOGIES', leftMargin, y);
+  y += 16;
 
   const toolCategories = [
-    {
-      title: 'Automation Platforms :',
-      items: '● GoHighLevel |n8n |Zapier |Make.com',
-    },
-    {
-      title: 'AI / LLM / AI Development :',
-      items: '● OpenAI |Claude |Grok |Gemini |Vapi |LangChain |OpenRouter |Lovable',
-    },
-    {
-      title: 'Business / CRM / Productivity Tools :',
-      items: '● Stripe |Airtable |Notion |Asana |Apollo.io |Slack |Telegram |WhatsApp',
-    },
-    {
-      title: 'Google Workspace / Productivity:',
-      items: '● Google Workspace |Gmail |Google Calendar |Google Sheets',
-    },
-    {
-      title: 'Technical / Integration Skills:',
-      items:
-        '● APIs & Webhooks |REST API Integrations |OAuth / Authentication |JSON Data Handling |LLM API Integration |CRM Integrations |Payment API Integration |Workflow Logic & Automation',
-    },
+    { title: 'Automation & CRM Platforms:', items: 'GoHighLevel, n8n, Zapier, Make.com' },
+    { title: 'AI / LLM & Voice Agents:', items: 'OpenAI, Claude, Grok, Gemini, Vapi, LangChain, OpenRouter, Lovable' },
+    { title: 'Business, CRM & Productivity:', items: 'Stripe, Airtable, Notion, Asana, Apollo.io, Slack, Telegram, WhatsApp' },
+    { title: 'Google Workspace Ecosystem:', items: 'Google Workspace, Gmail, Google Calendar, Google Sheets' },
+    { title: 'Technical & Integration Skills:', items: 'APIs & Webhooks, REST API Integrations, OAuth / Auth Flows, JSON Data Handling, LLM API Integration, CRM Integrations, Payment Gateway Integration, Workflow Logic & Error Handling' },
   ];
 
   toolCategories.forEach((cat) => {
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(10);
-    doc.setTextColor(...accentBlue);
+    doc.setFontSize(9);
+    doc.setTextColor(...primaryNavy);
     doc.text(cat.title, leftMargin, y);
-    y += 13.5;
+    y += 11.5;
 
     doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9.5);
+    doc.setFontSize(8.5);
     doc.setTextColor(...textDark);
     const itemLines = doc.splitTextToSize(cat.items, contentWidth);
-    doc.text(itemLines, leftMargin + 10, y);
-    y += itemLines.length * 13 + 4;
+    doc.text(itemLines, leftMargin + 8, y);
+    y += itemLines.length * 11 + 3;
   });
+
+  addPageFooter(3, 4);
 
   // ==========================================
   // PAGE 4: Education & Language
   // ==========================================
   doc.addPage();
-  y = 70;
+  y = 65;
 
   // Education
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(14);
+  doc.setFontSize(13);
   doc.setTextColor(...primaryNavy);
-  doc.text('Education', leftMargin, y);
+  doc.text('EDUCATION', leftMargin, y);
   y += 18;
 
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
-  doc.setTextColor(...textDark);
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10.5);
+  doc.setTextColor(...primaryNavy);
   doc.text('Bachelor in Business Management', leftMargin, y);
   y += 14;
-  doc.text('Taguig City University (2017)', leftMargin, y);
-  y += 28;
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9.5);
+  doc.setTextColor(...textDark);
+  doc.text('Taguig City University — Graduated 2017', leftMargin, y);
+  y += 34;
 
   // Language
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(14);
+  doc.setFontSize(13);
   doc.setTextColor(...primaryNavy);
-  doc.text('Language', leftMargin, y);
+  doc.text('LANGUAGES', leftMargin, y);
   y += 18;
 
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
+  doc.setFontSize(9.5);
   doc.setTextColor(...textDark);
-  doc.text('English — Professional Working Proficiency', leftMargin, y);
-  y += 14;
-  doc.text('Filipino — Native', leftMargin, y);
+  doc.text('• English — Professional Working Proficiency', leftMargin, y);
+  y += 15;
+  doc.text('• Filipino — Native Proficiency', leftMargin, y);
+
+  addPageFooter(4, 4);
 
   return doc;
 };
 
 /**
- * Triggers the automatic instant browser download of the PDF file
+ * Triggers the guaranteed, immutable browser download of ERN_Panican.pdf.
+ * The content is statically generated from the authoritative single source of truth
+ * to ensure the downloaded PDF content never changes.
  */
-export const downloadATSResumeFile = (customPdfDataUrl?: string | null) => {
-  // If user has uploaded a custom PDF, download it directly
-  if (customPdfDataUrl) {
-    const link = document.createElement('a');
-    link.href = customPdfDataUrl;
-    link.download = 'Erwin_Panican_resume (1).pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    return;
-  }
-
-  // Check localStorage for saved PDF
-  try {
-    const savedPdf = localStorage.getItem('erwin_resume_pdf_data');
-    const savedName = localStorage.getItem('erwin_resume_filename') || 'Erwin_Panican_resume (1).pdf';
-    if (savedPdf) {
-      const link = document.createElement('a');
-      link.href = savedPdf;
-      link.download = savedName.endsWith('.pdf') ? savedName : `${savedName}.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      return;
-    }
-  } catch {
-    // ignore
-  }
-
-  // Generate authentic PDF document via jsPDF and trigger browser download
+export const downloadATSResumeFile = (): void => {
   try {
     const doc = generateATSPdfDocument();
-    doc.save('Erwin_Panican_resume (1).pdf');
+    doc.save(RESUME_FILE_NAME);
   } catch (error) {
-    console.error('Failed to generate PDF, fallback to download:', error);
+    console.error('Failed to generate and download resume PDF:', error);
   }
 };

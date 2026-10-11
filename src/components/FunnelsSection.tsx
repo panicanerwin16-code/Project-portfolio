@@ -12,6 +12,7 @@ import {
   Sun,
   Wind,
   Smile,
+  Home,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
@@ -23,9 +24,11 @@ interface FunnelsSectionProps {
 interface FunnelProject {
   id: string;
   badge: string;
-  badgeType: 'solar' | 'hvac' | 'dental';
+  badgeType: 'solar' | 'hvac' | 'dental' | 'roofing';
   title: string;
   description: string;
+  useCase: string;
+  toolsUsed: string[];
   snapshotUrl: string;
   imageHostUrl?: string;
   liveDemoUrl?: string;
@@ -46,6 +49,9 @@ const funnelProjects: FunnelProject[] = [
     title: 'Solar Panel: High-Converting GoHighLevel Landing Page & Appointment Funnel',
     description:
       'A conversion-engineered GoHighLevel landing page and appointment funnel custom-built for residential and commercial solar panel installation businesses. It transforms cold ad traffic from Facebook, Google Ads, and organic search into high-intent, pre-qualified appointments directly synced with the GoHighLevel CRM calendar.',
+    useCase:
+      'Residential and commercial solar consultations, $0-down savings audits, and electric bill uploads.',
+    toolsUsed: ['GoHighLevel', 'GHL Forms & Surveys', 'Twilio SMS', 'Calendar Booking', 'CRM Pipeline'],
     snapshotUrl:
       'https://i.im.ge/QQQ4FiW/fullpage_snapshot_sites_leadconnectorhq_com_2026-09-04-15-00-53_1_.png',
     liveDemoUrl:
@@ -75,6 +81,9 @@ const funnelProjects: FunnelProject[] = [
     title: 'HVAC: High-Converting GoHighLevel Lead & Appointment Funnel',
     description:
       'A conversion-engineered GoHighLevel landing page and automated appointment booking funnel designed specifically for heating, ventilation, and air conditioning (HVAC) service contractors. It captures urgent repair leads and seasonal tune-up requests, automates lead pre-qualification, and books appointments directly onto dispatch calendars with instant SMS workflows.',
+    useCase:
+      '24/7 emergency AC and heating repairs, seasonal system tune-up bookings, and same-day dispatch scheduling.',
+    toolsUsed: ['GoHighLevel', 'Emergency Dispatch Form', 'Automated SMS Triggers', 'CRM Pipelines'],
     snapshotUrl:
       'https://i.im.ge/QQljqIp/fullpage_snapshot_sites_leadconnectorhq_com_2026-09-13-07-05-12.png',
     liveDemoUrl:
@@ -105,6 +114,9 @@ const funnelProjects: FunnelProject[] = [
     title: 'DENTAL: High-Converting GoHighLevel Lead & Appointment Funnel',
     description:
       'A conversion-engineered GoHighLevel landing page and appointment booking funnel custom-built for modern dental clinics and practices. It captures high-intent patient inquiries for cleanings, whitening, and cosmetic procedures, automates lead pre-qualification, and books appointments directly into the clinic calendar with instant SMS and email reminders.',
+    useCase:
+      'New patient routine cleanings, cosmetic teeth whitening packages, and emergency dental consultations.',
+    toolsUsed: ['GoHighLevel', 'Patient Intake Surveys', 'SMS & Email Reminders', 'Calendar Integration'],
     snapshotUrl:
       'https://i.im.ge/QQrZegT/fullpage_snapshot_sites_leadconnectorhq_com_2026-09-17-12-55-26.png',
     liveDemoUrl:
@@ -128,6 +140,39 @@ const funnelProjects: FunnelProject[] = [
     solution:
       'Engineered a modern, trust-building dental landing page featuring streamlined treatment packages, new patient specials, and direct calendar appointment booking with automated multi-touch reminder sequences.',
   },
+  {
+    id: 'roofing-service-funnel',
+    badge: 'Roofing Funnel',
+    badgeType: 'roofing',
+    title: 'Roofing Service Business: High-Converting GoHighLevel Lead & Estimate Funnel',
+    description:
+      'A conversion-engineered GoHighLevel landing page and automated estimate booking funnel built specifically for residential and commercial roofing service businesses. Designed to turn emergency leak searches and storm damage inquiries into scheduled on-site inspections.',
+    useCase:
+      'Emergency roof leak repairs, storm damage insurance claims, and scheduled free roof inspections & replacements.',
+    toolsUsed: ['GoHighLevel', 'GHL Smart Forms', 'Twilio SMS', 'Calendar Booking', 'CRM Pipeline'],
+    snapshotUrl:
+      'https://i.im.ge/QQ7eXup/fullpage_snapshot_sites_leadconnectorhq_com_2026-10-11-13-32-37.png',
+    liveDemoUrl:
+      'chrome-extension://ijidfpoenjmfdabnmchmdoopghmjnjij/capture/index.html?id=cap_1791724047439',
+    imageHostUrl: 'https://im.ge/i/QQ7eXup',
+    linkLabel: 'Live Funnel Link',
+    linkBadge: 'ACTIVE DEMO',
+    linkButtonText: 'Open Funnel',
+    tags: [
+      'GoHighLevel',
+      'Roofing Service Funnel',
+      'Landing Page Design',
+      'Free Roof Inspection',
+      'Lead Pre-Qualification',
+      'CRM Pipeline Sync',
+      'SMS & Email Automations',
+    ],
+    bookingTitle: 'Roofing Service Business GoHighLevel Funnel Build',
+    problem:
+      'Roofing contractors lose high-ticket storm damage and roof repair leads when homeowners cannot quickly schedule on-site inspections or receive instant confirmation.',
+    solution:
+      'Engineered a conversion-focused GoHighLevel funnel featuring storm damage workflows, instant inspection booking, and automatic SMS dispatched in under 60 seconds.',
+  },
 ];
 
 export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
@@ -136,7 +181,9 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
   const [activeZoomProject, setActiveZoomProject] = useState<FunnelProject | null>(null);
   const [zoomScale, setZoomScale] = useState(1);
   const [viewMode, setViewMode] = useState<'fit' | 'full'>('full');
-  const [selectedSlide, setSelectedSlide] = useState<'all' | 'solar-panel-funnel' | 'hvac-funnel' | 'dental-clinic-funnel'>('all');
+  const [selectedSlide, setSelectedSlide] = useState<
+    'all' | 'solar-panel-funnel' | 'hvac-funnel' | 'dental-clinic-funnel' | 'roofing-service-funnel'
+  >('all');
 
   const visibleProjects =
     selectedSlide === 'all'
@@ -257,6 +304,19 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
               <Smile className="w-3.5 h-3.5 text-amber-400" />
               <span>Dental Clinic</span>
             </button>
+
+            <button
+              type="button"
+              onClick={() => setSelectedSlide('roofing-service-funnel')}
+              className={`px-3.5 py-1.5 rounded-xl font-mono text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedSlide === 'roofing-service-funnel'
+                  ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md'
+                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <Home className="w-3.5 h-3.5 text-amber-400" />
+              <span>Roofing Service</span>
+            </button>
           </div>
         </div>
 
@@ -264,7 +324,7 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
         <div
           className={`grid gap-6 lg:gap-8 items-stretch ${
             selectedSlide === 'all'
-              ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+              ? 'grid-cols-1 md:grid-cols-2'
               : 'grid-cols-1 max-w-2xl mx-auto'
           }`}
         >
@@ -310,8 +370,10 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
                             <Sun className="w-3.5 h-3.5 text-amber-400" />
                           ) : project.badgeType === 'hvac' ? (
                             <Wind className="w-3.5 h-3.5 text-amber-400" />
-                          ) : (
+                          ) : project.badgeType === 'dental' ? (
                             <Smile className="w-3.5 h-3.5 text-amber-400" />
+                          ) : (
+                            <Home className="w-3.5 h-3.5 text-amber-400" />
                           )}
                           <span>{project.badge}</span>
                         </span>
@@ -445,11 +507,29 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
 
                       {/* Description */}
                       <p
-                        className="text-xs sm:text-sm leading-relaxed mb-4 line-clamp-4 min-h-[72px]"
+                        className="text-xs sm:text-sm leading-relaxed mb-3.5"
                         style={{ color: 'var(--text-secondary)' }}
                       >
                         {project.description}
                       </p>
+
+                      {/* Use Case & Tools Used Highlight Box */}
+                      <div
+                        className="mb-4 p-3 rounded-xl border text-[11px] font-mono leading-relaxed space-y-1.5"
+                        style={{
+                          backgroundColor: 'var(--bg-primary)',
+                          borderColor: 'var(--border-color)',
+                        }}
+                      >
+                        <div>
+                          <span className="text-amber-400 font-bold uppercase tracking-wider text-[10px]">Primary Use: </span>
+                          <span style={{ color: 'var(--text-secondary)' }}>{project.useCase}</span>
+                        </div>
+                        <div>
+                          <span className="text-amber-400 font-bold uppercase tracking-wider text-[10px]">Tools Used: </span>
+                          <span className="text-zinc-200 font-semibold">{project.toolsUsed.join(' • ')}</span>
+                        </div>
+                      </div>
 
                       {/* Tags */}
                       <div className="flex flex-wrap gap-1.5 mb-5">
@@ -639,6 +719,20 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
                   <ZoomIn className="w-4 h-4 text-[#f59e0b]" />
                   <span className="hidden sm:inline">Zoom In</span>
                 </button>
+
+                {activeZoomProject.imageHostUrl && (
+                  <a
+                    href={activeZoomProject.imageHostUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hidden sm:inline-flex px-2.5 sm:px-3 py-1.5 rounded-xl border border-white/10 hover:border-amber-500/50 text-zinc-300 hover:text-amber-300 font-mono text-xs items-center gap-1 transition-colors cursor-pointer"
+                    style={{ backgroundColor: 'var(--bg-primary)' }}
+                    title="Open Hosted Full Page Snapshot on im.ge"
+                  >
+                    <span>im.ge Host</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                )}
 
                 <a
                   href={activeZoomProject.liveDemoUrl || activeZoomProject.imageHostUrl || activeZoomProject.snapshotUrl}

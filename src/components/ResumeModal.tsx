@@ -21,7 +21,7 @@ import {
   FileCheck,
   Eye,
 } from 'lucide-react';
-import { downloadATSResumeFile, generateATSPdfDocument } from '../utils/resumeDownloader';
+import { downloadATSResumeFile, generateATSPdfDocument, RESUME_FILE_NAME } from '../utils/resumeDownloader';
 
 const erwinHeadshotDefault = "https://i.im.ge/QMc34OT/ERN_1.png";
 
@@ -41,38 +41,29 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState<'ats' | 'pdf'>('ats');
   const [pdfDataUrl, setPdfDataUrl] = useState<string | null>(null);
-  const [pdfFileName, setPdfFileName] = useState<string>('Erwin_Panican_resume.pdf');
+  const pdfFileName = RESUME_FILE_NAME;
 
-  // Load saved PDF from localStorage on mount or generate initial PDF Data URI
+  // Clean any stale overrides and generate authentic, immutable PDF preview
   useEffect(() => {
     try {
-      const savedPdf = localStorage.getItem('erwin_resume_pdf_data');
-      const savedName = localStorage.getItem('erwin_resume_filename');
-      if (savedPdf) {
-        setPdfDataUrl(savedPdf);
-      } else {
-        const generatedDoc = generateATSPdfDocument();
-        const dataUri = generatedDoc.output('datauristring');
-        setPdfDataUrl(dataUri);
-      }
-      if (savedName) {
-        setPdfFileName(savedName);
-      }
+      localStorage.removeItem('erwin_resume_pdf_data');
+      localStorage.removeItem('erwin_resume_filename');
     } catch {
-      try {
-        const generatedDoc = generateATSPdfDocument();
-        const dataUri = generatedDoc.output('datauristring');
-        setPdfDataUrl(dataUri);
-      } catch {
-        // ignore
-      }
+      // ignore
+    }
+    try {
+      const generatedDoc = generateATSPdfDocument();
+      const dataUri = generatedDoc.output('datauristring');
+      setPdfDataUrl(dataUri);
+    } catch (err) {
+      console.error('Failed to generate resume preview PDF:', err);
     }
   }, []);
 
   if (!isOpen) return null;
 
   const rawResumeText = `Erwin Panican
-AI Automation Specialist | n8n • Zapier • Make • GoHighLevel
+GoHighLevel CRM & AI Automation Specialist
 Manila, Philippines | +63 915300090 | panicanerwin16@gmail.com
 LinkedIn: https://linkedin.com/in/erwinpanican
 OnlineJobsPh: https://v2.onlinejobs.ph/jobseekers/info/5106135
@@ -81,56 +72,64 @@ Upwork: https://www.upwork.com/freelancers/~01c544a89e40992a44
 ==================================================
 PROFESSIONAL SUMMARY
 ==================================================
-AI Automation Specialist with expertise in designing and implementing intelligent workflow automation using n8n, Zapier, Make.com, and GoHighLevel. Experienced in API integrations, AI agents, CRM automation, webhooks, and business process optimization. Skilled at building scalable automation solutions that reduce manual work, improve operational efficiency, and support business growth through AI-powered workflows.
+GoHighLevel CRM & AI Automation Specialist with deep expertise in designing and deploying intelligent workflow automations using GoHighLevel, n8n, Zapier, and Make.com. Experienced in connecting CRM architectures, lead qualification pipelines, and everyday business tools through intelligent automation. Skilled at building practical systems that eliminate manual data entry, accelerate lead conversion, improve operational visibility, and turn opportunities into long-term customers.
 
 ==================================================
 CORE COMPETENCIES
 ==================================================
-• Workflow Automation • AI Agents • CRM Architecture • GoHighLevel • n8n • Zapier • Make.com • API Integrations • Webhooks • Lead Routing • SOP Documentation
+• GoHighLevel CRM Architecture & Pipelines
+• Workflow Automation & Multi-Step Logic
+• AI Agents & Intelligent Chatbots
+• n8n, Zapier & Make.com Automation
+• API Integrations, Webhooks & JSON Parsing
+• Lead Qualification & Automated Routing
+• Appointment Booking Funnels & Reminders
+• SOP & Systems Documentation
 
 ==================================================
 CERTIFICATIONS
 ==================================================
+• GoHighLevel Certification
+• n8n Workflow Automation Certification
 • Zapier Automation Certification
 • Make.com Automation Certification
-• n8n Workflow Automation Certification
-• GoHighLevel Certification
 
 ==================================================
 AUTOMATION PROJECTS
 ==================================================
-1. AI-Powered Facebook Customer Support & Lead Response Automation
-   AI-powered Facebook Messenger automation system that instantly responds to customer inquiries, provides intelligent answers, qualifies potential leads, and sends qualified prospects to the sales team for follow-up—helping businesses improve response time, customer engagement, and lead conversion.
-   Technologies: n8n, Gemini, Facebook
+1. AI-Powered Lead Qualification & Nurturing Automation
+   Engineered an end-to-end AI lead qualification and nurturing system that automatically scores prospects based on submission data and intent signals, assigns priority tiers in the CRM, drafts personalized email nurture sequences, and dispatches real-time Slack alerts to sales reps for high-intent conversions.
+   Technologies: n8n, Gemini, Google Sheets, Apollo.io, Gmail, Slack
 
-2. AI-Powered Lead Qualification & Nurturing Automation
-   AI-powered automation system that analyzes and qualifies leads based on their information and behavior, assigns lead priority, and automatically sends personalized follow-up messages to nurture prospects and improve conversion opportunities.
-   Technologies: n8n, Gemini, Google Sheets, Apollo, Gmail, Slack
+2. AI-Powered Facebook Customer Support & Lead Response Automation
+   Built an autonomous 24/7 Facebook Messenger AI support system that instantly answers client inquiries, resolves objections using dynamic knowledge retrieval, qualifies prospective leads, and routes booked sales conversations directly into the pipeline.
+   Technologies: n8n, Gemini, Facebook Graph API, Webhooks
 
 3. AI Receptionist & Automated Appointment Management
-   AI receptionist system that responds to customer inquiries, manages appointment scheduling, sends automated confirmations and reminders, and handles cancellations and rescheduling—reducing manual work and improving the overall customer experience.
-   Technologies: n8n, Vapi, Airtable, Google Calendar
+   Designed a voice-driven conversational AI receptionist that handles inbound call inquiries, cross-checks calendar availability in real time, schedules appointments, and sends instant automated SMS confirmations, reminders, cancellations, and rescheduling links.
+   Technologies: n8n, Vapi, Airtable, Google Calendar, Twilio
 
-4. Asana CRM Lead Management & Automated Engagement
-   Automated lead management system that organizes prospects in Asana, tracks lead progress, triggers personalized follow-ups, and notifies the sales team of important lead activities—improving lead visibility, engagement, and follow-up efficiency.
+4. Appointment Funnel & GoHighLevel CRM Lead Management Automation
+   Built an automated appointment funnel and lead management infrastructure in GoHighLevel. Automatically tracks prospects across stages, sends multi-channel SMS and email reminders, and triggers automated reactivation sequences for cancellations and no-shows.
+   Technologies: GoHighLevel, GHL Workflows, Twilio, Stripe
+
+5. Asana CRM Lead Management & Automated Engagement
+   Engineered a centralized Asana lead board with automated Zapier triggers. Automatically categorizes incoming leads, logs interaction history, drafts contextual follow-ups using OpenAI, and notifies sales account executives via Slack.
    Technologies: Zapier, Asana, OpenAI, Slack
 
-5. Xero Financial Data Export & Asana Workflow Automation
-   Automated workflow that exports financial transaction data from Xero and organizes it into Asana, enabling teams to track accounting-related tasks, streamline financial operations, and reduce manual data entry.
-   Technologies: Make, Asana, Xero, Google Sheets
-
-6. Appointment Funnel & Lead Management Automation
-   Automated appointment funnel that captures and manages leads, streamlines appointment booking, and triggers automated confirmations, reminders, cancellations, rescheduling, and no-show follow-ups—helping improve lead conversion and appointment management.
-   Technologies: GoHighLevel
+6. Xero Financial Data Export & Asana Workflow Automation
+   Architected an automated Make.com integration that pulls recurring transaction data from Xero, synchronizes financial status into Asana boards, and maintains structured audit logs in Google Sheets, eliminating repetitive manual data entry.
+   Technologies: Make.com, Asana, Xero, Google Sheets
 
 ==================================================
 PROFESSIONAL EXPERIENCE
 ==================================================
-Freelance / Independent — AI Automation Specialist (2026–Present)
-• Designed AI-powered workflow automations using n8n, Make.com, and Zapier.
-• Integrated OpenAI and Anthropic models.
-• Built API integrations and custom webhooks.
-• Maintained 99% workflow uptime.
+Freelance / Independent — GoHighLevel CRM & AI Automation Specialist (2024–Present)
+• Designed and implemented full-funnel GoHighLevel CRM architectures, custom fields, and automated pipelines.
+• Developed multi-step workflow automations using n8n, Zapier, and Make.com to replace manual business operations.
+• Integrated LLMs (OpenAI, Gemini, Claude) and Voice AI (Vapi) for automated customer support and lead qualification.
+• Built resilient REST API integrations, custom webhooks, and automated notifications connecting Airtable, Slack, and Google Workspace.
+• Maintained 99% workflow uptime and reliability with robust fallback logic and error handling.
 
 Performance Coach — SeidoPro Global Inc (2022 to 2026)
 • Responsible for monitoring and evaluating employee performance, providing coaching and constructive feedback, identifying performance gaps, creating improvement plans, conducting regular coaching sessions, and supporting team members in achieving their performance and productivity goals.
@@ -144,22 +143,21 @@ Documentation Associate — SeidoPro Global Inc (2018–2020)
 ==================================================
 TOOLS AND TECHNOLOGIES
 ==================================================
-• Automation Platforms: GoHighLevel | n8n | Zapier | Make.com
-• AI / LLM / AI Development: OpenAI | Claude | Grok | Gemini | Vapi | LangChain | OpenRouter | Lovable
-• Business / CRM / Productivity Tools: Stripe | Airtable | Notion | Asana | Apollo.io | Slack | Telegram | WhatsApp
-• Google Workspace / Productivity: Google Workspace | Gmail | Google Calendar | Google Sheets
-• Technical / Integration Skills: APIs & Webhooks | REST API Integrations | OAuth / Authentication | JSON Data Handling | LLM API Integration | CRM Integrations | Payment API Integration | Workflow Logic & Automation
+• Automation & CRM Platforms: GoHighLevel, n8n, Zapier, Make.com
+• AI / LLM & Voice Agents: OpenAI, Claude, Grok, Gemini, Vapi, LangChain, OpenRouter, Lovable
+• Business, CRM & Productivity: Stripe, Airtable, Notion, Asana, Apollo.io, Slack, Telegram, WhatsApp
+• Google Workspace Ecosystem: Google Workspace, Gmail, Google Calendar, Google Sheets
+• Technical & Integration Skills: APIs & Webhooks, REST API Integrations, OAuth / Auth Flows, JSON Data Handling, LLM API Integration, CRM Integrations, Payment Gateway Integration, Workflow Logic & Error Handling
 
 ==================================================
-EDUCATION & LANGUAGE
+EDUCATION & LANGUAGES
 ==================================================
 Education:
-• Bachelor in Business Management — Taguig City University (2017)
+• Bachelor in Business Management — Taguig City University (Graduated 2017)
 
 Languages:
 • English — Professional Working Proficiency
-• Filipino — Native
-`.trim();
+• Filipino — Native Proficiency`.trim();
 
   const handleCopyText = () => {
     navigator.clipboard.writeText(rawResumeText);
@@ -172,7 +170,7 @@ Languages:
   };
 
   const handleDownload = () => {
-    downloadATSResumeFile(pdfDataUrl);
+    downloadATSResumeFile();
   };
 
   return (
@@ -211,7 +209,7 @@ Languages:
                 </span>
               </div>
               <span className="text-[10px] font-mono uppercase tracking-widest text-[#f59e0b]">
-                AI & Workflow Automation Specialist
+                GoHighLevel CRM & AI Automation Specialist
               </span>
             </div>
           </div>
@@ -315,7 +313,7 @@ Languages:
                   Erwin Panican
                 </h1>
                 <p className="text-[#f59e0b] font-bold text-xs sm:text-sm font-mono">
-                  AI Automation Specialist | n8n • Zapier • Make • GoHighLevel
+                  GoHighLevel CRM & AI Automation Specialist
                 </p>
 
                 <div 
@@ -387,7 +385,7 @@ Languages:
                 </h3>
               </div>
               <p className="leading-relaxed text-xs sm:text-sm" style={{ color: 'var(--text-secondary)' }}>
-                AI Automation Specialist with expertise in designing and implementing intelligent workflow automation using <strong className="text-[#f59e0b]">n8n, Zapier, Make.com, and GoHighLevel</strong>. Experienced in API integrations, AI agents, CRM automation, webhooks, and business process optimization. Skilled at building scalable automation solutions that reduce manual work, improve operational efficiency, and support business growth through AI-powered workflows.
+                GoHighLevel CRM & AI Automation Specialist with deep expertise in designing and deploying intelligent workflow automations using <strong className="text-[#f59e0b]">GoHighLevel, n8n, Zapier, and Make.com</strong>. Experienced in connecting CRM architectures, lead qualification pipelines, and everyday business tools through intelligent automation. Skilled at building practical systems that eliminate manual data entry, accelerate lead conversion, improve operational visibility, and turn opportunities into long-term customers.
               </p>
             </div>
 
@@ -407,17 +405,14 @@ Languages:
                 }}
               >
                 {[
+                  'GoHighLevel CRM Architecture',
                   'Workflow Automation',
-                  'AI Agents',
-                  'CRM Architecture',
-                  'GoHighLevel',
-                  'n8n',
-                  'Zapier',
-                  'Make.com',
-                  'API Integrations',
-                  'Webhooks',
-                  'Lead Routing',
-                  'SOP Documentation',
+                  'AI Agents & Chatbots',
+                  'n8n & Zapier & Make.com',
+                  'API Integrations & Webhooks',
+                  'Lead Qualification & Routing',
+                  'Appointment Booking Funnels',
+                  'SOP & Systems Documentation',
                 ].map((skill, idx) => (
                   <span
                     key={idx}
@@ -434,15 +429,15 @@ Languages:
               <div className="flex items-center gap-2 border-b pb-2" style={{ borderColor: 'var(--border-color)' }}>
                 <Award className="w-4 h-4 text-[#f59e0b]" />
                 <h3 className="text-xs font-mono uppercase font-bold text-[#f59e0b] tracking-wider">
-                  Certification
+                  Certifications
                 </h3>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {[
+                  'GoHighLevel Certification',
+                  'n8n Workflow Automation Certification',
                   'Zapier Automation Certification',
                   'Make.com Automation Certification',
-                  'n8n Workflow Automation Certification',
-                  'GoHighLevel Certification',
                 ].map((cert, idx) => (
                   <div
                     key={idx}
@@ -460,7 +455,7 @@ Languages:
               </div>
             </div>
 
-            {/* Section: Automation Projects (6 Projects) */}
+            {/* Section: Automation Projects */}
             <div className="space-y-3">
               <div className="flex items-center gap-2 border-b pb-2" style={{ borderColor: 'var(--border-color)' }}>
                 <Briefcase className="w-4 h-4 text-[#f59e0b]" />
@@ -471,34 +466,34 @@ Languages:
               <div className="space-y-3">
                 {[
                   {
-                    title: 'AI-Powered Facebook Customer Support & Lead Response Automation',
-                    desc: 'AI-powered Facebook Messenger automation system that instantly responds to customer inquiries, provides intelligent answers, qualifies potential leads, and sends qualified prospects to the sales team for follow-up—helping businesses improve response time, customer engagement, and lead conversion.',
-                    tech: 'n8n, Gemini, Facebook',
+                    title: 'AI-Powered Lead Qualification & Nurturing Automation',
+                    desc: 'Engineered an end-to-end AI lead qualification and nurturing system that automatically scores prospects based on submission data and intent signals, assigns priority tiers in the CRM, drafts personalized email nurture sequences, and dispatches real-time Slack alerts to sales reps for high-intent conversions.',
+                    tech: 'n8n, Gemini, Google Sheets, Apollo.io, Gmail, Slack',
                   },
                   {
-                    title: 'AI-Powered Lead Qualification & Nurturing Automation',
-                    desc: 'AI-powered automation system that analyzes and qualifies leads based on their information and behavior, assigns lead priority, and automatically sends personalized follow-up messages to nurture prospects and improve conversion opportunities.',
-                    tech: 'n8n, Gemini, Google Sheets, Apollo, Gmail, Slack',
+                    title: 'AI-Powered Facebook Customer Support & Lead Response Automation',
+                    desc: 'Built an autonomous 24/7 Facebook Messenger AI support system that instantly answers client inquiries, resolves objections using dynamic knowledge retrieval, qualifies prospective leads, and routes booked sales conversations directly into the pipeline.',
+                    tech: 'n8n, Gemini, Facebook Graph API, Webhooks',
                   },
                   {
                     title: 'AI Receptionist & Automated Appointment Management',
-                    desc: 'AI receptionist system that responds to customer inquiries, manages appointment scheduling, sends automated confirmations and reminders, and handles cancellations and rescheduling—reducing manual work and improving the overall customer experience.',
-                    tech: 'n8n, Vapi, Airtable, Google Calendar',
+                    desc: 'Designed a voice-driven conversational AI receptionist that handles inbound call inquiries, cross-checks calendar availability in real time, schedules appointments, and sends instant automated SMS confirmations, reminders, cancellations, and rescheduling links.',
+                    tech: 'n8n, Vapi, Airtable, Google Calendar, Twilio',
+                  },
+                  {
+                    title: 'Appointment Funnel & GoHighLevel CRM Lead Management Automation',
+                    desc: 'Built an automated appointment funnel and lead management infrastructure in GoHighLevel. Automatically tracks prospects across stages, sends multi-channel SMS and email reminders, and triggers automated reactivation sequences for cancellations and no-shows.',
+                    tech: 'GoHighLevel, GHL Workflows, Twilio, Stripe',
                   },
                   {
                     title: 'Asana CRM Lead Management & Automated Engagement',
-                    desc: 'Automated lead management system that organizes prospects in Asana, tracks lead progress, triggers personalized follow-ups, and notifies the sales team of important lead activities—improving lead visibility, engagement, and follow-up efficiency.',
+                    desc: 'Engineered a centralized Asana lead board with automated Zapier triggers. Automatically categorizes incoming leads, logs interaction history, drafts contextual follow-ups using OpenAI, and notifies sales account executives via Slack.',
                     tech: 'Zapier, Asana, OpenAI, Slack',
                   },
                   {
                     title: 'Xero Financial Data Export & Asana Workflow Automation',
-                    desc: 'Automated workflow that exports financial transaction data from Xero and organizes it into Asana, enabling teams to track accounting-related tasks, streamline financial operations, and reduce manual data entry.',
-                    tech: 'Make, Asana, Xero, Google Sheets',
-                  },
-                  {
-                    title: 'Appointment Funnel & Lead Management Automation',
-                    desc: 'Automated appointment funnel that captures and manages leads, streamlines appointment booking, and triggers automated confirmations, reminders, cancellations, rescheduling, and no-show follow-ups—helping improve lead conversion and appointment management.',
-                    tech: 'GoHighLevel',
+                    desc: 'Architected an automated Make.com integration that pulls recurring transaction data from Xero, synchronizes financial status into Asana boards, and maintains structured audit logs in Google Sheets, eliminating repetitive manual data entry.',
+                    tech: 'Make.com, Asana, Xero, Google Sheets',
                   },
                 ].map((proj, idx) => (
                   <div 
@@ -539,14 +534,15 @@ Languages:
                   }}
                 >
                   <div className="flex flex-wrap items-center justify-between gap-1 font-bold" style={{ color: 'var(--text-primary)' }}>
-                    <span>Freelance / Independent — AI Automation Specialist</span>
-                    <span className="text-[#f59e0b] font-mono text-xs">(2026–Present)</span>
+                    <span>Freelance / Independent — GoHighLevel CRM & AI Automation Specialist</span>
+                    <span className="text-[#f59e0b] font-mono text-xs">(2024–Present)</span>
                   </div>
                   <ul className="list-disc pl-5 space-y-1 text-xs" style={{ color: 'var(--text-secondary)' }}>
-                    <li>Designed AI-powered workflow automations using n8n, Make.com, and Zapier.</li>
-                    <li>Integrated OpenAI and Anthropic models.</li>
-                    <li>Built API integrations and custom webhooks.</li>
-                    <li>Maintained 99% workflow uptime.</li>
+                    <li>Designed and implemented full-funnel GoHighLevel CRM architectures, custom fields, and automated pipelines.</li>
+                    <li>Developed multi-step workflow automations using n8n, Zapier, and Make.com to replace manual business operations.</li>
+                    <li>Integrated LLMs (OpenAI, Gemini, Claude) and Voice AI (Vapi) for automated customer support and lead qualification.</li>
+                    <li>Built resilient REST API integrations, custom webhooks, and automated notifications connecting Airtable, Slack, and Google Workspace.</li>
+                    <li>Maintained 99% workflow uptime and reliability with robust fallback logic and error handling.</li>
                   </ul>
                 </div>
 
@@ -610,24 +606,24 @@ Languages:
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
                 <div className="p-3.5 rounded-xl border" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-color)' }}>
-                  <strong className="text-[#f59e0b] font-mono block mb-1">Automation Platforms:</strong>
+                  <strong className="text-[#f59e0b] font-mono block mb-1">Automation & CRM Platforms:</strong>
                   <p className="font-medium" style={{ color: 'var(--text-primary)' }}>GoHighLevel | n8n | Zapier | Make.com</p>
                 </div>
                 <div className="p-3.5 rounded-xl border" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-color)' }}>
-                  <strong className="text-[#f59e0b] font-mono block mb-1">AI / LLM / AI Development:</strong>
+                  <strong className="text-[#f59e0b] font-mono block mb-1">AI / LLM & Voice Agents:</strong>
                   <p className="font-medium" style={{ color: 'var(--text-primary)' }}>OpenAI | Claude | Grok | Gemini | Vapi | LangChain | OpenRouter | Lovable</p>
                 </div>
                 <div className="p-3.5 rounded-xl border" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-color)' }}>
-                  <strong className="text-[#f59e0b] font-mono block mb-1">Business / CRM / Productivity Tools:</strong>
+                  <strong className="text-[#f59e0b] font-mono block mb-1">Business, CRM & Productivity:</strong>
                   <p className="font-medium" style={{ color: 'var(--text-primary)' }}>Stripe | Airtable | Notion | Asana | Apollo.io | Slack | Telegram | WhatsApp</p>
                 </div>
                 <div className="p-3.5 rounded-xl border" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-color)' }}>
-                  <strong className="text-[#f59e0b] font-mono block mb-1">Google Workspace / Productivity:</strong>
+                  <strong className="text-[#f59e0b] font-mono block mb-1">Google Workspace Ecosystem:</strong>
                   <p className="font-medium" style={{ color: 'var(--text-primary)' }}>Google Workspace | Gmail | Google Calendar | Google Sheets</p>
                 </div>
                 <div className="p-3.5 rounded-xl border sm:col-span-2" style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-color)' }}>
-                  <strong className="text-[#f59e0b] font-mono block mb-1">Technical / Integration Skills:</strong>
-                  <p className="font-medium" style={{ color: 'var(--text-primary)' }}>APIs & Webhooks | REST API Integrations | OAuth / Authentication | JSON Data Handling | LLM API Integration | CRM Integrations | Payment API Integration | Workflow Logic & Automation</p>
+                  <strong className="text-[#f59e0b] font-mono block mb-1">Technical & Integration Skills:</strong>
+                  <p className="font-medium" style={{ color: 'var(--text-primary)' }}>APIs & Webhooks | REST API Integrations | OAuth / Auth Flows | JSON Data Handling | LLM API Integration | CRM Integrations | Payment Gateway Integration | Workflow Logic & Error Handling</p>
                 </div>
               </div>
             </div>
@@ -645,7 +641,7 @@ Languages:
                   <GraduationCap className="w-4 h-4" /> Education
                 </div>
                 <h4 className="font-bold text-xs sm:text-sm" style={{ color: 'var(--text-primary)' }}>Bachelor in Business Management</h4>
-                <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Taguig City University (2017)</p>
+                <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Taguig City University — Graduated 2017</p>
               </div>
 
               <div 
@@ -662,7 +658,7 @@ Languages:
                   <strong style={{ color: 'var(--text-primary)' }}>English:</strong> Professional Working Proficiency
                 </p>
                 <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
-                  <strong style={{ color: 'var(--text-primary)' }}>Filipino:</strong> Native
+                  <strong style={{ color: 'var(--text-primary)' }}>Filipino:</strong> Native Proficiency
                 </p>
               </div>
             </div>
@@ -776,7 +772,7 @@ Languages:
               className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#f59e0b] via-[#f97316] to-[#ea580c] hover:brightness-110 text-white text-xs font-bold font-mono shadow-[0_0_20px_rgba(245,158,11,0.35)] flex items-center gap-2 cursor-pointer transition-all hover:scale-105"
             >
               <Download className="w-4 h-4" />
-              <span>Download Resume (.pdf)</span>
+              <span>Download Resume ({pdfFileName})</span>
             </button>
           </div>
         </div>
@@ -785,5 +781,3 @@ Languages:
     </div>
   );
 };
-
-
