@@ -75,6 +75,39 @@ const funnelProjects: FunnelProject[] = [
       'Engineered a focused landing page with $0 down incentives, homeowner qualification steps, and direct GoHighLevel calendar integration with automated SMS reminders.',
   },
   {
+    id: 'roofing-service-funnel',
+    badge: 'Roofing Funnel',
+    badgeType: 'roofing',
+    title: 'Roofing Service Business: High-Converting GoHighLevel Lead & Estimate Funnel',
+    description:
+      'A conversion-engineered GoHighLevel landing page and automated estimate booking funnel built specifically for residential and commercial roofing service businesses. Designed to turn emergency leak searches and storm damage inquiries into scheduled on-site inspections.',
+    useCase:
+      'Emergency roof leak repairs, storm damage insurance claims, and scheduled free roof inspections & replacements.',
+    toolsUsed: ['GoHighLevel', 'GHL Smart Forms', 'Twilio SMS', 'Calendar Booking', 'CRM Pipeline'],
+    snapshotUrl:
+      'https://i.im.ge/QQ7eXup/fullpage_snapshot_sites_leadconnectorhq_com_2026-10-11-13-32-37.png',
+    liveDemoUrl:
+      'chrome-extension://ijidfpoenjmfdabnmchmdoopghmjnjij/capture/index.html?id=cap_1791724047439',
+    imageHostUrl: 'https://im.ge/i/QQ7eXup',
+    linkLabel: 'Live Funnel Link',
+    linkBadge: 'ACTIVE DEMO',
+    linkButtonText: 'Open Funnel',
+    tags: [
+      'GoHighLevel',
+      'Roofing Service Funnel',
+      'Landing Page Design',
+      'Free Roof Inspection',
+      'Lead Pre-Qualification',
+      'CRM Pipeline Sync',
+      'SMS & Email Automations',
+    ],
+    bookingTitle: 'Roofing Service Business GoHighLevel Funnel Build',
+    problem:
+      'Roofing contractors lose high-ticket storm damage and roof repair leads when homeowners cannot quickly schedule on-site inspections or receive instant confirmation.',
+    solution:
+      'Engineered a conversion-focused GoHighLevel funnel featuring storm damage workflows, instant inspection booking, and automatic SMS dispatched in under 60 seconds.',
+  },
+  {
     id: 'hvac-funnel',
     badge: 'HVAC Funnel',
     badgeType: 'hvac',
@@ -139,39 +172,6 @@ const funnelProjects: FunnelProject[] = [
       'Dental clinics lose prospective patients when ad traffic lands on cluttered sites lacking instant online appointment scheduling and automated reminders.',
     solution:
       'Engineered a modern, trust-building dental landing page featuring streamlined treatment packages, new patient specials, and direct calendar appointment booking with automated multi-touch reminder sequences.',
-  },
-  {
-    id: 'roofing-service-funnel',
-    badge: 'Roofing Funnel',
-    badgeType: 'roofing',
-    title: 'Roofing Service Business: High-Converting GoHighLevel Lead & Estimate Funnel',
-    description:
-      'A conversion-engineered GoHighLevel landing page and automated estimate booking funnel built specifically for residential and commercial roofing service businesses. Designed to turn emergency leak searches and storm damage inquiries into scheduled on-site inspections.',
-    useCase:
-      'Emergency roof leak repairs, storm damage insurance claims, and scheduled free roof inspections & replacements.',
-    toolsUsed: ['GoHighLevel', 'GHL Smart Forms', 'Twilio SMS', 'Calendar Booking', 'CRM Pipeline'],
-    snapshotUrl:
-      'https://i.im.ge/QQ7eXup/fullpage_snapshot_sites_leadconnectorhq_com_2026-10-11-13-32-37.png',
-    liveDemoUrl:
-      'chrome-extension://ijidfpoenjmfdabnmchmdoopghmjnjij/capture/index.html?id=cap_1791724047439',
-    imageHostUrl: 'https://im.ge/i/QQ7eXup',
-    linkLabel: 'Live Funnel Link',
-    linkBadge: 'ACTIVE DEMO',
-    linkButtonText: 'Open Funnel',
-    tags: [
-      'GoHighLevel',
-      'Roofing Service Funnel',
-      'Landing Page Design',
-      'Free Roof Inspection',
-      'Lead Pre-Qualification',
-      'CRM Pipeline Sync',
-      'SMS & Email Automations',
-    ],
-    bookingTitle: 'Roofing Service Business GoHighLevel Funnel Build',
-    problem:
-      'Roofing contractors lose high-ticket storm damage and roof repair leads when homeowners cannot quickly schedule on-site inspections or receive instant confirmation.',
-    solution:
-      'Engineered a conversion-focused GoHighLevel funnel featuring storm damage workflows, instant inspection booking, and automatic SMS dispatched in under 60 seconds.',
   },
 ];
 
@@ -281,6 +281,19 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
 
             <button
               type="button"
+              onClick={() => setSelectedSlide('roofing-service-funnel')}
+              className={`px-3.5 py-1.5 rounded-xl font-mono text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                selectedSlide === 'roofing-service-funnel'
+                  ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md'
+                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <Home className="w-3.5 h-3.5 text-amber-400" />
+              <span>Roofing Service</span>
+            </button>
+
+            <button
+              type="button"
               onClick={() => setSelectedSlide('hvac-funnel')}
               className={`px-3.5 py-1.5 rounded-xl font-mono text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                 selectedSlide === 'hvac-funnel'
@@ -303,19 +316,6 @@ export const FunnelsSection: React.FC<FunnelsSectionProps> = ({
             >
               <Smile className="w-3.5 h-3.5 text-amber-400" />
               <span>Dental Clinic</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setSelectedSlide('roofing-service-funnel')}
-              className={`px-3.5 py-1.5 rounded-xl font-mono text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                selectedSlide === 'roofing-service-funnel'
-                  ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md'
-                  : 'text-zinc-400 hover:text-white hover:bg-white/5'
-              }`}
-            >
-              <Home className="w-3.5 h-3.5 text-amber-400" />
-              <span>Roofing Service</span>
             </button>
           </div>
         </div>
