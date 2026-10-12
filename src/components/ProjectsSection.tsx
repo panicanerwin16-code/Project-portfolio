@@ -175,9 +175,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       title: 'Dental Clinic: GoHighLevel Appointment Funnel & Lead Management Automation',
       description:
         'A tailored dental clinic patient acquisition and appointment funnel built in GoHighLevel featuring automated multi-scenario workflows for appointment confirmations, cancellations, reschedules, showed visits, and automated no-show patient recovery with CRM pipeline opportunity tracking.',
-      image: 'https://img.youtube.com/vi/iQw0d296tDM/maxresdefault.jpg',
-      videoUrl: 'https://www.youtube.com/watch?v=iQw0d296tDM',
-      youtubeId: 'iQw0d296tDM',
+      image: 'https://img.youtube.com/vi/Xyp55gEc6aQ/maxresdefault.jpg',
+      videoUrl: 'https://www.youtube.com/watch?v=Xyp55gEc6aQ',
+      youtubeId: 'Xyp55gEc6aQ',
       tools: ['GoHighLevel', 'Dental Funnel', 'Automated Workflows', 'CRM Pipeline', 'SMS & Email Automation'],
       resourceLink: {
         url: 'https://sites.leadconnectorhq.com/preview/R8kppxdqnUrCeTz227cL?notrack=true',
